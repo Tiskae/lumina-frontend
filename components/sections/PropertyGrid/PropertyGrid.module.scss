@@ -1,0 +1,130 @@
+@use "../../../styles/mixins" as *;
+
+.section {
+  padding: 60px 0 100px;
+
+  @include res(md) { padding: 40px 0 60px; }
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.resultCount {
+  font-size: 15px;
+  color: var(--Text-secondary);
+
+  strong {
+    color: var(--Text-primary);
+    font-weight: 600;
+  }
+}
+
+.viewToggle {
+  display: flex;
+  gap: 8px;
+
+  button {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--Line);
+    background: var(--White);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--Text-secondary);
+    @include transition3();
+
+    &.active,
+    &:hover {
+      background: var(--Text-primary);
+      border-color: var(--Text-primary);
+      color: var(--White);
+    }
+  }
+}
+
+.sortWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  label {
+    font-size: 14px;
+    color: var(--Text-secondary);
+    white-space: nowrap;
+  }
+
+  select {
+    padding: 8px 12px;
+    border: 1px solid var(--Line);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--Text-primary);
+    outline: none;
+    background: var(--White);
+    @include transition3();
+
+    &:focus {
+      border-color: var(--Primary);
+    }
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+
+  @include res(lg) { grid-template-columns: repeat(2, 1fr); }
+  @include res(sm) { grid-template-columns: 1fr; }
+
+  &.listView {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 60px;
+
+  button,
+  a {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    border: 1px solid var(--Line);
+    background: var(--White);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--Text-primary);
+    cursor: pointer;
+    @include transition3();
+
+    &.active,
+    &:hover {
+      background: var(--Primary);
+      border-color: var(--Primary);
+      color: var(--White);
+    }
+
+    &.navBtn {
+      font-size: 20px;
+    }
+  }
+}

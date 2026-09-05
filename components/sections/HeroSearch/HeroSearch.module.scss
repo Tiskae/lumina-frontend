@@ -1,0 +1,251 @@
+@use "../../../styles/mixins" as *;
+@use "../../../styles/variables" as *;
+
+/* ─── Hero / Page Title ──────────────────────────────────────────────────────── */
+.pageTitle {
+  position: relative;
+  z-index: 99;
+  padding: 160px 0 320px;
+  background: linear-gradient(252.62deg, #dcedf5 0%, #f9f1e5 100.83%);
+  overflow: hidden;
+
+  @include res(lg) {
+    padding: 130px 0 60px;
+  }
+
+  @include res(md) {
+    padding: 100px 0 48px;
+  }
+
+  .content {
+    padding-bottom: 48px;
+
+    .title {
+      font-size: 72px;
+      line-height: 80px;
+      font-weight: 700;
+      color: var(--Text-primary);
+      margin-bottom: 20px;
+
+      @include res(xl) {
+        font-size: 60px;
+        line-height: 68px;
+      }
+
+      @include res(lg) {
+        font-size: 48px;
+        line-height: 56px;
+      }
+
+      @include res(md) {
+        font-size: 36px;
+        line-height: 44px;
+      }
+    }
+
+    .subtitle {
+      font-size: 18px;
+      line-height: 28px;
+      color: var(--Text-secondary);
+      flex: 1;
+
+      @include res(md) {
+        font-size: 15px;
+        line-height: 24px;
+      }
+    }
+
+    .titleRow {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  }
+
+  .heroImage {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    max-height: 680px;
+
+    img {
+      width: 100%;
+      max-height: 680px;
+      object-fit: cover;
+      display: block;
+    }
+  }
+}
+
+/* ─── Search form overlay (floating over hero image) ────────────────────────── */
+.flatTab {
+  position: absolute;
+  bottom: 24px;
+  left: 60px;
+  right: 60px;
+  z-index: 10;
+
+  @include res(xxl) {
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+  }
+
+  @include res(lg) {
+    position: static;
+    padding-top: 30px;
+  }
+}
+
+.tabNav {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--White);
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+  width: max-content;
+
+  @include res(sm) {
+    width: 100%;
+  }
+}
+
+.tabItem {
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--Text-secondary);
+  cursor: pointer;
+  border: 0;
+  background: none;
+  @include transition3();
+
+  &.active {
+    color: var(--Text-primary);
+    background: var(--Bg-light);
+  }
+
+  &:hover {
+    color: var(--Text-primary);
+  }
+}
+
+.searchBox {
+  background: var(--White);
+  border-radius: 0 12px 12px 12px;
+  padding: 28px;
+  box-shadow: 0px 10px 25px 0px #485f771a;
+
+  @include res(sm) {
+    padding: 20px 16px;
+    border-radius: 0 0 12px 12px;
+  }
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+
+  @include res(xl) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include res(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fieldWrap {
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--Text-primary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  input,
+  select {
+    width: 100%;
+    padding: 11px 16px;
+    border: 1px solid var(--Line);
+    border-radius: 8px;
+    font-size: 15px;
+    color: var(--Text-primary);
+    background: var(--White);
+    outline: none;
+    @include transition3();
+
+    &:focus {
+      border-color: var(--Primary);
+    }
+
+    &::placeholder {
+      color: var(--Text-muted);
+    }
+  }
+}
+
+.searchActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.advancedToggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--Text-primary);
+  cursor: pointer;
+  background: none;
+  border: 0;
+
+  i {
+    font-size: 20px;
+    color: var(--Text-secondary);
+  }
+
+  &:hover {
+    color: var(--Primary);
+    i {
+      color: var(--Primary);
+    }
+  }
+}
+
+.advancedPanel {
+  overflow: hidden;
+  max-height: 0;
+  @include transition3();
+
+  &.isOpen {
+    max-height: 500px;
+    padding-top: 20px;
+  }
+
+  .advancedGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+
+    @include res(xl) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include res(sm) {
+      grid-template-columns: 1fr;
+    }
+  }
+}

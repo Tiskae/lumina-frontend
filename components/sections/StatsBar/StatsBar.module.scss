@@ -1,0 +1,64 @@
+@use "../../../styles/mixins" as *;
+
+.statsSection {
+  padding: 60px 0;
+  border-bottom: 1px solid var(--Line);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+
+  @include res(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include res(sm) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+.statItem {
+  text-align: center;
+  position: relative;
+
+  &:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 60%;
+    background-color: var(--Line);
+
+    @include res(sm) {
+      display: none;
+    }
+  }
+
+  .number {
+    font-size: 56px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--Text-primary);
+    display: block;
+    margin-bottom: 8px;
+
+    @include res(lg) {
+      font-size: 44px;
+    }
+
+    @include res(sm) {
+      font-size: 36px;
+    }
+  }
+
+  .label {
+    font-size: 15px;
+    line-height: 22px;
+    color: var(--Text-secondary);
+  }
+}

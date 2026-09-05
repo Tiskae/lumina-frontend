@@ -1,0 +1,77 @@
+@use "sass:map";
+@use "variables" as *;
+
+// ─── Flexbox ─────────────────────────────────────────────────────────────────
+@mixin flex($alignItem, $justifyContent) {
+  display: flex;
+  align-items: $alignItem;
+  justify-content: $justifyContent;
+}
+
+@mixin d-flex() {
+  display: flex;
+}
+
+// ─── Grid ────────────────────────────────────────────────────────────────────
+@mixin grid($loop, $num, $row-gap, $col-gap) {
+  display: grid;
+  grid-template-columns: repeat($loop, $num);
+  gap: $row-gap $col-gap;
+}
+
+// ─── Centering ───────────────────────────────────────────────────────────────
+@mixin centered() {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin center($x, $y) {
+  transform: translate($x, $y);
+}
+
+// ─── Responsive ──────────────────────────────────────────────────────────────
+@mixin res($size, $type: max) {
+  $breakpoint: if(
+    $type == min,
+    map.get($breakpoints-min, $size),
+    map.get($breakpoints, $size)
+  );
+
+  @if $breakpoint {
+    @if $type == max {
+      @media (max-width: $breakpoint) {
+        @content;
+      }
+    } @else if $type == min {
+      @media (min-width: $breakpoint) {
+        @content;
+      }
+    }
+  }
+}
+
+// ─── Transitions ─────────────────────────────────────────────────────────────
+@mixin transition1() {
+  transition: all 0.1s ease;
+}
+@mixin transition2() {
+  transition: all 0.2s ease;
+}
+@mixin transition3() {
+  transition: all 0.3s ease;
+}
+@mixin transition4() {
+  transition: all 0.4s ease;
+}
+@mixin transition5() {
+  transition: all 0.5s ease;
+}
+
+@mixin transition-cubic-1() {
+  transition: 1s cubic-bezier(0.63, 0.25, 0.25, 1);
+}
+
+@mixin transition-cubic-2() {
+  transition: 1.5s cubic-bezier(0.63, 0.25, 0.25, 1);
+}

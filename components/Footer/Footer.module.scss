@@ -1,0 +1,251 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.footer {
+  background-color: var(--Text-primary);
+
+  .footerBody {
+    padding-top: 60px;
+    padding-bottom: 100px;
+    border-bottom: 1px solid #ffffff1a;
+  }
+
+  .footerInner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+
+    @include res(lg) {
+      flex-wrap: wrap;
+    }
+
+    @include res(md) {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 20px;
+
+      > * {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+  }
+
+  .text {
+    color: var(--Text-muted);
+  }
+
+  .footerLogo {
+    margin-bottom: 24px;
+    display: block;
+
+    @include res(md) {
+      width: 200px;
+    }
+  }
+
+  .footerAbout {
+    flex-grow: 1;
+    max-width: 280px;
+
+    > div:not(:last-child) {
+      margin-bottom: 12px;
+    }
+
+    @include res(md) {
+      max-width: 100%;
+    }
+  }
+
+  .footerContent {
+    flex-grow: 1;
+    max-width: 420px;
+    display: flex;
+    gap: 40px;
+
+    @include res(md) {
+      max-width: 100%;
+      flex-direction: column;
+      gap: 30px;
+    }
+  }
+
+  .newsletter {
+    flex-grow: 1;
+    max-width: 340px;
+
+    @include res(lg) {
+      max-width: 100%;
+    }
+
+    @include res(md) {
+      max-width: 100%;
+    }
+  }
+
+  .footerHeading {
+    color: var(--White);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 26px;
+    margin-bottom: 20px;
+  }
+
+  .footerMenuList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    a {
+      color: var(--Text-muted);
+      font-size: 14px;
+      line-height: 22px;
+      @include transition3();
+
+      &:hover {
+        color: var(--White);
+      }
+    }
+  }
+
+  // Mobile accordion heading
+  .footerHeadingMobile {
+    display: none;
+
+    @include res(md) {
+      display: block;
+      position: relative;
+      cursor: pointer;
+
+      &::after {
+        position: absolute;
+        content: "";
+        right: 9px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 15px;
+        height: 1px;
+        background-color: var(--Line);
+        transition: 0.25s ease-in-out;
+      }
+
+      &::before {
+        position: absolute;
+        content: "";
+        right: 15px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 1px;
+        height: 15px;
+        background-color: var(--Line);
+        transition: 0.25s ease-in-out;
+      }
+    }
+  }
+
+  .footerColBlock {
+    @include res(md) {
+      width: 100%;
+      border-top: 1px solid #ffffff1a;
+      padding-top: 16px;
+
+      .footerMenuList {
+        padding-top: 13px;
+        padding-left: 12px;
+      }
+
+      .footerHeading {
+        margin-bottom: 0 !important;
+      }
+
+      &.open {
+        .footerHeadingMobile::before {
+          opacity: 0;
+        }
+        .footerHeadingMobile::after {
+          transform: translate(0%, -50%) rotate(180deg);
+        }
+      }
+
+      .collapseContent {
+        display: none;
+      }
+
+      &.open .collapseContent {
+        display: block;
+      }
+    }
+  }
+
+  .footerBottom {
+    padding: 16px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    @include res(sm) {
+      flex-direction: column;
+      gap: 12px;
+    }
+  }
+
+  .copyright {
+    color: var(--Text-muted);
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+
+/* ─── Newsletter form ────────────────────────────────────────────────────────── */
+.newsletterForm {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+
+  input {
+    flex: 1;
+    padding: 11px 15px;
+    border: 1px solid #ffffff1a;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--White);
+    font-size: 14px;
+    outline: none;
+    @include transition3();
+
+    &::placeholder {
+      color: var(--Text-muted);
+    }
+
+    &:focus {
+      border-color: var(--Primary);
+    }
+  }
+
+  button {
+    flex-shrink: 0;
+  }
+}
+
+/* ─── Social links ───────────────────────────────────────────────────────────── */
+.wgSocial {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+
+  a {
+    display: flex;
+    font-size: 24px;
+    color: var(--Text-muted);
+    @include transition3();
+
+    &:hover {
+      color: var(--White);
+    }
+  }
+}

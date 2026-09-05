@@ -1,0 +1,270 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.cardHouse {
+  position: relative;
+
+  .imgStyle {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  .wrapTag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+
+    .tag {
+      display: flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 99px;
+      background-color: var(--Bg-light);
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  .info {
+    padding-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--Text-secondary);
+
+      i {
+        font-size: 20px;
+        color: var(--Text-secondary);
+      }
+    }
+
+    @include res(sm) {
+      gap: 12px 22px;
+    }
+  }
+
+  .title {
+    text-transform: capitalize;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box !important;
+    margin-top: 8px;
+    margin-bottom: 4px;
+
+    a {
+      color: var(--Text-primary);
+
+      &:hover {
+        color: var(--Primary);
+      }
+    }
+  }
+
+  .price {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--Text-primary);
+  }
+
+  .wrapBtn {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    z-index: 6;
+  }
+
+  /* ─── Style Default ──────────────────────────────────────────── */
+  &.styleDefault {
+    .wrapBtn {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+
+      .tf-btn {
+        transform: translateY(10px);
+        opacity: 0;
+        visibility: hidden;
+        transition-duration: 0.4s;
+      }
+
+      .quickView {
+        transition-delay: 0.1s;
+      }
+
+      .compare {
+        transition-delay: 0.3s;
+      }
+    }
+
+    &:hover {
+      .wrapBtn .tf-btn {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  /* ─── Style 1 (overlay card) ─────────────────────────────────── */
+  &.style1 {
+    .content {
+      position: absolute;
+      bottom: 0;
+      right: 12px;
+      left: 12px;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: var(--White);
+      opacity: 0;
+      visibility: hidden;
+      z-index: 2;
+      @include transition3;
+    }
+
+    &:hover .content {
+      opacity: 1;
+      visibility: visible;
+      bottom: 12px;
+    }
+  }
+
+  /* ─── Style List ─────────────────────────────────────────────── */
+  &.styleList {
+    display: flex;
+    gap: 32px;
+    padding: 27px;
+    border-radius: 12px;
+    background-color: var(--White);
+    align-items: center;
+    border: 1px solid var(--Line);
+
+    .wrapImg {
+      display: flex;
+      gap: 20px;
+      flex: 0 0 280px;
+    }
+
+    .imgStyle {
+      border-radius: 12px;
+      overflow: hidden;
+      width: 100%;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 0%;
+        left: 50%;
+        top: 50%;
+        background-color: rgba(255, 255, 255, 0.3);
+        transform: translate(-50%, -50%) rotate(-45deg);
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      img {
+        min-height: 220px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 1s;
+      }
+
+      &:hover {
+        &::after {
+          height: 250%;
+          transition: all 600ms linear;
+          background-color: transparent;
+        }
+
+        img {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    .wrapTag {
+      position: unset;
+
+      .tag {
+        display: flex;
+        height: 32px;
+        align-items: center;
+        padding: 0 12px;
+        border-radius: 4px;
+      }
+    }
+
+    .info {
+      padding-top: 16px;
+      margin-top: 16px;
+      border-top: 1px solid var(--Line);
+      gap: 24px;
+    }
+
+    .content {
+      flex: 1;
+
+      .title {
+        margin-bottom: 8px;
+      }
+    }
+
+    .wrapBtn {
+      margin-top: 28px;
+      display: flex;
+      gap: 8px;
+    }
+
+    @include res(xxl) {
+      gap: 12px;
+      padding: 24px 15px;
+    }
+
+    @include res(xl) {
+      .info {
+        margin-top: 10px;
+        padding-top: 10px;
+        row-gap: 10px;
+      }
+    }
+
+    @include res(md) {
+      flex-direction: column;
+      padding: 27px 15px !important;
+
+      .wrapImg {
+        flex: none;
+        width: 100%;
+      }
+
+      .content {
+        width: 100%;
+      }
+
+      .info {
+        gap: 10px;
+      }
+    }
+  }
+}

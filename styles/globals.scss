@@ -1,0 +1,29 @@
+// ─── Global SCSS entry point ─────────────────────────────────────────────────
+// Order matters: variables and mixins first, then reset, then animations/utilities
+
+@use "variables";
+@use "mixins";
+@use "icomoon";
+@use "reset";
+@use "animations";
+@use "utilities";
+@use "button";
+
+// ─── CSS Custom Properties ────────────────────────────────────────────────────
+:root {
+  --Black: #000000;
+  --White: #ffffff;
+  --Primary: #fe5631;
+  --Text-primary: #101010;
+  --Text-secondary: #5c6368;
+  --Line: #e4e4e4;
+  --Text-muted: #a4aeb5;
+  --Text-light: #ffffff;
+  --Bg-light: #f9f7f3;
+}
+
+// ─── Swiper CSS (loaded at runtime by SwiperCarousel, no static import needed)
+// Override
+.swiper-slide {
+  height: auto !important;
+}

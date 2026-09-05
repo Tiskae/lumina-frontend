@@ -1,0 +1,59 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.headingSection {
+  margin-bottom: 48px;
+
+  .subTitle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    margin-bottom: 12px;
+
+    .dot {
+      display: flex;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--Primary);
+      flex-shrink: 0;
+    }
+
+    span {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--Primary);
+    }
+  }
+
+  .title {
+    color: var(--Text-primary);
+  }
+
+  &.light {
+    .subTitle span {
+      color: var(--White);
+    }
+    .dot {
+      background-color: var(--White);
+    }
+    .title {
+      color: var(--White);
+    }
+  }
+
+  &.center {
+    text-align: center;
+
+    .subTitle {
+      justify-content: center;
+    }
+  }
+
+  @include res(md) {
+    margin-bottom: 32px;
+  }
+}

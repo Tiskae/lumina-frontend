@@ -1,0 +1,39 @@
+@use "../../styles/mixins" as *;
+
+.wgSocial {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+
+  a {
+    display: flex;
+    font-size: 24px;
+    color: var(--Text-light);
+    @include transition3();
+
+    &:hover {
+      color: var(--Primary);
+    }
+  }
+
+  &.styleBlack a {
+    color: var(--Text-primary);
+  }
+
+  &.styleBordered a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--Line);
+    color: var(--Text-primary);
+
+    &:hover {
+      background-color: var(--Text-primary);
+      border-color: var(--Text-primary);
+      color: var(--Text-light);
+    }
+  }
+}

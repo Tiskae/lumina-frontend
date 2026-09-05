@@ -1,0 +1,366 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+/* ─── Reset ─────────────────────────────────────────────────────────────────── */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font: inherit;
+  vertical-align: baseline;
+  font-family: inherit;
+  font-size: 100%;
+  font-style: inherit;
+  font-weight: inherit;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+html {
+  margin-right: 0 !important;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1;
+  padding: 0 !important;
+  font-family: $font-main;
+  color: var(--Text-secondary);
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    background-color: var(--Line);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--Text-secondary);
+    border-radius: 0;
+  }
+}
+
+ol,
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+svg,
+svg path {
+  @include transition3();
+}
+
+/* ─── General ────────────────────────────────────────────────────────────────── */
+body,
+button,
+input,
+select,
+textarea {
+  font-family: $font-main;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+
+  @include res(md) {
+    font-size: 14px;
+    line-height: 24px;
+  }
+}
+
+strong,
+b,
+cite {
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  color: inherit;
+  @include transition3();
+
+  &:focus,
+  &:hover {
+    text-decoration: none;
+    outline: 0;
+  }
+}
+
+button,
+input,
+select,
+textarea {
+  font-size: 100%;
+  line-height: inherit;
+  margin: 0;
+  vertical-align: baseline;
+  background: unset;
+  border: 0;
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  cursor: pointer;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #f7f7f7 inset;
+}
+
+/* ─── Typography ─────────────────────────────────────────────────────────────── */
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  font-family: $font-main;
+  margin: 0;
+  text-rendering: optimizeLegibility;
+  color: var(--Text-primary);
+  font-weight: 600;
+}
+
+h1,
+.h1 {
+  font-size: 80px;
+  line-height: 88px;
+}
+h2,
+.h2 {
+  font-size: 52px;
+  line-height: 62px;
+}
+h3,
+.h3 {
+  font-size: 44px;
+  line-height: 52px;
+}
+h4,
+.h4 {
+  font-size: 30px;
+  line-height: 40px;
+}
+h5,
+.h5 {
+  font-size: 24px;
+  line-height: 30px;
+}
+h6,
+.h6 {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+@include res(lg) {
+  h1,
+  .h1 {
+    font-size: 66px;
+    line-height: 74px;
+  }
+  h2,
+  .h2 {
+    font-size: 43px;
+    line-height: 51px;
+  }
+  h3,
+  .h3 {
+    font-size: 36px;
+    line-height: 44px;
+  }
+}
+
+@include res(md) {
+  h1,
+  .h1 {
+    font-size: 55px;
+    line-height: 63px;
+  }
+  h2,
+  .h2 {
+    font-size: 35px;
+    line-height: 43px;
+  }
+  h3,
+  .h3 {
+    font-size: 30px;
+    line-height: 38px;
+  }
+  h4,
+  .h4 {
+    font-size: 25px;
+    line-height: 33px;
+  }
+}
+
+@include res(sm) {
+  h1,
+  .h1 {
+    font-size: 36px;
+    line-height: 44px;
+  }
+  h2,
+  .h2 {
+    font-size: 30px;
+    line-height: 38px;
+  }
+  h3,
+  .h3 {
+    font-size: 25px;
+    line-height: 33px;
+  }
+  h4,
+  .h4 {
+    font-size: 22px;
+    line-height: 30px;
+  }
+  h5,
+  .h5 {
+    font-size: 20px;
+    line-height: 28px;
+  }
+  h6,
+  .h6 {
+    font-size: 18px;
+    line-height: 26px;
+  }
+}

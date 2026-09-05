@@ -1,0 +1,140 @@
+@use "../../../styles/mixins" as *;
+
+.section {
+  padding: 100px 0;
+  background-color: var(--Bg-light);
+
+  @include res(lg) { padding: 80px 0; }
+  @include res(md) { padding: 60px 0; }
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+
+  @include res(lg) { grid-template-columns: repeat(2, 1fr); }
+  @include res(sm) { grid-template-columns: 1fr; }
+}
+
+.blogCard {
+  background: var(--White);
+  border-radius: 16px;
+  overflow: hidden;
+  @include transition3();
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+
+    .thumb img {
+      transform: scale(1.05);
+    }
+  }
+
+  .thumb {
+    position: relative;
+    height: 240px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      @include transition5();
+    }
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+
+  .category {
+    display: inline-flex;
+    padding: 4px 12px;
+    border-radius: 99px;
+    background-color: var(--Bg-light);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--Primary);
+  }
+
+  .date {
+    font-size: 13px;
+    color: var(--Text-muted);
+  }
+
+  .readTime {
+    font-size: 13px;
+    color: var(--Text-muted);
+
+    &::before {
+      content: "·";
+      margin-right: 4px;
+    }
+  }
+
+  .body {
+    padding: 24px;
+  }
+
+  .title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 26px;
+    color: var(--Text-primary);
+    margin-bottom: 12px;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box !important;
+    @include transition3();
+
+    &:hover {
+      color: var(--Primary);
+    }
+  }
+
+  .excerpt {
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--Text-secondary);
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    display: -webkit-box;
+    margin-bottom: 20px;
+  }
+
+  .readMore {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--Text-primary);
+    @include transition3();
+
+    i { font-size: 18px; }
+
+    &:hover {
+      color: var(--Primary);
+      gap: 10px;
+    }
+  }
+}

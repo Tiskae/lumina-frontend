@@ -1,0 +1,234 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.mobileNavWrap {
+  z-index: 999991;
+  background-color: var(--White);
+  max-width: 400px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateX(calc(100% + 6vw)) rotate(0.001deg);
+  transition: transform 0.85s cubic-bezier(0.7, 0, 0.2, 1);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  @media (max-width: 576px) {
+    max-width: 100%;
+  }
+
+  &.isOpen {
+    transform: translateX(0) rotate(0.001deg);
+  }
+
+  // Rounded edge that morphs in from the left
+  .roundedDiv {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 100%;
+    transform: translateX(-100%);
+    width: 6vw;
+    transition: all 0.85s cubic-bezier(0.7, 0, 0.2, 1);
+
+    .roundedDivInner {
+      position: absolute;
+      content: "";
+      top: 50%;
+      left: 50%;
+      z-index: -1;
+      display: block;
+      width: 775%;
+      height: 150%;
+      background: var(--White);
+      border-radius: 50%;
+      transform: translate(-6.5%, -50%);
+    }
+  }
+
+  &.isOpen .roundedDiv {
+    width: 0;
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999990;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+
+  &.isOpen {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+.topNav {
+  padding: 20px 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.btnClose {
+  font-size: 26px;
+  color: var(--Text-primary);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  margin-left: auto;
+}
+
+.navBody {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 70px);
+}
+
+.menuList {
+  flex-grow: 1;
+  margin-bottom: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+
+  > li {
+    border-top: 1px solid var(--Line);
+
+    &:first-child {
+      border-top: 0;
+    }
+  }
+
+  .menuItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    width: 100%;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 600;
+    color: var(--Text-primary);
+    cursor: pointer;
+
+    a {
+      color: inherit;
+      flex-grow: 1;
+    }
+
+    &.active a {
+      color: var(--Primary);
+    }
+  }
+
+  .expandBtn {
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    flex-shrink: 0;
+
+    &::after {
+      position: absolute;
+      content: "";
+      top: 50%;
+      right: 4px;
+      transform: translateY(-50%);
+      width: 12px;
+      height: 2px;
+      border-radius: 99px;
+      background-color: var(--Text-primary);
+      @include transition3();
+    }
+
+    &::before {
+      position: absolute;
+      content: "";
+      top: 50%;
+      right: 9px;
+      transform: translate(-50%, -50%);
+      width: 2px;
+      height: 12px;
+      border-radius: 99px;
+      background-color: var(--Text-primary);
+      opacity: 1;
+      @include transition3();
+    }
+
+    &.isOpen::before {
+      transform: translate(-50%, -50%) rotate(90deg);
+      opacity: 0;
+    }
+  }
+
+  .subMenu {
+    list-style: none;
+    padding: 0 0 14px 25px;
+    margin: 0;
+    display: none;
+
+    &.isOpen {
+      display: block;
+    }
+
+    li {
+      font-size: 14px;
+      line-height: 24px;
+      font-weight: 500;
+
+      a {
+        display: block;
+        padding: 5px 0;
+        color: var(--Text-secondary);
+
+        &:hover {
+          color: var(--Primary);
+        }
+      }
+    }
+  }
+}
+
+.contactBlock {
+  padding-bottom: 20px;
+
+  .contactItem {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 12px;
+
+    .icon {
+      font-size: 40px;
+      color: var(--Text-primary);
+    }
+  }
+}
+
+.socialWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  a {
+    display: flex;
+    font-size: 24px;
+    color: var(--Text-primary);
+
+    &:hover {
+      color: var(--Primary);
+    }
+  }
+}

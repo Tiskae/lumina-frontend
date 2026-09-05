@@ -1,0 +1,255 @@
+@use "../abstracts/index" as *;
+
+form {
+    position: relative;
+    z-index: 30;
+    textarea,
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="color"] {
+        outline: 0;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        width: 100%;
+        padding: 11px 15px;
+        background-color: var(--White);
+        border: 1px solid var(--Line);
+        border-radius: 8px;
+        color: var(--Text-primary);
+        overflow: hidden;
+        margin-bottom: 0;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 26px;
+        @include transition3();
+        &::placeholder {
+            color: var(--Text-muted);
+        }
+        &:focus {
+            border-color: var(--Primary);
+        }
+
+        &.style-1 {
+            padding: 8px 0 7px;
+            background-color: transparent;
+            border-radius: 0;
+            border: 0;
+            border-bottom: 1px solid #FFFFFF1A;
+            color: var(--White);
+        }
+        &.style-2 {
+            padding: 8px 0 7px;
+            background-color: transparent;
+            border-radius: 0;
+            border: 0;
+            border-bottom: 1px solid var(--Line);
+            color: var(--Text-primary);
+        }
+    }
+    button,
+    input[type="button"],
+    input[type="reset"],
+    input[type="submit"] {
+        background-color: transparent;
+        overflow: hidden;
+        padding: 0;
+    }
+    textarea {
+        height: 113px;
+    }
+}
+
+.form-search {
+    position: relative;
+    .button-submit {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 16px;
+        display: flex;
+        font-size: 24px;
+        color: var(--Text-primary);
+    }
+    &.style-left {
+        input {
+            padding-left: 47px;
+        }
+        .button-submit {
+            right: unset;
+            left: 16px;
+        }
+    }
+}
+
+.form-newsletter-2,
+.form-newsletter-1 {
+    position: relative;
+    .button-submit {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0px;
+        @include transition3;
+        i {
+            font-size: 24px;
+            color: var(--Text-primary);
+        }
+        &:hover {
+            color: var(--Primary) !important;
+        }
+    }
+}
+
+input.tf-check {
+    position: relative;
+    cursor: pointer;
+    outline: 0;
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--Line);
+    background-color: transparent;
+    @include transition3();
+    &:checked {
+        background-color: var(--Text-primary) !important;
+        &::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    &::before {
+        font-family: $fontIcon;
+        content: "\e938";
+        position: absolute;
+        color: var(--White);
+        opacity: 0;
+        left: 1px;
+        top: 1px;
+        font-size: 8px;
+        line-height: 8px;
+        transform: scale(0.5);
+        @include transition3;
+    }
+}
+
+.box-fieldset-item {
+    fieldset {
+        flex-shrink: 0;
+        margin-right: 6px;
+        padding: 3px;
+    }
+}
+
+.leave-comment {
+    background-color: var(--Bg-light);
+    border-radius: 8px;
+    padding: 32px;
+    .tf-grid-layout {
+        gap: 20px;
+    }
+    @include res(md) {
+       padding: 24px 15px;
+    }
+}
+
+.checkbox-item {
+    label {
+        padding-left: 28px;
+        cursor: pointer;
+        position: relative;
+        color: var(--Text-primary);
+        input {
+            position: absolute;
+            opacity: 0;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            &:checked {
+                ~ .btn-checkbox {
+                    border: 1px solid var(--Text-primary);
+                    background-color: var(--Text-primary);
+                    &:after {
+                        display: block;
+                    }
+                    &.style-radio {
+                        background: unset;
+                        &::after {
+                            background-color: var(--Text-primary);
+                        }
+                    }
+                }
+            }
+        }
+        .btn-checkbox {
+            position: absolute;
+            left: 2px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 15px;
+            height: 15px;
+            background-color: transparent;
+            border-radius: 2px;
+            border: 1px solid var(--Text-secondary);
+            &:after {
+                content: "\e938";
+                font-family: $fontIcon !important;
+                position: absolute;
+                font-size: 10px;
+                line-height: 10px;
+                height: 10px;
+                top: 1px;
+                left: 1px;
+                color: var(--White);
+                display: none;
+            }
+            &.style-radio {
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                &::after {
+                    display: block;
+                    content: '';
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%,-50%);
+                    width: 9px;
+                    height: 9px;
+                    border-radius: 50%;
+                    background-color: transparent;
+                    @include transition3;
+                }
+            }
+        }
+    }
+}
+
+.has-icon-pre {
+    position: relative;
+    >.icon {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 24px;
+        z-index: 2;
+    }
+    .nice-select,
+    input {
+        padding-left: 47px !important;
+    }
+}

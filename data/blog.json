@@ -1,0 +1,80 @@
+[
+  {
+    "id": "1",
+    "slug": "luxury-real-estate-lagos-2024",
+    "title": "Lagos Luxury Real Estate: What to Expect in 2025",
+    "excerpt": "The Lagos property market continues to defy global headwinds. We break down the neighbourhoods driving demand, the emerging buyer profiles, and where smart money is moving.",
+    "content": "The Lagos luxury real estate market has demonstrated remarkable resilience...",
+    "category": "Market Insights",
+    "author": "1",
+    "date": "2025-01-15",
+    "image": "/images/blog/blog-1.jpg",
+    "readTime": 6,
+    "featured": true
+  },
+  {
+    "id": "2",
+    "slug": "banana-island-vs-ikoyi",
+    "title": "Banana Island vs Ikoyi: Where Should You Invest?",
+    "excerpt": "Two of Lagos's most prestigious addresses go head to head. We compare price per square metre, appreciation rates, rental yields, and lifestyle factors.",
+    "content": "When it comes to ultra-luxury residential real estate in Lagos...",
+    "category": "Investment Guide",
+    "author": "2",
+    "date": "2025-02-03",
+    "image": "/images/blog/blog-2.jpg",
+    "readTime": 8,
+    "featured": true
+  },
+  {
+    "id": "3",
+    "slug": "abuja-property-market-2025",
+    "title": "Abuja's Rise as a Premier Investment Destination",
+    "excerpt": "Nigeria's capital is no longer just a government town. We explore how Maitama, Asokoro, and the new Centenary City are attracting serious private capital.",
+    "content": "Abuja has long been overshadowed by Lagos in real estate conversations...",
+    "category": "Market Insights",
+    "author": "3",
+    "date": "2025-02-20",
+    "image": "/images/blog/blog-3.jpg",
+    "readTime": 5,
+    "featured": false
+  },
+  {
+    "id": "4",
+    "slug": "buying-off-plan-nigeria",
+    "title": "Buying Off-Plan in Nigeria: A Complete Guide",
+    "excerpt": "Off-plan purchases can deliver exceptional returns, but they carry unique risks. Our complete guide walks you through due diligence, developer vetting, and legal protections.",
+    "content": "Off-plan property purchases have grown significantly in Nigeria...",
+    "category": "Buyer Guides",
+    "author": "1",
+    "date": "2025-03-10",
+    "image": "/images/blog/blog-4.jpg",
+    "readTime": 10,
+    "featured": true
+  },
+  {
+    "id": "5",
+    "slug": "home-staging-luxury-properties",
+    "title": "The Art of Staging: How We Sell Lagos Luxury Faster",
+    "excerpt": "In a competitive luxury market, presentation is everything. Discover how professional staging and visual storytelling can reduce days on market by up to 40%.",
+    "content": "Professional home staging has transformed the way luxury properties sell in Lagos...",
+    "category": "Seller Guides",
+    "author": "2",
+    "date": "2025-03-25",
+    "image": "/images/blog/blog-5.jpg",
+    "readTime": 7,
+    "featured": false
+  },
+  {
+    "id": "6",
+    "slug": "eko-atlantic-city-guide",
+    "title": "Eko Atlantic City: The Definitive Investor's Guide",
+    "excerpt": "Africa's newest city-within-a-city is taking shape on reclaimed land off Victoria Island. We examine the opportunity, the risks, and the long-term upside.",
+    "content": "Eko Atlantic City represents one of Africa's most ambitious real estate developments...",
+    "category": "Investment Guide",
+    "author": "4",
+    "date": "2025-04-08",
+    "image": "/images/blog/blog-6.jpg",
+    "readTime": 9,
+    "featured": false
+  }
+]
