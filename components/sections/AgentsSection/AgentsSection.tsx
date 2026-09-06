@@ -25,12 +25,7 @@ export default function AgentsSection() {
             <AnimateOnScroll key={agent.id} direction="2" delay={i * 0.1}>
               <Link href={`/contact#${agent.id}`} className={styles.agentCard}>
                 <div className={styles.agentImg}>
-                  <Image
-                    src={agent.image}
-                    alt={agent.name}
-                    fill
-                    style={{ objectFit: "cover" }}
-                  />
+                  <Image src={agent.image} alt={agent.name} fill style={{ objectFit: "cover" }} />
                 </div>
                 <div className={styles.agentInfo}>
                   <div className={styles.name}>{agent.name}</div>

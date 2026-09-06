@@ -47,9 +47,7 @@ function ColBlock({ title, links }: ColBlockProps) {
   }, []);
 
   return (
-    <div
-      className={`${styles.footerColBlock} ${isOpen ? styles.open : ""}`}
-    >
+    <div className={`${styles.footerColBlock} ${isOpen ? styles.open : ""}`}>
       <div
         className={`${styles.footerHeading} ${styles.footerHeadingMobile}`}
         onClick={() => isMobile && setIsOpen((v) => !v)}
@@ -85,50 +83,24 @@ export default function Footer() {
             {/* Brand column */}
             <div className={styles.footerAbout}>
               <Link href="/" className={styles.footerLogo}>
-                <Image
-                  src="/images/logo/logo-white.svg"
-                  alt="Lumina"
-                  width={140}
-                  height={42}
-                />
+                <Image src="/images/logo/logo-1.svg" alt="Lumina" width={140} height={42} />
               </Link>
               <p className={styles.text}>
-                Lumina curates luxury real estate across Lagos, Abuja, and
-                select African cities. Exceptional properties for discerning
-                buyers.
+                Lumina curates luxury real estate across Lagos, Abuja, and select African cities. Exceptional properties
+                for discerning buyers.
               </p>
               <div style={{ marginTop: 20 }}>
                 <div className={styles.wgSocial}>
-                  <a
-                    href="https://facebook.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Facebook"
-                  >
+                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                     <i className="icon-Facebook" />
                   </a>
-                  <a
-                    href="https://instagram.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Instagram"
-                  >
+                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                     <i className="icon-Instagram" />
                   </a>
-                  <a
-                    href="https://x.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="X"
-                  >
+                  <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X">
                     <i className="icon-X" />
                   </a>
-                  <a
-                    href="https://youtube.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="YouTube"
-                  >
+                  <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
                     <i className="icon-Youtube" />
                   </a>
                 </div>
@@ -146,13 +118,9 @@ export default function Footer() {
             <div className={styles.newsletter}>
               <div className={styles.footerHeading}>Newsletter</div>
               <p className={styles.text}>
-                Get exclusive property listings and market insights delivered to
-                your inbox.
+                Get exclusive property listings and market insights delivered to your inbox.
               </p>
-              <form
-                className={styles.newsletterForm}
-                onSubmit={handleNewsletter}
-              >
+              <form className={styles.newsletterForm} onSubmit={handleNewsletter}>
                 <input
                   type="email"
                   placeholder="Your email address"
@@ -169,23 +137,22 @@ export default function Footer() {
           </div>
         </div>
 
+        <Image
+          className={styles.logoWatermark}
+          src="/images/logo/logo-1.svg"
+          width={1000}
+          height={400}
+          alt="Lumina watermark"
+        />
+
         {/* Footer bottom bar */}
         <div className={styles.footerBottom}>
-          <p className={styles.copyright}>
-            &copy; {new Date().getFullYear()} Lumina Real Estate. All rights
-            reserved.
-          </p>
+          <p className={styles.copyright}>&copy; {new Date().getFullYear()} Lumina Real Estate. All rights reserved.</p>
           <div style={{ display: "flex", gap: 24 }}>
-            <Link
-              href="/privacy"
-              style={{ color: "var(--Text-muted)", fontSize: 14 }}
-            >
+            <Link href="/privacy" style={{ color: "var(--Text-muted)", fontSize: 14 }}>
               Privacy Policy
             </Link>
-            <Link
-              href="/terms"
-              style={{ color: "var(--Text-muted)", fontSize: 14 }}
-            >
+            <Link href="/terms" style={{ color: "var(--Text-muted)", fontSize: 14 }}>
               Terms of Use
             </Link>
           </div>

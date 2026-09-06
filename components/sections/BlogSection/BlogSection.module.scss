@@ -4,8 +4,12 @@
   padding: 100px 0;
   background-color: var(--Bg-light);
 
-  @include res(lg) { padding: 80px 0; }
-  @include res(md) { padding: 60px 0; }
+  @include res(lg) {
+    padding: 80px 0;
+  }
+  @include res(md) {
+    padding: 60px 0;
+  }
 }
 
 .header {
@@ -22,13 +26,17 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 
-  @include res(lg) { grid-template-columns: repeat(2, 1fr); }
-  @include res(sm) { grid-template-columns: 1fr; }
+  @include res(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include res(sm) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .blogCard {
   background: var(--White);
-  border-radius: 16px;
+  border-radius: 0px;
   overflow: hidden;
   @include transition3();
 
@@ -130,7 +138,9 @@
     color: var(--Text-primary);
     @include transition3();
 
-    i { font-size: 18px; }
+    i {
+      font-size: 18px;
+    }
 
     &:hover {
       color: var(--Primary);

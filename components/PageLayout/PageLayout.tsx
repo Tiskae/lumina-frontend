@@ -24,17 +24,9 @@ export default function PageLayout({
 
   return (
     <>
-      <Header
-        currentPath={currentPath}
-        isAbsolute={isAbsolute}
-        onMenuOpen={() => setMobileNavOpen(true)}
-      />
+      <Header currentPath={currentPath} isAbsolute={isAbsolute} onMenuOpen={() => setMobileNavOpen(true)} />
 
-      <MobileNav
-        isOpen={mobileNavOpen}
-        onClose={() => setMobileNavOpen(false)}
-        currentPath={currentPath}
-      />
+      <MobileNav isOpen={mobileNavOpen} onClose={() => setMobileNavOpen(false)} currentPath={currentPath} />
 
       <main>{children}</main>
 
