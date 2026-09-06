@@ -21,6 +21,7 @@ export default function BlogSection() {
       <div className="tf-container">
         <div className={styles.header}>
           <SectionHeading
+            className={styles.heading}
             subtitle="Latest News"
             title={
               <>

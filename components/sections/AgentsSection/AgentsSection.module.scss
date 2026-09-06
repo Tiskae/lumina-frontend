@@ -11,6 +11,11 @@
   }
 }
 
+.heading h2 {
+  font-size: 40px;
+  line-height: 1.2;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

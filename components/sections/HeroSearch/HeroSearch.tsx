@@ -55,9 +55,7 @@ export default function HeroSearch() {
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
 
   const toggleAmenity = (amenity: string) => {
-    setSelectedAmenities((prev) =>
-      prev.includes(amenity) ? prev.filter((a) => a !== amenity) : [...prev, amenity]
-    );
+    setSelectedAmenities((prev) => (prev.includes(amenity) ? prev.filter((a) => a !== amenity) : [...prev, amenity]));
   };
 
   const handleSearch = (e: React.FormEvent) => {

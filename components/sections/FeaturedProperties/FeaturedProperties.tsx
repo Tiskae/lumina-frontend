@@ -17,13 +17,9 @@ export default function FeaturedProperties({ properties }: FeaturedPropertiesPro
       <div className="tf-container">
         <div className={styles.header}>
           <SectionHeading
+            className={styles.heading}
             subtitle="Featured Properties"
-            title={
-              <>
-                Handpicked for the <br />
-                Discerning Buyer
-              </>
-            }
+            title={<>Handpicked for the Discerning Buyer</>}
           />
           <div className={styles.viewAll}>
             <Link href="/listings" className="tf-btn btn-border btn-px-28">

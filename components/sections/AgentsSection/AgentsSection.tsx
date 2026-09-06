@@ -10,6 +10,7 @@ export default function AgentsSection() {
     <section className={styles.section}>
       <div className="tf-container">
         <SectionHeading
+          className={styles.heading}
           subtitle="Our Agents"
           title={
             <>

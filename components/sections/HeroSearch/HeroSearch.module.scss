@@ -5,7 +5,7 @@
 .pageTitle {
   position: relative;
   z-index: 99;
-  padding: 160px 0 100px;
+  padding: 160px 0 20px;
   background: linear-gradient(252.62deg, #dcedf5 0%, #f9f1e5 100.83%);
   overflow: hidden;
 
@@ -21,7 +21,7 @@
     padding-bottom: 48px;
 
     .title {
-      font-size: 72px;
+      font-size: 66px;
       line-height: 80px;
       font-weight: 700;
       color: var(--Text-primary);
@@ -68,7 +68,7 @@
     position: relative;
     border-radius: 16px;
     overflow: hidden;
-    max-height: 680px;
+    max-height: 440px; // 680px
 
     img {
       width: 100%;

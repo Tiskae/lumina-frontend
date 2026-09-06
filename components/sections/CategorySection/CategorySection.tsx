@@ -15,7 +15,12 @@ export default function CategorySection() {
   return (
     <section className={styles.section}>
       <div className="tf-container">
-        <SectionHeading subtitle="Browse by Type" title="Find the Property That Fits Your Life" align="center" />
+        <SectionHeading
+          className={styles.heading}
+          subtitle="Browse by Type"
+          title="Find the Property That Fits Your Life"
+          align="center"
+        />
 
         <div className={styles.grid}>
           {categories.map((cat, i) => (
