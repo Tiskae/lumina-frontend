@@ -40,37 +40,23 @@ const STATUS_LABELS: Record<Property["status"], string> = {
   new: "New",
 };
 
-export default function PropertyCard({
-  property,
-  variant = "default",
-}: PropertyCardProps) {
-  const { slug, title, price, status, beds, baths, sqft, image, tag } =
-    property;
+export default function PropertyCard({ property, variant = "default" }: PropertyCardProps) {
+  const { slug, title, price, status, beds, baths, sqft, image, tag } = property;
 
   const variantClass =
-    variant === "style1"
-      ? styles.style1
-      : variant === "list"
-        ? styles.styleList
-        : styles.styleDefault;
+    variant === "style1" ? styles.style1 : variant === "list" ? styles.styleList : styles.styleDefault;
 
   if (variant === "list") {
     return (
       <div className={`${styles.cardHouse} ${styles.styleList} hover-image`}>
         <div className={styles.wrapImg}>
           <Link href={`/properties/${slug}`} className={styles.imgStyle}>
-            <Image
-              src={image}
-              alt={title}
-              width={280}
-              height={220}
-              style={{ objectFit: "cover" }}
-            />
+            <Image src={image} alt={title} width={280} height={220} />
           </Link>
         </div>
 
         <div className={styles.content}>
-          <div className="d-flex gap_8 mb_8">
+          {/* <div className="d-flex gap_8 mb_8">
             <div className={styles.wrapTag}>
               <span className={styles.tag}>{STATUS_LABELS[status]}</span>
             </div>
@@ -79,9 +65,10 @@ export default function PropertyCard({
                 <span className={styles.tag}>{tag}</span>
               </div>
             )}
-          </div>
+          </div> */}
 
-          <div className={styles.price}>{price}</div>
+          {/* <div className={styles.price}>{price}</div> */}
+
           <h5 className={styles.title}>
             <Link href={`/properties/${slug}`}>{title}</Link>
           </h5>
@@ -91,13 +78,15 @@ export default function PropertyCard({
               <i className="icon icon-Bed" />
               <span>{beds} Beds</span>
             </li>
+
             <li>
               <i className="icon icon-Bathtub" />
               <span>{baths} Baths</span>
             </li>
+
             <li>
               <i className="icon icon-Crop" />
-              <span>{sqft.toLocaleString()} sqft</span>
+              {/* <span>{sqft.toLocaleString()} sqft</span> */}
             </li>
           </ul>
 
@@ -118,9 +107,7 @@ export default function PropertyCard({
   }
 
   return (
-    <div
-      className={`${styles.cardHouse} ${variantClass} hover-image`}
-    >
+    <div className={`${styles.cardHouse} ${variantClass} hover-image`}>
       <Link href={`/properties/${slug}`} className={styles.imgStyle}>
         <Image
           src={image}
@@ -129,18 +116,15 @@ export default function PropertyCard({
           height={280}
           style={{ objectFit: "cover", width: "100%", height: "100%" }}
         />
-        <div className={styles.wrapTag}>
+        {/* <div className={styles.wrapTag}>
           <span className={styles.tag}>{STATUS_LABELS[status]}</span>
           {tag && <span className={styles.tag}>{tag}</span>}
-        </div>
+        </div> */}
       </Link>
 
-      {variant === "default" && (
+      {/* {variant === "default" && (
         <div className={styles.wrapBtn}>
-          <Link
-            href={`/properties/${slug}`}
-            className={`tf-btn btn-bg-white ${styles.quickView}`}
-          >
+          <Link href={`/properties/${slug}`} className={`tf-btn btn-bg-white ${styles.quickView}`}>
             <span>Quick View</span>
             <span className="bg-effect" />
           </Link>
@@ -149,14 +133,15 @@ export default function PropertyCard({
             <span className="bg-effect" />
           </button>
         </div>
-      )}
+      )} */}
 
-      <div className={variant === "style1" ? styles.content : ""}>
-        <div className={styles.price}>{price}</div>
-        <h5 className={styles.title}>
-          <Link href={`/properties/${slug}`}>{title}</Link>
-        </h5>
+      {/* <Link href={`/properties/${slug}`}>{title}</Link> */}
 
+      <div className={styles.title}>
+        <h5>{title}</h5>
+      </div>
+
+      <div className={styles.content}>
         <ul className={styles.info}>
           <li>
             <i className="icon icon-Bed" />
@@ -169,6 +154,10 @@ export default function PropertyCard({
           <li>
             <i className="icon icon-Crop" />
             <span>{sqft.toLocaleString()} sqft</span>
+          </li>
+          <li>
+            <i className="icon icon-Crop" />
+            <span>{price}</span>
           </li>
         </ul>
       </div>

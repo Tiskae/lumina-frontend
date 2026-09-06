@@ -3,10 +3,14 @@
 
 .cardHouse {
   position: relative;
+  background-color: #f9f7f6;
+  display: grid;
+  grid-template-rows: 280px 1fr;
+  position: relative;
 
   .imgStyle {
     position: relative;
-    border-radius: 12px;
+    // border-radius: 12px;
     overflow: hidden;
 
     img {
@@ -162,6 +166,7 @@
       display: flex;
       gap: 20px;
       flex: 0 0 280px;
+      background-color: red;
     }
 
     .imgStyle {
@@ -266,5 +271,37 @@
         gap: 10px;
       }
     }
+  }
+}
+
+.title {
+  background-color: var(--Primary);
+  background-color: #611200;
+  position: absolute;
+  top: 280px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  padding: 12.5px;
+  text-align: center;
+  margin: auto;
+
+  h5 {
+    font-size: 16px;
+    color: #fff;
+  }
+}
+
+.content {
+  padding: 40px 30px 40px;
+}
+
+.info {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+
+  span {
+    font-size: 15px !important;
   }
 }

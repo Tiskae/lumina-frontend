@@ -52,18 +52,12 @@ export default function AnimateOnScroll({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const classes = [
-    `tf-animate-${direction}`,
-    slow ? "transition-1s" : "",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const classes = [`tf-animate-${direction}`, slow ? "transition-1s" : "", className].filter(Boolean).join(" ");
 
   return (
     // @ts-expect-error: dynamic tag ref type
-    <Tag ref={ref} className={classes}>
-      {children}
-    </Tag>
+    // <Tag ref={ref} className={classes}>
+    <>{children}</>
+    // </Tag>
   );
 }

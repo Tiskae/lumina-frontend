@@ -5,7 +5,7 @@
 .pageTitle {
   position: relative;
   z-index: 99;
-  padding: 160px 0 320px;
+  padding: 160px 0 100px;
   background: linear-gradient(252.62deg, #dcedf5 0%, #f9f1e5 100.83%);
   overflow: hidden;
 
@@ -104,6 +104,8 @@
   align-items: center;
   gap: 0;
   background: var(--White);
+
+  justify-self: center;
   border-radius: 12px 12px 0 0;
   overflow: hidden;
   width: max-content;
@@ -135,7 +137,7 @@
 
 .searchBox {
   background: var(--White);
-  border-radius: 0 12px 12px 12px;
+  border-radius: 12px;
   padding: 28px;
   box-shadow: 0px 10px 25px 0px #485f771a;
 
@@ -231,7 +233,7 @@
   @include transition3();
 
   &.isOpen {
-    max-height: 500px;
+    max-height: 600px;
     padding-top: 20px;
   }
 
@@ -248,4 +250,107 @@
       grid-template-columns: 1fr;
     }
   }
+}
+
+/* ─── Amenities checkbox grid ────────────────────────────────────────────────── */
+.amenitiesSection {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--Line);
+}
+
+.amenitiesLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--Text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+}
+
+.amenitiesGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px 16px;
+
+  @include res(xl) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @include res(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include res(sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.checkboxItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  position: relative;
+  padding-left: 24px;
+
+  input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 1;
+    margin: 0;
+
+    &:checked ~ .checkboxBox {
+      border-color: var(--Text-primary);
+      background-color: var(--Text-primary);
+
+      &::after {
+        display: block;
+      }
+    }
+  }
+}
+
+.checkboxBox {
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 15px;
+  height: 15px;
+  background-color: transparent;
+  border-radius: 2px;
+  border: 1px solid var(--Text-secondary);
+  flex-shrink: 0;
+  @include transition3();
+
+  &::after {
+    // icomoon check glyph
+    content: "\e938";
+    font-family: "icomoon" !important;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    position: absolute;
+    font-size: 10px;
+    top: 1px;
+    left: 1px;
+    color: var(--White);
+    display: none;
+  }
+}
+
+.checkboxText {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--Text-primary);
+  user-select: none;
 }

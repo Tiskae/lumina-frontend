@@ -5,10 +5,10 @@ import AnimateOnScroll from "@/components/AnimateOnScroll/AnimateOnScroll";
 import styles from "./StatsBar.module.scss";
 
 const stats = [
-  { number: 500, suffix: "+", label: "Properties Listed" },
+  { number: 20, suffix: "+", label: "Properties Listed" },
   { number: 12, suffix: "+", label: "Years in Market" },
   { number: 98, suffix: "%", label: "Client Satisfaction" },
-  { number: 4, suffix: "", label: "Cities Covered" },
+  { number: 7, suffix: "", label: "Cities Covered" },
 ];
 
 function Counter({ target, suffix }: { target: number; suffix: string }) {
@@ -39,7 +39,7 @@ function Counter({ target, suffix }: { target: number; suffix: string }) {
           }, duration / steps);
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     observer.observe(el);
