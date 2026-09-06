@@ -32,10 +32,10 @@ const navItems: NavItem[] = [
       { label: "Top Map", href: "/listings/top-map" },
     ],
   },
-  {
-    label: "Property Details",
-    href: "/properties/lumina-heights-ikoyi",
-  },
+  // {
+  //   label: "Property Details",
+  //   href: "/properties/lumina-heights-ikoyi",
+  // },
   {
     label: "Latest News",
     href: "/blog",

@@ -48,8 +48,8 @@
       color: var(--Text-primary);
     }
 
-    .icon {
-    }
+    // .icon {
+    // }
 
     .hotLineText {
       .label {
@@ -92,9 +92,9 @@
   // Default style (initial header shown before scroll)
   &.styleDefault {
     @include res(xxl) {
-      :global(.tf-btn) {
-        display: none;
-      }
+      // :global(.tf-btn) {
+      // display: none;
+      // }
     }
     @include res(xl) {
       .hotLine {

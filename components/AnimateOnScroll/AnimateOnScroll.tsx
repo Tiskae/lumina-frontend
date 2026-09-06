@@ -56,8 +56,8 @@ export default function AnimateOnScroll({
 
   return (
     // @ts-expect-error: dynamic tag ref type
-    // <Tag ref={ref} className={classes}>
-    <>{children}</>
-    // </Tag>
+    <Tag ref={ref} className={classes}>
+      {children}
+    </Tag>
   );
 }
