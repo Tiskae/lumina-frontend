@@ -5,16 +5,47 @@
 .pageTitle {
   position: relative;
   z-index: 99;
-  padding: 160px 0 20px;
-  background: linear-gradient(252.62deg, #dcedf5 0%, #f9f1e5 100.83%);
+  padding: 80px 0 20px;
+  // background: linear-gradient(252.62deg, #dcedf5 0%, #f9f1e5 100.83%);
   overflow: hidden;
 
   @include res(lg) {
-    padding: 130px 0 60px;
+    padding: 80px 0 20px;
   }
 
   @include res(md) {
-    padding: 100px 0 48px;
+    padding: 80px 0 20px;
+  }
+
+  @include res(sm) {
+    padding: 80px 0 20px;
+  }
+
+  .pageTitleInner {
+    background-image: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3)
+    ); // , url("/images/section/hero-1.jpg")
+    background-size: cover;
+    margin: 20px;
+    width: calc(100vw - 40px);
+    border-radius: 13px;
+    padding: 80px 20px 20px;
+    height: calc(100vh - 120px);
+    position: relative;
+    overflow: hidden;
+    // background-color: yellow;
+    display: grid;
+    align-content: space-between;
+
+    @include res(md) {
+      border-radius: 8px;
+    }
+
+    @include res(sm) {
+      padding: 50px 20px 20px;
+    }
   }
 
   .content {
@@ -24,7 +55,8 @@
       font-size: 66px;
       line-height: 80px;
       font-weight: 700;
-      color: var(--Text-primary);
+      // color: var(--Text-primary);
+      color: #fff;
       margin-bottom: 20px;
 
       @include res(xl) {
@@ -46,12 +78,15 @@
     .subtitle {
       font-size: 18px;
       line-height: 28px;
-      color: var(--Text-secondary);
+      max-width: 80%;
+      // color: var(--Text-secondary);
+      color: #fff;
       flex: 1;
 
       @include res(md) {
         font-size: 15px;
         line-height: 24px;
+        max-width: none;
       }
     }
 
@@ -61,27 +96,37 @@
       gap: 24px;
       flex-wrap: wrap;
       justify-content: space-between;
+
+      @include res(md) {
+        display: grid;
+      }
     }
   }
 
   .heroImage {
-    position: relative;
-    border-radius: 16px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    // height: calc(100vh - 120px);
+    height: 100%;
     overflow: hidden;
-    max-height: 440px; // 680px
+    z-index: -8;
+    // max-height: 440px; // 680px
 
     img {
       width: 100%;
-      max-height: 680px;
+      height: 100%;
+      // max-height: 680px;
       object-fit: cover;
-      display: block;
+      // opacity: 0;
     }
   }
 }
 
 /* ─── Search form overlay (floating over hero image) ────────────────────────── */
 .flatTab {
-  position: absolute;
+  // position: absolute;
   bottom: 24px;
   left: 60px;
   right: 60px;
@@ -95,7 +140,8 @@
 
   @include res(lg) {
     position: static;
-    padding-top: 30px;
+    // padding-top: 30px;
+    padding-top: 0px;
   }
 }
 
@@ -124,6 +170,7 @@
   border: 0;
   background: none;
   @include transition3();
+  flex-grow: 1;
 
   &.active {
     color: var(--Text-primary);
@@ -149,7 +196,7 @@
 
 .formGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   margin-bottom: 20px;
 
@@ -213,6 +260,10 @@
   cursor: pointer;
   background: none;
   border: 0;
+
+  @include res(sm) {
+    display: none;
+  }
 
   i {
     font-size: 20px;

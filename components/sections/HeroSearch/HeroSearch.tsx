@@ -9,6 +9,7 @@ import SplitText from "@/components/SplitText/SplitText";
 import styles from "./HeroSearch.module.scss";
 
 import ImageHero from "/images/section/hero-1.jpg";
+import clsx from "clsx";
 
 type SearchTab = "all" | "rent" | "sale";
 
@@ -72,7 +73,7 @@ export default function HeroSearch() {
 
   return (
     <section className={styles.pageTitle}>
-      <div className="tf-container w-1770">
+      <div className={clsx("tf-container w-1770", styles.pageTitleInner)}>
         {/* Heading */}
         <div className={styles.content}>
           <SplitText effect="split-lines-rotation-x" as="h1" className={styles.title}>
@@ -85,24 +86,17 @@ export default function HeroSearch() {
               matches your lifestyle and budget.
             </div>
 
-            <Link href="/listings" className="tf-btn btn-bg-1 btn-px-32">
+            {/* <Link href="/listings" className="tf-btn btn-bg-1 btn-px-32">
               <span>View Properties</span>
               <span className="bg-effect" />
-            </Link>
+            </Link> */}
           </div>
         </div>
 
         {/* Hero image with floating search form */}
-        <div style={{ position: "relative" }}>
+        <div>
           <AnimateOnScroll direction="1" className={styles.heroImage}>
-            <Image
-              src={ImageHero}
-              alt="Luxury Lagos property"
-              width={1770}
-              height={680}
-              priority
-              style={{ objectFit: "cover", width: "100%", height: "auto" }}
-            />
+            <Image src={ImageHero} alt="Luxury Lagos property" width={1770} height={680} priority />
           </AnimateOnScroll>
 
           {/* Search form */}
@@ -123,7 +117,7 @@ export default function HeroSearch() {
             {/* Search box */}
             <form className={styles.searchBox} onSubmit={handleSearch}>
               <div className={styles.formGrid}>
-                <div className={styles.fieldWrap}>
+                {/* <div className={styles.fieldWrap}>
                   <label htmlFor="keyword">Keyword</label>
                   <input
                     id="keyword"
@@ -132,7 +126,7 @@ export default function HeroSearch() {
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
                   />
-                </div>
+                </div> */}
 
                 <div className={styles.fieldWrap}>
                   <label htmlFor="city">Location</label>
