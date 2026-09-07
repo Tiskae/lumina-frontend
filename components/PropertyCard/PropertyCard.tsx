@@ -41,63 +41,66 @@ const STATUS_LABELS: Record<Property["status"], string> = {
 };
 
 export default function PropertyCard({ property, variant = "default" }: PropertyCardProps) {
-  const { slug, title, price, status, beds, baths, sqft, image, tag } = property;
+  const { slug, title, price, status, type, beds, baths, sqft, image, address, gallery } = property;
 
-  const variantClass =
-    variant === "style1" ? styles.style1 : variant === "list" ? styles.styleList : styles.styleDefault;
-
+  /* ── List variant ─────────────────────────────────────────────────────────── */
   if (variant === "list") {
+    const img1 = gallery?.[0] ?? image;
+    const img2 = gallery?.[1] ?? image;
+
     return (
-      <div className={`${styles.cardHouse} ${styles.styleList} hover-image`}>
-        <div className={styles.wrapImg}>
-          <Link href={`/properties/${slug}`} className={styles.imgStyle}>
-            <Image src={image} alt={title} width={280} height={220} />
+      <div className={`${styles.cardHouse} ${styles.styleList}`}>
+        {/* Two images */}
+        <div className={styles.imagesWrap}>
+          <Link href={`/properties/${slug}`} className={styles.listImgItem}>
+            <Image src={img1} alt={title} fill style={{ objectFit: "cover" }} />
+          </Link>
+          <Link href={`/properties/${slug}`} className={styles.listImgItem}>
+            <Image src={img2} alt={title} fill style={{ objectFit: "cover" }} />
           </Link>
         </div>
 
-        <div className={styles.content}>
-          {/* <div className="d-flex gap_8 mb_8">
-            <div className={styles.wrapTag}>
-              <span className={styles.tag}>{STATUS_LABELS[status]}</span>
+        {/* Content */}
+        <div className={styles.listContent}>
+          {/* Price + tags */}
+          <div className={styles.listPricingRow}>
+            <div className={styles.listPrice}>{price}</div>
+            <div className={styles.listTags}>
+              <span className={styles.listTag}>{STATUS_LABELS[status]}</span>
+              <span className={styles.listTag} style={{ textTransform: "capitalize" }}>{type}</span>
             </div>
-            {tag && (
-              <div className={styles.wrapTag}>
-                <span className={styles.tag}>{tag}</span>
-              </div>
-            )}
-          </div> */}
+          </div>
 
-          {/* <div className={styles.price}>{price}</div> */}
+          {/* Title + address */}
+          <Link href={`/properties/${slug}`} className={styles.listTitle}>
+            {title}
+          </Link>
+          {address && <div className={styles.listPlace}>{address}</div>}
 
-          <h5 className={styles.title}>
-            <Link href={`/properties/${slug}`}>{title}</Link>
-          </h5>
-
-          <ul className={styles.info}>
+          {/* Info row */}
+          <ul className={styles.listInfo}>
             <li>
               <i className="icon icon-Bed" />
-              <span>{beds} Beds</span>
+              {beds} Bed
             </li>
-
             <li>
               <i className="icon icon-Bathtub" />
-              <span>{baths} Baths</span>
+              {baths} Bath
             </li>
-
             <li>
-              <i className="icon icon-Crop" />
-              {/* <span>{sqft.toLocaleString()} sqft</span> */}
+              <i className="icon icon-Ruler" />
+              {sqft.toLocaleString()} Sqft
             </li>
           </ul>
 
-          <div className={styles.wrapBtn}>
-            <Link href={`/properties/${slug}`} className="tf-btn btn-bg-1">
+          {/* Action buttons */}
+          <div className={styles.listBtns}>
+            <Link href={`/properties/${slug}`} className="tf-btn btn-bg-1 rounded-8">
               <span>View Details</span>
               <span className="bg-effect" />
             </Link>
-            <button className="tf-btn btn-border">
-              <i className="icon icon-Heart" />
-              <span>Save</span>
+            <button className="tf-btn btn-border rounded-8">
+              <span>Compare</span>
               <span className="bg-effect" />
             </button>
           </div>
@@ -105,6 +108,9 @@ export default function PropertyCard({ property, variant = "default" }: Property
       </div>
     );
   }
+
+  /* ── Default / style1 variant ─────────────────────────────────────────────── */
+  const variantClass = variant === "style1" ? styles.style1 : styles.styleDefault;
 
   return (
     <div className={`${styles.cardHouse} ${variantClass} hover-image`}>
@@ -116,26 +122,7 @@ export default function PropertyCard({ property, variant = "default" }: Property
           height={280}
           style={{ objectFit: "cover", width: "100%", height: "100%" }}
         />
-        {/* <div className={styles.wrapTag}>
-          <span className={styles.tag}>{STATUS_LABELS[status]}</span>
-          {tag && <span className={styles.tag}>{tag}</span>}
-        </div> */}
       </Link>
-
-      {/* {variant === "default" && (
-        <div className={styles.wrapBtn}>
-          <Link href={`/properties/${slug}`} className={`tf-btn btn-bg-white ${styles.quickView}`}>
-            <span>Quick View</span>
-            <span className="bg-effect" />
-          </Link>
-          <button className={`tf-btn btn-border ${styles.compare}`}>
-            <span>Compare</span>
-            <span className="bg-effect" />
-          </button>
-        </div>
-      )} */}
-
-      {/* <Link href={`/properties/${slug}`}>{title}</Link> */}
 
       <div className={styles.title}>
         <h5>{title}</h5>

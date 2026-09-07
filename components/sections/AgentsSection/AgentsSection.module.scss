@@ -31,6 +31,7 @@
 }
 
 .agentCard {
+  display: block;
   border: 1px solid var(--Line);
   overflow: hidden;
   @include transition3();
