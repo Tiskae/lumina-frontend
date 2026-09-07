@@ -137,13 +137,15 @@ export default function Footer() {
           </div>
         </div>
 
-        <Image
-          className={styles.logoWatermark}
-          src="/images/logo/logo-1.svg"
-          width={1000}
-          height={400}
-          alt="Lumina watermark"
-        />
+        <div className={styles.logoWatermarkCont}>
+          <Image
+            className={styles.logoWatermark}
+            src="/images/logo/logo-wide-cropped.png"
+            width={1000}
+            height={400}
+            alt="Lumina watermark"
+          />
+        </div>
 
         {/* Footer bottom bar */}
         <div className={styles.footerBottom}>

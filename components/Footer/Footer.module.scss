@@ -6,8 +6,8 @@
 
   .footerBody {
     padding-top: 60px;
-    padding-bottom: 100px;
-    border-bottom: 1px solid #ffffff1a;
+    padding-bottom: 40px;
+    // border-bottom: 1px solid #ffffff1a;
   }
 
   .footerInner {
@@ -39,6 +39,7 @@
   .footerLogo {
     margin-bottom: 24px;
     display: block;
+    transform: translateX(-12px);
 
     @include res(md) {
       width: 200px;
@@ -201,10 +202,27 @@
   }
 }
 
+.logoWatermarkCont {
+  position: relative;
+
+  &::after {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 61%;
+    background: linear-gradient(360deg, #101010 0%, rgba(16, 16, 16, 0) 100%);
+  }
+}
+
 .logoWatermark {
+  display: block;
   margin: auto;
   width: 100%;
   height: auto;
+  max-height: 200px;
+  // background: linear-gradient(to bottom, #101010 0%, rgba(16, 16, 16, 0) 100%);
 }
 
 /* ─── Newsletter form ────────────────────────────────────────────────────────── */
