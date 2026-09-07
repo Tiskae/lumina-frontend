@@ -1,9 +1,11 @@
 "use client";
 
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import styles from "./PropertyImageCarousel.module.scss";
 
@@ -16,27 +18,29 @@ interface Props {
 }
 
 export default function PropertyImageCarousel({ images, href, alt, id }: Props) {
+  const swiperRef = useRef<SwiperType | null>(null);
   const prevClass = `c-prev-${id}`;
   const nextClass = `c-next-${id}`;
   const hasMultiple = images.length > 1;
 
   return (
-    <div className={styles.wrap}>
+    <div
+      className={styles.wrap}
+      onMouseEnter={() => swiperRef.current?.autoplay?.pause()}
+      onMouseLeave={() => swiperRef.current?.autoplay?.resume()}
+    >
       <Swiper
         modules={[Autoplay, Navigation]}
         slidesPerView={1}
         loop={hasMultiple}
         speed={700}
-        autoplay={
-          hasMultiple
-            ? { delay: 3500, disableOnInteraction: false, pauseOnMouseEnter: true }
-            : false
-        }
+        autoplay={hasMultiple ? { delay: 3500, disableOnInteraction: false } : false}
         navigation={
           hasMultiple
             ? { prevEl: `.${prevClass}`, nextEl: `.${nextClass}` }
             : false
         }
+        onSwiper={(swiper) => { swiperRef.current = swiper; }}
         className={styles.swiper}
         touchStartPreventDefault={false}
       >

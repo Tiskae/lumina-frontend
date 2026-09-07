@@ -59,7 +59,9 @@
       }
     }
 
-    @include res(sm) { gap: 12px 22px; }
+    @include res(sm) {
+      gap: 12px 22px;
+    }
   }
 
   .wrapBtn {
@@ -84,8 +86,12 @@
         transition-duration: 0.4s;
       }
 
-      .quickView { transition-delay: 0.1s; }
-      .compare   { transition-delay: 0.3s; }
+      .quickView {
+        transition-delay: 0.1s;
+      }
+      .compare {
+        transition-delay: 0.3s;
+      }
     }
 
     &:hover {
@@ -152,7 +158,9 @@
   grid-template-columns: repeat(2, 1fr);
   justify-content: center;
 
-  span { font-size: 15px !important; }
+  span {
+    font-size: 15px !important;
+  }
 }
 
 // ─── Style List ───────────────────────────────────────────────────────────────
@@ -161,50 +169,24 @@
   gap: 0;
   background-color: var(--White);
   border: 1px solid var(--Line);
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
   grid-template-rows: none; // reset grid from base
 
-  // ── Two-image wrapper ────────────────────────────────────────────────────────
+  // ── Image carousel column ─────────────────────────────────────────────────────
   .imagesWrap {
-    display: flex;
-    flex-direction: column;
-    flex: 0 0 300px;
+    flex: 0 0 400px;
+    align-self: stretch;
     min-height: 280px;
-  }
-
-  .listImgItem {
+    // carousel child uses height: 100% — needs a defined height context
     position: relative;
-    flex: 1;
-    display: block;
     overflow: hidden;
-
-    img { @include transition5(); }
-
-    &::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0);
-      @include transition3();
-    }
-
-    &:hover {
-      img { transform: scale(1.08); }
-
-      &::after { background: rgba(0, 0, 0, 0.08); }
-    }
-  }
-
-  // Separator between stacked images
-  .listImgItem + .listImgItem {
-    border-top: 2px solid var(--White);
   }
 
   // ── Content ──────────────────────────────────────────────────────────────────
   .listContent {
     flex: 1;
-    padding: 28px 30px;
+    padding: 28px 35px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -225,6 +207,7 @@
     font-size: 22px;
     font-weight: 700;
     color: var(--Text-primary);
+    color: green;
     line-height: 1.2;
   }
 
@@ -258,11 +241,13 @@
     margin-bottom: 6px;
     @include transition3();
 
-    &:hover { color: var(--Primary); }
+    &:hover {
+      color: var(--Primary);
+    }
   }
 
   .listPlace {
-    font-size: 14px;
+    font-size: 15px;
     color: var(--Text-secondary);
     margin-bottom: 0;
   }
@@ -282,7 +267,7 @@
       display: flex;
       align-items: center;
       gap: 7px;
-      font-size: 14px;
+      font-size: 16px;
       color: var(--Text-secondary);
 
       i {
@@ -301,14 +286,25 @@
 
   // ── Responsive ───────────────────────────────────────────────────────────────
   @include res(xxl) {
-    .imagesWrap { flex: 0 0 260px; }
-    .listContent { padding: 24px 22px; }
+    .imagesWrap {
+      flex: 0 0 260px;
+    }
+    .listContent {
+      padding: 24px 22px;
+    }
   }
 
   @include res(lg) {
-    .imagesWrap { flex: 0 0 220px; min-height: 240px; }
-    .listPrice  { font-size: 18px; }
-    .listTitle  { font-size: 17px; }
+    .imagesWrap {
+      flex: 0 0 220px;
+      min-height: 240px;
+    }
+    .listPrice {
+      font-size: 18px;
+    }
+    .listTitle {
+      font-size: 17px;
+    }
   }
 
   @include res(md) {
@@ -317,20 +313,21 @@
     .imagesWrap {
       flex: none;
       width: 100%;
-      min-height: 200px;
-      flex-direction: row;
+      min-height: 220px;
+      align-self: auto;
     }
 
-    .listImgItem + .listImgItem {
-      border-top: none;
-      border-left: 2px solid var(--White);
+    .listContent {
+      padding: 22px 20px;
     }
-
-    .listContent { padding: 22px 20px; }
   }
 
   @include res(sm) {
-    .imagesWrap { min-height: 160px; }
-    .listBtns   { flex-direction: column; }
+    .imagesWrap {
+      min-height: 160px;
+    }
+    .listBtns {
+      flex-direction: column;
+    }
   }
 }

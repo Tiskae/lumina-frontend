@@ -49,7 +49,7 @@ export default function FilterSidebar({ filters, setFilters, cities, onClose }: 
       <div className={styles.canvasHeader}>
         <div className="h5">Filters</div>
         <button className={styles.closeBtn} onClick={onClose} aria-label="Close filters">
-          <i className="icon icon-X" />
+          <i className="icon icon-close" />
         </button>
       </div>
 
@@ -154,7 +154,7 @@ export default function FilterSidebar({ filters, setFilters, cities, onClose }: 
           </div>
 
           {/* Garages */}
-          <div className={styles.filterGroup}>
+          {/* <div className={styles.filterGroup}>
             <div className={styles.filterLabel}>Garages</div>
             <div className={styles.selectWrap}>
               <select value={filters.garages} onChange={(e) => update({ garages: e.target.value })}>
@@ -167,7 +167,7 @@ export default function FilterSidebar({ filters, setFilters, cities, onClose }: 
               </select>
               <i className="icon icon-CaretDown" />
             </div>
-          </div>
+          </div> */}
 
           {/* Price Range */}
           <div className={styles.filterGroup}>
@@ -244,10 +244,10 @@ export default function FilterSidebar({ filters, setFilters, cities, onClose }: 
                 <i className="icon icon-ArrowCounterClockwise" />
                 <span>Reset all filters</span>
               </button>
-              <button type="button" className={styles.textBtn}>
+              {/* <button type="button" className={styles.textBtn}>
                 <i className="icon icon-Star" />
                 <span>Save search</span>
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

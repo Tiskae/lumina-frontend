@@ -179,7 +179,7 @@ export default function ListingsSection({ properties }: Props) {
                   {activeFilters.map((f) => (
                     <button key={f.key} className={styles.filterChip} onClick={() => removeFilter(f.key)}>
                       {f.label}
-                      <i className="icon icon-X" />
+                      <i className="icon icon-close" />
                     </button>
                   ))}
                   <button

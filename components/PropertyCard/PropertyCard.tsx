@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import PropertyImageCarousel from "@/components/PropertyImageCarousel/PropertyImageCarousel";
 import styles from "./PropertyCard.module.scss";
 
 export interface Property {
@@ -40,24 +40,22 @@ const STATUS_LABELS: Record<Property["status"], string> = {
   new: "New",
 };
 
+function getImages(property: Property): string[] {
+  const gallery = property.gallery?.filter(Boolean) ?? [];
+  return gallery.length > 0 ? gallery : [property.image];
+}
+
 export default function PropertyCard({ property, variant = "default" }: PropertyCardProps) {
-  const { slug, title, price, status, type, beds, baths, sqft, image, address, gallery } = property;
+  const { slug, title, price, status, type, beds, baths, sqft, address } = property;
+  const images = getImages(property);
 
   /* ── List variant ─────────────────────────────────────────────────────────── */
   if (variant === "list") {
-    const img1 = gallery?.[0] ?? image;
-    const img2 = gallery?.[1] ?? image;
-
     return (
       <div className={`${styles.cardHouse} ${styles.styleList}`}>
-        {/* Two images */}
+        {/* Carousel — fills the left image column */}
         <div className={styles.imagesWrap}>
-          <Link href={`/properties/${slug}`} className={styles.listImgItem}>
-            <Image src={img1} alt={title} fill style={{ objectFit: "cover" }} />
-          </Link>
-          <Link href={`/properties/${slug}`} className={styles.listImgItem}>
-            <Image src={img2} alt={title} fill style={{ objectFit: "cover" }} />
-          </Link>
+          <PropertyImageCarousel images={images} href={`/properties/${slug}`} alt={title} id={`list-${slug}`} />
         </div>
 
         {/* Content */}
@@ -67,7 +65,9 @@ export default function PropertyCard({ property, variant = "default" }: Property
             <div className={styles.listPrice}>{price}</div>
             <div className={styles.listTags}>
               <span className={styles.listTag}>{STATUS_LABELS[status]}</span>
-              <span className={styles.listTag} style={{ textTransform: "capitalize" }}>{type}</span>
+              <span className={styles.listTag} style={{ textTransform: "capitalize" }}>
+                {type}
+              </span>
             </div>
           </div>
 
@@ -93,16 +93,16 @@ export default function PropertyCard({ property, variant = "default" }: Property
             </li>
           </ul>
 
-          {/* Action buttons */}
+          {/* Buttons */}
           <div className={styles.listBtns}>
-            <Link href={`/properties/${slug}`} className="tf-btn btn-bg-1 rounded-8">
+            <Link href={`/properties/${slug}`} className="tf-btn rounded-8">
               <span>View Details</span>
               <span className="bg-effect" />
             </Link>
-            <button className="tf-btn btn-border rounded-8">
+            {/* <button className="tf-btn btn-border rounded-8">
               <span>Compare</span>
               <span className="bg-effect" />
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
@@ -114,15 +114,10 @@ export default function PropertyCard({ property, variant = "default" }: Property
 
   return (
     <div className={`${styles.cardHouse} ${variantClass} hover-image`}>
-      <Link href={`/properties/${slug}`} className={styles.imgStyle}>
-        <Image
-          src={image}
-          alt={title}
-          width={400}
-          height={280}
-          style={{ objectFit: "cover", width: "100%", height: "100%" }}
-        />
-      </Link>
+      {/* Image carousel fills the 280px top grid slot */}
+      <div className={styles.imgStyle}>
+        <PropertyImageCarousel images={images} href={`/properties/${slug}`} alt={title} id={`grid-${slug}`} />
+      </div>
 
       <div className={styles.title}>
         <h5>{title}</h5>
@@ -143,7 +138,7 @@ export default function PropertyCard({ property, variant = "default" }: Property
             <span>{sqft.toLocaleString()} sqft</span>
           </li>
           <li>
-            <i className="icon icon-Crop" />
+            <i className="icon icon-CurrencyCircleDollar" />
             <span>{price}</span>
           </li>
         </ul>
