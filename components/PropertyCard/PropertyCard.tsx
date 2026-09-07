@@ -1,6 +1,17 @@
 import Link from "next/link";
 import PropertyImageCarousel from "@/components/PropertyImageCarousel/PropertyImageCarousel";
 import styles from "./PropertyCard.module.scss";
+import clsx from "clsx";
+
+export interface PropertyDetail {
+  label: string;
+  value: string;
+}
+
+export interface PropertyNearby {
+  place: string;
+  distance: string;
+}
 
 export interface Property {
   id: string;
@@ -23,6 +34,9 @@ export interface Property {
   featured?: boolean;
   description?: string;
   amenities?: string[];
+  details?: PropertyDetail[];
+  utilities?: string[];
+  nearby?: PropertyNearby[];
   agent?: string;
   yearBuilt?: number;
   latitude?: number;
@@ -32,6 +46,7 @@ export interface Property {
 interface PropertyCardProps {
   property: Property;
   variant?: "default" | "style1" | "list";
+  whiteBg?: boolean;
 }
 
 const STATUS_LABELS: Record<Property["status"], string> = {
@@ -45,14 +60,14 @@ function getImages(property: Property): string[] {
   return gallery.length > 0 ? gallery : [property.image];
 }
 
-export default function PropertyCard({ property, variant = "default" }: PropertyCardProps) {
+export default function PropertyCard({ property, variant = "default", whiteBg }: PropertyCardProps) {
   const { slug, title, price, status, type, beds, baths, sqft, address } = property;
   const images = getImages(property);
 
   /* ── List variant ─────────────────────────────────────────────────────────── */
   if (variant === "list") {
     return (
-      <div className={`${styles.cardHouse} ${styles.styleList}`}>
+      <div className={clsx(styles.cardHouse, styles.styleList, whiteBg && styles.whiteBg)}>
         {/* Carousel — fills the left image column */}
         <div className={styles.imagesWrap}>
           <PropertyImageCarousel images={images} href={`/properties/${slug}`} alt={title} id={`list-${slug}`} />
@@ -113,7 +128,7 @@ export default function PropertyCard({ property, variant = "default" }: Property
   const variantClass = variant === "style1" ? styles.style1 : styles.styleDefault;
 
   return (
-    <div className={`${styles.cardHouse} ${variantClass} hover-image`}>
+    <div className={clsx(styles.cardHouse, variantClass, "hover-image", whiteBg && styles.whiteBg)}>
       {/* Image carousel fills the 280px top grid slot */}
       <div className={styles.imgStyle}>
         <PropertyImageCarousel images={images} href={`/properties/${slug}`} alt={title} id={`grid-${slug}`} />

@@ -8,6 +8,10 @@
   display: grid;
   grid-template-rows: 280px 1fr;
 
+  &.whiteBg {
+    background-color: #fff !important;
+  }
+
   .imgStyle {
     position: relative;
     overflow: hidden;
