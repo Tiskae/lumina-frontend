@@ -22,8 +22,8 @@ const navItems: NavItem[] = [
     // ],
   },
   {
-    label: "Listings",
-    href: "/listings",
+    label: "Properties",
+    href: "/properties",
     // children: [
     //   { label: "Filter Sidebar", href: "/listings/sidebar" },
     //   { label: "Grid Full Width", href: "/listings" },
@@ -128,13 +128,14 @@ export default function Header({
 }
 
 function Nav({ items, currentPath }: { items: NavItem[]; currentPath: string }) {
-  console.log({ currentPath });
-
   return (
     <nav className={styles.mainMenu}>
       <ul className={styles.navigation}>
         {items.map((item) => {
-          const isCurrent = currentPath === item.href || item.children?.some((c) => c.href === currentPath);
+          const isCurrent =
+            currentPath === item.href ||
+            item.children?.some((c) => c.href === currentPath) ||
+            (item.href !== "/" && currentPath.startsWith(item.href));
 
           return (
             <li
@@ -179,12 +180,12 @@ function HeaderRight({ onMenuOpen }: { onMenuOpen?: () => void }) {
         <div className={styles.hotLineText}>
           <div className={styles.label}>Hotline:</div>
           <div className={styles.number}>
-            <a href="tel:+2348001234567">+234 800 123 4567</a>
+            <a href="tel:09120448767">0912 044 8767</a>
           </div>
         </div>
       </div>
 
-      <Link href="/listings" className="tf-btn">
+      <Link href="/properties" className="tf-btn">
         <i className="icon icon-HouseLine" />
         <span>Find Property</span>
         <span className="bg-effect" />

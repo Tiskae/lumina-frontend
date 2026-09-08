@@ -4,7 +4,7 @@
 .heroSection {
   background: var(--Bg-light);
   padding-top: 120px;
-  padding-bottom: 0;
+  padding-bottom: 25px;
 }
 
 // ─── Breadcrumb ───────────────────────────────────────────────────────────────
@@ -37,7 +37,7 @@
 
 // ─── Detail body section ──────────────────────────────────────────────────────
 .bodySection {
-  padding: 60px 0 100px;
+  padding: 40px 0 100px;
 }
 
 .bodyGrid {
@@ -386,7 +386,7 @@
   flex-direction: column;
   gap: 28px;
   position: sticky;
-  top: 100px;
+  top: 20px;
 
   @include res(xl) {
     position: static;

@@ -12,11 +12,30 @@ interface PageBannerProps {
   subtitle?: string;
   breadcrumbs: BreadcrumbItem[];
   style?: "default" | "style2";
+  smallerHeading?: boolean;
+  hasBg?: boolean;
+  bgURL?: string;
 }
 
-export default function PageBanner({ title, subtitle, breadcrumbs, style = "default" }: PageBannerProps) {
+export default function PageBanner({
+  title,
+  subtitle,
+  breadcrumbs,
+  style = "default",
+  smallerHeading,
+  hasBg,
+  bgURL,
+}: PageBannerProps) {
   return (
-    <section className={`${styles.pageBanner} ${style === "style2" ? styles.style2 : ""}`}>
+    <section
+      className={clsx(
+        styles.pageBanner,
+        style === "style2" && styles.style2,
+        smallerHeading && styles.smallerHeading,
+        hasBg && styles.hasBg,
+      )}
+      style={hasBg && bgURL ? { backgroundImage: `url(${bgURL})` } : undefined}
+    >
       <div className={clsx("tf-container", styles.contentWrap)}>
         <h1 className={styles.title}>{title}</h1>
 

@@ -11,25 +11,147 @@
   position: relative;
   width: 100%;
   height: 480px;
-  border-radius: 16px;
+  border-radius: 12px;
   overflow: hidden;
   background: var(--Bg-light);
+  cursor: pointer;
+  outline: none;
+
+  // Reveal hover controls
+  &:hover .navBtn,
+  &:focus-visible .navBtn {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+
+  &:hover .dots,
+  &:focus-visible .dots {
+    opacity: 1;
+  }
+
+  &:hover .expandHint,
+  &:focus-visible .expandHint {
+    opacity: 1;
+  }
 
   @include res(md) {
     height: 320px;
+    border-radius: 12px;
   }
+}
+
+// ─── Expand hint (top-right corner) ──────────────────────────────────────────
+.expandHint {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 4;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 17px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+// ─── Prev / Next arrows on main image ────────────────────────────────────────
+.navBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) scale(0.85);
+  z-index: 5;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    background 0.15s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.85);
+  }
+
+  @media (hover: none) {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+  }
+}
+
+.navPrev {
+  left: 14px;
+}
+.navNext {
+  right: 14px;
+}
+
+// ─── Navigation dots on main image ───────────────────────────────────────────
+.dots {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  gap: 7px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+
+  @media (hover: none) {
+    opacity: 1;
+  }
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.dotActive {
+  background: #fff;
+  border-color: #fff;
+  transform: scale(1.25);
 }
 
 // ─── Thumbnail strip ──────────────────────────────────────────────────────────
 .thumbStrip {
   display: flex;
-  gap: 12px;
+  gap: 10px;
 }
 
 .thumb {
   position: relative;
   flex: 1;
-  height: 130px;
+  height: 120px;
   border-radius: 10px;
   overflow: hidden;
   border: 3px solid transparent;
@@ -39,18 +161,162 @@
   transition:
     border-color 0.2s ease,
     opacity 0.2s ease;
-  opacity: 0.75;
+  opacity: 0.7;
 
   &:hover {
     opacity: 1;
   }
 
   @include res(md) {
-    height: 80px;
+    height: 72px;
+    border-radius: 7px;
   }
 }
 
 .thumbActive {
   border-color: var(--Primary);
   opacity: 1;
+}
+
+// ─── Lightbox overlay ─────────────────────────────────────────────────────────
+.lightboxOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.93);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lbFadeIn 0.2s ease;
+}
+
+@keyframes lbFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// ─── Close button ─────────────────────────────────────────────────────────────
+.lightboxClose {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+// ─── Counter ──────────────────────────────────────────────────────────────────
+.lightboxCounter {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.05em;
+  pointer-events: none;
+}
+
+// ─── Image ────────────────────────────────────────────────────────────────────
+.lightboxImgWrap {
+  position: relative;
+  width: min(90vw, 1200px);
+  height: min(80vh, 800px);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+// ─── Prev / Next arrows ───────────────────────────────────────────────────────
+.lightboxNav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.45);
+  }
+
+  @include res(sm) {
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+  }
+}
+
+.lightboxPrev {
+  left: 24px;
+}
+.lightboxNext {
+  right: 24px;
+}
+
+// ─── Dots ─────────────────────────────────────────────────────────────────────
+.lightboxDots {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.lightboxDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.7);
+  }
+}
+
+.lightboxDotActive {
+  background: #fff;
+  border-color: #fff;
+  transform: scale(1.3);
 }

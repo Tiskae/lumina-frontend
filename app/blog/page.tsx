@@ -3,11 +3,11 @@ import Link from "next/link";
 import PageLayout from "@/components/PageLayout/PageLayout";
 import PageBanner from "@/components/sections/PageBanner/PageBanner";
 import blogData from "@/data/blog.json";
+import styles from "./Blog.module.scss";
 
 export const metadata = {
   title: "Latest News | Lumina Real Estate",
-  description:
-    "Property market insights, investment guides, and expert advice from Lumina's team.",
+  description: "Property market insights, investment guides, and expert advice from Lumina's team.",
 };
 
 function formatDate(dateStr: string) {
@@ -19,102 +19,71 @@ function formatDate(dateStr: string) {
 }
 
 export default function BlogPage() {
+  const featured = blogData.find((p) => p.featured);
+  const rest = blogData.filter((p) => p.id !== featured?.id);
+
   return (
-    <PageLayout currentPath="/blog">
+    <PageLayout currentPath="/blog" isAbsolute>
       <PageBanner
         title="Latest News & Insights"
         subtitle="Expert perspectives on Nigeria's luxury property market."
-        breadcrumbs={[
-          { label: "Home", href: "/" },
-          { label: "Blog" },
-        ]}
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Blog" }]}
       />
 
-      <section style={{ padding: "80px 0" }}>
+      <section className={styles.section}>
         <div className="tf-container">
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: 30,
-            }}
-          >
-            {blogData.map((post) => (
-              <article
-                key={post.id}
-                style={{
-                  background: "var(--White)",
-                  borderRadius: 16,
-                  overflow: "hidden",
-                  border: "1px solid var(--Line)",
-                }}
-              >
-                <Link
-                  href={`/blog/${post.slug}`}
-                  style={{ display: "block", height: 220, position: "relative", overflow: "hidden" }}
-                >
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    style={{ objectFit: "cover" }}
-                  />
+          {/* Featured post */}
+          {featured && (
+            <article className={styles.featured}>
+              <Link href={`/blog/${featured.slug}`} className={styles.featuredImg}>
+                <Image src={featured.image} alt={featured.title} fill style={{ objectFit: "cover" }} priority />
+              </Link>
+
+              <div className={styles.featuredBody}>
+                <span className={styles.featuredLabel}>Featured</span>
+                <Link href={`/blog/${featured.slug}`} className={styles.featuredTitle}>
+                  {featured.title}
+                </Link>
+                <p className={styles.featuredExcerpt}>{featured.excerpt}</p>
+                <div className={styles.featuredMeta}>
+                  <span className={styles.catChip}>{featured.category}</span>
+                  <span className={styles.dot} />
+                  <span>{formatDate(featured.date)}</span>
+                  <span className={styles.dot} />
+                  <span>{featured.readTime} min read</span>
+                </div>
+              </div>
+            </article>
+          )}
+
+          {/* All other posts */}
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionHeading}>More Articles</h2>
+          </div>
+
+          <div className={styles.grid}>
+            {rest.map((post) => (
+              <article key={post.id} className={styles.card}>
+                <Link href={`/blog/${post.slug}`} className={styles.cardImgWrap}>
+                  <Image src={post.image} alt={post.title} fill style={{ objectFit: "cover" }} />
                 </Link>
 
-                <div style={{ padding: "24px" }}>
-                  <div style={{ marginBottom: 12 }}>
-                    <span
-                      style={{
-                        display: "inline-flex",
-                        padding: "4px 12px",
-                        borderRadius: 99,
-                        background: "var(--Bg-light)",
-                        fontSize: 12,
-                        fontWeight: 600,
-                        color: "var(--Primary)",
-                        textTransform: "uppercase",
-                      }}
-                    >
-                      {post.category}
-                    </span>
+                <div className={styles.cardBody}>
+                  <div className={styles.cardCat}>
+                    <span className={styles.catChip}>{post.category}</span>
                   </div>
 
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    style={{
-                      display: "block",
-                      fontSize: 18,
-                      fontWeight: 600,
-                      lineHeight: "26px",
-                      color: "var(--Text-primary)",
-                      marginBottom: 10,
-                    }}
-                  >
+                  <Link href={`/blog/${post.slug}`} className={styles.cardTitle}>
                     {post.title}
                   </Link>
 
-                  <p
-                    style={{
-                      fontSize: 14,
-                      lineHeight: "22px",
-                      color: "var(--Text-secondary)",
-                      marginBottom: 16,
-                    }}
-                  >
-                    {post.excerpt}
-                  </p>
+                  <p className={styles.cardExcerpt}>{post.excerpt}</p>
 
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      fontSize: 13,
-                      color: "var(--Text-muted)",
-                    }}
-                  >
+                  <div className={styles.cardFooter}>
                     <span>{formatDate(post.date)}</span>
-                    <span>{post.readTime} min read</span>
+                    <Link href={`/blog/${post.slug}`} className={styles.readMore}>
+                      Read more <i className="icon icon-CaretRight" />
+                    </Link>
                   </div>
                 </div>
               </article>

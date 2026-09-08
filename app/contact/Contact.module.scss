@@ -1,0 +1,314 @@
+@use "../../styles/mixins" as *;
+
+// ─── Main info + form section ─────────────────────────────────────────────────
+.section {
+  padding: 80px 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+
+  @include res(lg) {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+// ─── Left col ─────────────────────────────────────────────────────────────────
+.heading {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--Text-primary);
+  line-height: 1.25;
+  margin-bottom: 16px;
+
+  @include res(md) {
+    font-size: 28px;
+  }
+}
+
+.subtext {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--Text-secondary);
+  margin-bottom: 40px;
+}
+
+.officeList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.officeCard {
+  padding: 28px;
+  border: 1px solid var(--Line);
+  border-radius: 12px;
+}
+
+.officeCity {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--Primary);
+  margin-bottom: 14px;
+}
+
+.officeDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.officeRow {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+
+  i {
+    font-size: 17px;
+    color: var(--Primary);
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  span {
+    font-size: 14px;
+    color: var(--Text-secondary);
+    line-height: 1.55;
+  }
+}
+
+// ─── Right col — form ─────────────────────────────────────────────────────────
+.formCard {
+  background: var(--Bg-light);
+  border-radius: 12px;
+  padding: 40px;
+
+  @include res(sm) {
+    padding: 28px 20px;
+  }
+}
+
+.formTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--Text-primary);
+  margin-bottom: 6px;
+}
+
+.formNote {
+  font-size: 14px;
+  color: var(--Text-secondary);
+  margin-bottom: 28px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.nameRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  @include res(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fieldWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--Text-primary);
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--Line);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  background: var(--White);
+  color: var(--Text-primary);
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: var(--Text-secondary);
+    opacity: 0.6;
+  }
+
+  &:focus {
+    border-color: var(--Primary);
+  }
+}
+
+.select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.textarea {
+  resize: vertical;
+}
+
+.submitBtn {
+  margin-top: 6px;
+}
+
+// ─── Map strip ────────────────────────────────────────────────────────────────
+.mapStrip {
+  height: 420px;
+  position: relative;
+  overflow: hidden;
+
+  @include res(md) {
+    height: 280px;
+  }
+}
+
+.mapFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+// ─── Team section ─────────────────────────────────────────────────────────────
+.teamSection {
+  padding: 80px 0;
+  background: var(--White);
+}
+
+.teamHeader {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.teamTitle {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--Text-primary);
+  margin-bottom: 12px;
+
+  @include res(sm) {
+    font-size: 26px;
+  }
+}
+
+.teamSub {
+  font-size: 16px;
+  color: var(--Text-secondary);
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+
+  @include res(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include res(sm) {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
+
+.agentCard {
+  padding: 28px 20px;
+  border: 1px solid var(--Line);
+  border-radius: 12px;
+  text-align: center;
+  transition:
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+
+  &:hover {
+    border-color: var(--Primary);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.07);
+  }
+}
+
+.agentAvatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 16px;
+  display: block;
+}
+
+.agentName {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--Text-primary);
+  margin-bottom: 4px;
+}
+
+.agentRole {
+  font-size: 13px;
+  color: var(--Primary);
+  margin-bottom: 16px;
+}
+
+.agentPhone {
+  font-size: 13px;
+  color: var(--Text-secondary);
+  display: block;
+  margin-bottom: 6px;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--Primary);
+  }
+}
+
+.agentEmail {
+  font-size: 13px;
+  color: var(--Primary);
+  display: block;
+  word-break: break-all;
+  margin-bottom: 20px;
+}
+
+.agentBtns {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+
+  :global(.tf-btn) {
+    flex: 1;
+    justify-content: center;
+    font-size: 13px;
+    padding: 8px 10px;
+
+    i {
+      color: var(--Text-primary);
+      transition: color 0.2s ease;
+    }
+
+    &:hover i {
+      color: #fff;
+    }
+  }
+}

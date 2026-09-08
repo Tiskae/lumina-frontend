@@ -68,7 +68,7 @@ export default function HeroSearch() {
     if (type && type !== "All Types") params.set("type", type.toLowerCase());
     if (beds && beds !== "Any Beds") params.set("beds", beds.replace(/\D/g, ""));
     if (selectedAmenities.length > 0) params.set("amenities", selectedAmenities.join(","));
-    router.push(`/listings?${params.toString()}`);
+    router.push(`/properties?${params.toString()}`);
   };
 
   return (

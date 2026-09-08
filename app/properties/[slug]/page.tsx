@@ -4,6 +4,7 @@ import PageLayout from "@/components/PageLayout/PageLayout";
 import PropertyGallery from "@/components/PropertyGallery/PropertyGallery";
 import FinancingCalculator from "@/components/FinancingCalculator/FinancingCalculator";
 import PropertyCard from "@/components/PropertyCard/PropertyCard";
+import AgentContactForm from "@/components/AgentContactForm/AgentContactForm";
 import propertiesData from "@/data/properties.json";
 import agentsData from "@/data/agents.json";
 import type { Property } from "@/components/PropertyCard/PropertyCard";
@@ -49,7 +50,7 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
           <nav className={styles.breadcrumb}>
             <Link href="/">Home</Link>
             <i className="icon icon-CaretRight" />
-            <Link href="/listings">Listings</Link>
+            <Link href="/properties">Properties</Link>
             <i className="icon icon-CaretRight" />
             <span>{property.title}</span>
           </nav>
@@ -228,20 +229,7 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
                   </div>
 
                   {/* Contact form */}
-                  <form className={styles.contactForm}>
-                    <input type="text" placeholder="Your full name" className={styles.formInput} />
-                    <input type="email" placeholder="Email address" className={styles.formInput} />
-                    <input type="tel" placeholder="Phone number" className={styles.formInput} />
-                    <textarea
-                      rows={4}
-                      placeholder="I am interested in this property..."
-                      className={styles.formTextarea}
-                    />
-                    <button type="submit" className="tf-btn btn-bg-1 w-full">
-                      <span>Send Enquiry</span>
-                      <span className="bg-effect" />
-                    </button>
-                  </form>
+                  <AgentContactForm agentName={agent.name} />
 
                   <div className={styles.agentCtaBtns}>
                     <a href={`tel:${agent.phone}`} className="tf-btn btn-border" style={{ flex: 1 }}>
@@ -315,7 +303,7 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
           <div className="tf-container">
             <div className={styles.relatedHeader}>
               <h2 className={styles.relatedTitle}>Related Properties</h2>
-              <Link href="/listings" className="tf-btn btn-border">
+              <Link href="/properties" className="tf-btn btn-border">
                 <span>View All</span>
                 <span className="bg-effect" />
               </Link>

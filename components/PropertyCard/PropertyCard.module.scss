@@ -135,7 +135,8 @@
 // This only applies to the grid card (styleDefault/style1), NOT to styleList
 .cardHouse:not(.styleList) {
   .title {
-    background-color: #611200;
+    // background-color: #611200;
+    background-color: var(--Primary);
     position: absolute;
     top: 280px;
     left: 50%;

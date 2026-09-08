@@ -7,26 +7,26 @@ import styles from "./Footer.module.scss";
 
 const quickLinks = [
   { label: "About Lumina", href: "/about" },
-  { label: "Our Properties", href: "/listings" },
+  { label: "Our Properties", href: "/properties" },
   { label: "Find an Agent", href: "/contact" },
   { label: "Latest News", href: "/blog" },
   { label: "Contact Us", href: "/contact" },
 ];
 
 const propertyLinks = [
-  { label: "Luxury Apartments", href: "/listings?type=apartment" },
-  { label: "Villas & Duplexes", href: "/listings?type=villa" },
-  { label: "Townhouses", href: "/listings?type=townhouse" },
-  { label: "Commercial", href: "/listings?type=commercial" },
-  { label: "New Developments", href: "/listings?status=new" },
+  { label: "Luxury Apartments", href: "/properties?type=apartment" },
+  { label: "Villas & Duplexes", href: "/properties?type=villa" },
+  { label: "Townhouses", href: "/properties?type=townhouse" },
+  { label: "Commercial", href: "/properties?type=commercial" },
+  { label: "New Developments", href: "/properties?status=new" },
 ];
 
 const locationLinks = [
-  { label: "Lagos Island", href: "/listings?city=lagos-island" },
-  { label: "Ikoyi", href: "/listings?city=ikoyi" },
-  { label: "Lekki", href: "/listings?city=lekki" },
-  { label: "Victoria Island", href: "/listings?city=vi" },
-  { label: "Abuja", href: "/listings?city=abuja" },
+  { label: "Lagos Island", href: "/properties?city=lagos-island" },
+  { label: "Ikoyi", href: "/properties?city=ikoyi" },
+  { label: "Lekki", href: "/properties?city=lekki" },
+  { label: "Victoria Island", href: "/properties?city=vi" },
+  { label: "Abuja", href: "/properties?city=abuja" },
 ];
 
 interface ColBlockProps {
