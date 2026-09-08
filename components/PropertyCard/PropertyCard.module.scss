@@ -54,8 +54,10 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 14px;
+      font-size: 16px;
       color: var(--Text-secondary);
+      justify-content: center;
+      // background-color: yellowgreen;
 
       i {
         font-size: 20px;

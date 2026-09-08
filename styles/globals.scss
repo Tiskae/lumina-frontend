@@ -22,6 +22,38 @@
   --Bg-light: #f9f7f3;
 }
 
+// ─── Global scrollbar ────────────────────────────────────────────────────────
+html {
+  direction: rtl; // moves native scrollbar to the left edge
+}
+
+body {
+  direction: ltr; // reset so content is unaffected
+}
+
+::-webkit-scrollbar {
+  width: 1px;
+  height: 1px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--Primary);
+  border-radius: 99px;
+
+  &:hover {
+    background: color-mix(in srgb, var(--Primary) 80%, #000);
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--Primary) #f0f0f0;
+}
+
 // ─── Swiper CSS (loaded at runtime by SwiperCarousel, no static import needed)
 // Override
 .swiper-slide {

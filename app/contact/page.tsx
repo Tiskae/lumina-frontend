@@ -104,7 +104,7 @@ export default function ContactPage() {
 
           <div className={styles.teamGrid}>
             {agentsData.map((agent) => (
-              <div key={agent.id} className={styles.agentCard}>
+              <div key={agent.id} id={agent.id} className={styles.agentCard}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={agent.image} alt={agent.name} className={styles.agentAvatar} />
                 <div className={styles.agentName}>{agent.name}</div>

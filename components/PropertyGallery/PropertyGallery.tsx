@@ -7,9 +7,10 @@ import styles from "./PropertyGallery.module.scss";
 interface Props {
   images: string[];
   title: string;
+  layout?: "default" | "sidebar";
 }
 
-export default function PropertyGallery({ images, title }: Props) {
+export default function PropertyGallery({ images, title, layout = "default" }: Props) {
   const [active, setActive] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -58,85 +59,113 @@ export default function PropertyGallery({ images, title }: Props) {
     setLightboxOpen(true);
   }
 
+  // ── Shared: main image block ────────────────────────────────────────────────
+  const mainImage = (
+    <div
+      className={styles.mainWrap}
+      tabIndex={0}
+      onKeyDown={handleGalleryKey}
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+      onClick={() => openLightbox(active)}
+      role="button"
+      aria-label="Open fullscreen gallery"
+    >
+      <Image
+        src={images[active]}
+        alt={`${title} — image ${active + 1}`}
+        fill
+        style={{ objectFit: "cover" }}
+        priority
+      />
+
+      {/* Expand hint */}
+      <div className={styles.expandHint} aria-hidden>
+        <i className="icon icon-ArrowsOut" />
+      </div>
+
+      {/* Prev / Next arrows */}
+      {total > 1 && (
+        <>
+          <button
+            className={`${styles.navBtn} ${styles.navPrev}`}
+            onClick={(e) => { e.stopPropagation(); setActive((i) => goPrev(i)); }}
+            aria-label="Previous image"
+          >
+            <i className="icon icon-CaretLeft" />
+          </button>
+          <button
+            className={`${styles.navBtn} ${styles.navNext}`}
+            onClick={(e) => { e.stopPropagation(); setActive((i) => goNext(i)); }}
+            aria-label="Next image"
+          >
+            <i className="icon icon-CaretRight" />
+          </button>
+        </>
+      )}
+
+      {/* Dots */}
+      {total > 1 && (
+        <div className={styles.dots} onClick={(e) => e.stopPropagation()}>
+          {images.map((_, i) => (
+            <button
+              key={i}
+              className={`${styles.dot} ${i === active ? styles.dotActive : ""}`}
+              onClick={() => setActive(i)}
+              aria-label={`Image ${i + 1}`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <>
-      <div className={styles.gallery}>
-        {/* ── Main image ──────────────────────────────────────────────── */}
-        <div
-          className={styles.mainWrap}
-          tabIndex={0}
-          onKeyDown={handleGalleryKey}
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
-          onClick={() => openLightbox(active)}
-          role="button"
-          aria-label="Open fullscreen gallery"
-        >
-          <Image
-            src={images[active]}
-            alt={`${title} — image ${active + 1}`}
-            fill
-            style={{ objectFit: "cover" }}
-            priority
-          />
+      {layout === "sidebar" ? (
+        /* ── Sidebar layout: big main left, thumb column right ── */
+        <div className={styles.gallerySidebar}>
+          <div className={styles.sideMain}>{mainImage}</div>
 
-          {/* Expand hint */}
-          <div className={styles.expandHint} aria-hidden>
-            <i className="icon icon-ArrowsOut" />
-          </div>
-
-          {/* Prev / Next arrows */}
           {total > 1 && (
-            <>
-              <button
-                className={`${styles.navBtn} ${styles.navPrev}`}
-                onClick={(e) => { e.stopPropagation(); setActive((i) => goPrev(i)); }}
-                aria-label="Previous image"
-              >
-                <i className="icon icon-CaretLeft" />
-              </button>
-              <button
-                className={`${styles.navBtn} ${styles.navNext}`}
-                onClick={(e) => { e.stopPropagation(); setActive((i) => goNext(i)); }}
-                aria-label="Next image"
-              >
-                <i className="icon icon-CaretRight" />
-              </button>
-            </>
-          )}
-
-          {/* Dots */}
-          {total > 1 && (
-            <div className={styles.dots} onClick={(e) => e.stopPropagation()}>
-              {images.map((_, i) => (
+            <div className={styles.sideThumbCol}>
+              {images.map((img, i) => (
                 <button
                   key={i}
-                  className={`${styles.dot} ${i === active ? styles.dotActive : ""}`}
-                  onClick={() => setActive(i)}
-                  aria-label={`Image ${i + 1}`}
-                />
+                  className={`${styles.sideThumb} ${i === active ? styles.sideThumbActive : ""}`}
+                  onMouseEnter={() => setActive(i)}
+                  onClick={() => openLightbox(i)}
+                  aria-label={`View image ${i + 1}`}
+                >
+                  <Image src={img} alt={`${title} thumbnail ${i + 1}`} fill style={{ objectFit: "cover" }} />
+                  {i === active && <div className={styles.sideThumbOverlay} aria-hidden />}
+                </button>
               ))}
             </div>
           )}
         </div>
+      ) : (
+        /* ── Default layout: full-width main + bottom strip ── */
+        <div className={styles.gallery}>
+          {mainImage}
 
-        {/* ── Thumbnail strip ─────────────────────────────────────────── */}
-        {total > 1 && (
-          <div className={styles.thumbStrip}>
-            {images.map((img, i) => (
-              <button
-                key={i}
-                className={`${styles.thumb} ${i === active ? styles.thumbActive : ""}`}
-                onMouseEnter={() => setActive(i)}
-                onClick={() => openLightbox(i)}
-                aria-label={`View image ${i + 1}`}
-              >
-                <Image src={img} alt={`${title} thumbnail ${i + 1}`} fill style={{ objectFit: "cover" }} />
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
+          {total > 1 && (
+            <div className={styles.thumbStrip}>
+              {images.map((img, i) => (
+                <button
+                  key={i}
+                  className={`${styles.thumb} ${i === active ? styles.thumbActive : ""}`}
+                  onMouseEnter={() => setActive(i)}
+                  onClick={() => openLightbox(i)}
+                  aria-label={`View image ${i + 1}`}
+                >
+                  <Image src={img} alt={`${title} thumbnail ${i + 1}`} fill style={{ objectFit: "cover" }} />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       {/* ── Lightbox ──────────────────────────────────────────────────── */}
       {lightboxOpen && (

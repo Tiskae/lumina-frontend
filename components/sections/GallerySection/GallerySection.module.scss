@@ -1,0 +1,161 @@
+@use "../../../styles/mixins" as *;
+
+.section {
+  padding: 60px 0 0px;
+  background: #fff;
+}
+
+.heading {
+  @include res(xxl) {
+    h2 {
+      font-size: 40px !important;
+      // background-color: red;
+    }
+  }
+}
+
+// ─── Mosaic grid ──────────────────────────────────────────────────────────────
+.gridWrap {
+  width: 100%;
+  overflow: hidden;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: min(10vw, 150px);
+  gap: 8px;
+}
+
+// ─── Individual item ──────────────────────────────────────────────────────────
+.item {
+  position: relative;
+  // border-radius: 4px;
+  overflow: hidden;
+  display: block;
+  background: var(--Bg-light);
+
+  img {
+    transition: transform 0.55s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+
+  &:hover .overlay {
+    opacity: 1;
+  }
+
+  &:hover .label {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ─── Overlay ──────────────────────────────────────────────────────────────────
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.15) 55%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+// ─── Property label ───────────────────────────────────────────────────────────
+.label {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+
+  i {
+    font-size: 16px;
+    flex-shrink: 0;
+    opacity: 0.85;
+  }
+}
+
+// ─── Grid placements ──────────────────────────────────────────────────────────
+//
+//  Col:  1      2      3      4      5      6
+//  Row1: [p1] [  m1   ] [sm1] [sm2] [p2]
+//  Row2: [p1] [  m1   ] [sm3] [sm4] [p2]
+//  Row3: [sm5][sm6]  [p3]  [  m2   ] [p4]
+//  Row4: [sm7][sm8]  [p3]  [  m2   ] [p4]
+
+// Portrait items — 1 col × 2 rows (nearly square)
+.p1 {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+.p2 {
+  grid-column: 6;
+  grid-row: 1 / 3;
+}
+.p3 {
+  grid-column: 3;
+  grid-row: 3 / 5;
+}
+.p4 {
+  grid-column: 6;
+  grid-row: 3 / 5;
+}
+
+// Medium items — 2 cols × 2 rows (2:1 landscape)
+.m1 {
+  grid-column: 2 / 4;
+  grid-row: 1 / 3;
+}
+.m2 {
+  grid-column: 4 / 6;
+  grid-row: 3 / 5;
+}
+
+// Small items — 1 col × 1 row
+.sm1 {
+  grid-column: 4;
+  grid-row: 1;
+}
+.sm2 {
+  grid-column: 5;
+  grid-row: 1;
+}
+.sm3 {
+  grid-column: 4;
+  grid-row: 2;
+}
+.sm4 {
+  grid-column: 5;
+  grid-row: 2;
+}
+.sm5 {
+  grid-column: 1;
+  grid-row: 3;
+}
+.sm6 {
+  grid-column: 2;
+  grid-row: 3;
+}
+.sm7 {
+  grid-column: 1;
+  grid-row: 4;
+}
+.sm8 {
+  grid-column: 2;
+  grid-row: 4;
+}

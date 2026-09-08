@@ -21,6 +21,22 @@
   }
 }
 
+.iconWrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--Primary) 10%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+
+  i {
+    font-size: 24px;
+    color: var(--Primary);
+  }
+}
+
 .statItem {
   text-align: center;
   position: relative;

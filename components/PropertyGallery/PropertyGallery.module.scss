@@ -142,6 +142,66 @@
   transform: scale(1.25);
 }
 
+// ─── Sidebar layout ───────────────────────────────────────────────────────────
+.gallerySidebar {
+  display: grid;
+  grid-template-columns: 1fr 250px;
+  gap: 10px;
+  align-items: start;
+
+  @include res(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sideMain {
+  min-width: 0;
+}
+
+.sideThumbCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  align-content: start;
+
+  @include res(md) {
+    display: none; // hidden on mobile — main image dots handle navigation
+  }
+}
+
+.sideThumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2.5px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  transition:
+    border-color 0.2s ease,
+    opacity 0.2s ease;
+  opacity: 0.75;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.sideThumbActive {
+  border-color: var(--Primary);
+  opacity: 1;
+}
+
+.sideThumbOverlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--Primary) 15%, transparent);
+}
+
 // ─── Thumbnail strip ──────────────────────────────────────────────────────────
 .thumbStrip {
   display: flex;

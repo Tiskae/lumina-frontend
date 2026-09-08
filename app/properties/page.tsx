@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import PageLayout from "@/components/PageLayout/PageLayout";
 import PageBanner from "@/components/sections/PageBanner/PageBanner";
 import ListingsSection from "@/components/sections/ListingsSection/ListingsSection";
@@ -19,7 +20,9 @@ export default function ListingsPage() {
         subtitle="Discover homes and spaces carefully selected to suit every lifestyle and budget."
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Buy / Rent" }]}
       />
-      <ListingsSection properties={properties} />
+      <Suspense>
+        <ListingsSection properties={properties} />
+      </Suspense>
     </PageLayout>
   );
 }

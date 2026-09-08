@@ -55,29 +55,17 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
             <span>{property.title}</span>
           </nav>
 
-          <div className={styles.heroGrid}>
-            {/* Gallery */}
-            <div className={styles.heroGallery}>
-              <PropertyGallery images={images} title={property.title} />
-            </div>
-
-            {/* Key info panel */}
-            <div className={styles.heroInfo}>
-              <div className={styles.tagRow}>
-                <span className={styles.statusTag}>{property.status === "for-sale" ? "For Sale" : "For Rent"}</span>
-                <span className={styles.typeTag}>{property.type}</span>
-              </div>
-
+          {/* Full-width property info */}
+          <div className={styles.propInfoBar}>
+            <div className={styles.propInfoLeft}>
               <h1 className={styles.heroTitle}>{property.title}</h1>
-
               <div className={styles.addressRow}>
                 <i className="icon icon-MapPin" />
                 <span>{property.address}</span>
               </div>
-
-              <div className={styles.heroPriceDivider} />
+            </div>
+            <div className={styles.propInfoRight}>
               <div className={styles.heroPrice}>{property.price}</div>
-
               <div className={styles.heroQuickStats}>
                 <div className={styles.heroStat}>
                   <i className="icon icon-Bed" />
@@ -94,6 +82,9 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
               </div>
             </div>
           </div>
+
+          {/* Gallery: big main left + thumb column right */}
+          <PropertyGallery images={images} title={property.title} layout="sidebar" />
         </div>
       </section>
 
@@ -211,7 +202,7 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
               {/* ── Financing Calculator ──────────────────────────────────── */}
               <div className={styles.section}>
                 <h3 className={styles.sectionTitle}>Financing Calculator</h3>
-                <FinancingCalculator defaultPrice={property.priceRaw ?? 0} />
+                <FinancingCalculator defaultPrice={property.priceRaw ?? 0} currencyCode={property.currencyCode ?? "NGN"} />
               </div>
 
               {/* ── What's Nearby ─────────────────────────────────────────── */}

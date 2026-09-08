@@ -5,10 +5,10 @@ import AnimateOnScroll from "@/components/AnimateOnScroll/AnimateOnScroll";
 import styles from "./StatsBar.module.scss";
 
 const stats = [
-  { number: 20, suffix: "+", label: "Properties Listed" },
-  { number: 12, suffix: "+", label: "Years in Market" },
-  { number: 98, suffix: "%", label: "Client Satisfaction" },
-  { number: 7, suffix: "", label: "Cities Covered" },
+  { number: 10, suffix: "", label: "Premium Listings", icon: "icon-HouseLine" },
+  { number: 4, suffix: "", label: "African Markets", icon: "icon-MapPin" },
+  { number: 98, suffix: "%", label: "Client Satisfaction", icon: "icon-Star" },
+  { number: 12, suffix: "+", label: "Years of Excellence", icon: "icon-CalendarBlank" },
 ];
 
 function Counter({ target, suffix }: { target: number; suffix: string }) {
@@ -62,6 +62,9 @@ export default function StatsBar() {
           {stats.map((stat, i) => (
             <AnimateOnScroll key={stat.label} direction="3" delay={i * 0.1}>
               <div className={styles.statItem}>
+                <div className={styles.iconWrap}>
+                  <i className={`icon ${stat.icon}`} />
+                </div>
                 <Counter target={stat.number} suffix={stat.suffix} />
                 <p className={styles.label}>{stat.label}</p>
               </div>
