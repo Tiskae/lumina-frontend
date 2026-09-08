@@ -1,13 +1,16 @@
 @use "../../../styles/mixins" as *;
 
 .pageBanner {
-  padding: 100px 0;
-  background-color: var(--Bg-light);
-  text-align: center;
   position: relative;
+  background: linear-gradient(252.62deg, #dcedf5 0%, #f9f1e5 100.83%);
+  padding: 180px 0 100px;
+
+  .contentWrap {
+    text-align: center;
+    // background-color: var(--Bg-light);
+  }
 
   &.style2 {
-    background: linear-gradient(252.62deg, #dcedf5 0%, #f9f1e5 100.83%);
   }
 
   .title {
@@ -17,9 +20,18 @@
     color: var(--Text-primary);
     margin-bottom: 16px;
 
-    @include res(lg) { font-size: 44px; line-height: 52px; }
-    @include res(md) { font-size: 34px; line-height: 42px; }
-    @include res(sm) { font-size: 28px; line-height: 36px; }
+    @include res(lg) {
+      font-size: 44px;
+      line-height: 52px;
+    }
+    @include res(md) {
+      font-size: 34px;
+      line-height: 42px;
+    }
+    @include res(sm) {
+      font-size: 28px;
+      line-height: 36px;
+    }
   }
 
   .breadcrumb {
@@ -55,6 +67,8 @@
     max-width: 560px;
     margin: 12px auto 0;
 
-    @include res(md) { font-size: 14px; }
+    @include res(md) {
+      font-size: 14px;
+    }
   }
 }

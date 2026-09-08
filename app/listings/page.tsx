@@ -1,6 +1,6 @@
 import PageLayout from "@/components/PageLayout/PageLayout";
 import PageBanner from "@/components/sections/PageBanner/PageBanner";
-import PropertyGrid from "@/components/sections/PropertyGrid/PropertyGrid";
+import ListingsSection from "@/components/sections/ListingsSection/ListingsSection";
 import propertiesData from "@/data/properties.json";
 import type { Property } from "@/components/PropertyCard/PropertyCard";
 
@@ -13,16 +13,13 @@ export default function ListingsPage() {
   const properties = propertiesData as Property[];
 
   return (
-    <PageLayout currentPath="/listings">
+    <PageLayout currentPath="/listings" isAbsolute>
       <PageBanner
-        title="Property Listings"
-        subtitle="Browse our curated selection of luxury properties across Nigeria and Africa."
-        breadcrumbs={[
-          { label: "Home", href: "/" },
-          { label: "Listings" },
-        ]}
+        title="Explore Properties"
+        subtitle="Discover homes and spaces carefully selected to suit every lifestyle and budget."
+        breadcrumbs={[{ label: "Home", href: "/" }, { label: "Buy / Rent" }]}
       />
-      <PropertyGrid properties={properties} />
+      <ListingsSection properties={properties} />
     </PageLayout>
   );
 }

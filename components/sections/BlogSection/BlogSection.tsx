@@ -21,6 +21,7 @@ export default function BlogSection() {
       <div className="tf-container">
         <div className={styles.header}>
           <SectionHeading
+            className={styles.heading}
             subtitle="Latest News"
             title={
               <>
@@ -41,12 +42,7 @@ export default function BlogSection() {
             <AnimateOnScroll key={post.id} direction="2" delay={i * 0.1}>
               <article className={styles.blogCard}>
                 <Link href={`/blog/${post.slug}`} className={styles.thumb}>
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    style={{ objectFit: "cover" }}
-                  />
+                  <Image src={post.image} alt={post.title} width={400} height={200} />
                 </Link>
 
                 <div className={styles.body}>

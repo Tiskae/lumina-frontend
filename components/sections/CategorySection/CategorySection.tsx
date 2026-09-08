@@ -16,6 +16,7 @@ export default function CategorySection() {
     <section className={styles.section}>
       <div className="tf-container">
         <SectionHeading
+          className={styles.heading}
           subtitle="Browse by Type"
           title="Find the Property That Fits Your Life"
           align="center"

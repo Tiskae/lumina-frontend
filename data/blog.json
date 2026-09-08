@@ -8,7 +8,7 @@
     "category": "Market Insights",
     "author": "1",
     "date": "2025-01-15",
-    "image": "/images/blog/blog-1.jpg",
+    "image": "/images/blog/blog-item-1.jpg",
     "readTime": 6,
     "featured": true
   },
@@ -21,7 +21,7 @@
     "category": "Investment Guide",
     "author": "2",
     "date": "2025-02-03",
-    "image": "/images/blog/blog-2.jpg",
+    "image": "/images/blog/blog-item-2.jpg",
     "readTime": 8,
     "featured": true
   },
@@ -34,7 +34,7 @@
     "category": "Market Insights",
     "author": "3",
     "date": "2025-02-20",
-    "image": "/images/blog/blog-3.jpg",
+    "image": "/images/blog/blog-item-3.jpg",
     "readTime": 5,
     "featured": false
   },

@@ -16,33 +16,33 @@ const navItems: NavItem[] = [
   {
     label: "Home",
     href: "/",
-    children: [
-      { label: "Homepage 1", href: "/" },
-      { label: "Homepage 2", href: "/home-2" },
-    ],
+    // children: [
+    //   { label: "Homepage 1", href: "/" },
+    //   { label: "Homepage 2", href: "/home-2" },
+    // ],
   },
   {
     label: "Listings",
     href: "/listings",
-    children: [
-      { label: "Filter Sidebar", href: "/listings/sidebar" },
-      { label: "Grid Full Width", href: "/listings" },
-      { label: "Half Map Grid", href: "/listings/map" },
-      { label: "Top Filter", href: "/listings/top-filter" },
-      { label: "Top Map", href: "/listings/top-map" },
-    ],
+    // children: [
+    //   { label: "Filter Sidebar", href: "/listings/sidebar" },
+    //   { label: "Grid Full Width", href: "/listings" },
+    //   { label: "Half Map Grid", href: "/listings/map" },
+    //   { label: "Top Filter", href: "/listings/top-filter" },
+    //   { label: "Top Map", href: "/listings/top-map" },
+    // ],
   },
-  {
-    label: "Property Details",
-    href: "/properties/lumina-heights-ikoyi",
-  },
+  // {
+  //   label: "Property Details",
+  //   href: "/properties/lumina-heights-ikoyi",
+  // },
   {
     label: "Latest News",
     href: "/blog",
-    children: [
-      { label: "Blog", href: "/blog" },
-      { label: "Blog Post", href: "/blog/luxury-real-estate-lagos" },
-    ],
+    // children: [
+    //   { label: "Blog", href: "/blog" },
+    //   { label: "Blog Post", href: "/blog/luxury-real-estate-lagos" },
+    // ],
   },
   {
     label: "Contact",

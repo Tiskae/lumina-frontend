@@ -55,27 +55,17 @@ interface MobileNavProps {
   currentPath?: string;
 }
 
-export default function MobileNav({
-  isOpen,
-  onClose,
-  currentPath = "/",
-}: MobileNavProps) {
+export default function MobileNav({ isOpen, onClose, currentPath = "/" }: MobileNavProps) {
   const [openItems, setOpenItems] = useState<string[]>([]);
 
   const toggleItem = (label: string) => {
-    setOpenItems((prev) =>
-      prev.includes(label) ? prev.filter((l) => l !== label) : [...prev, label]
-    );
+    setOpenItems((prev) => (prev.includes(label) ? prev.filter((l) => l !== label) : [...prev, label]));
   };
 
   return (
     <>
       {/* Backdrop */}
-      <div
-        className={`${styles.overlay} ${isOpen ? styles.isOpen : ""}`}
-        onClick={onClose}
-        aria-hidden="true"
-      />
+      <div className={`${styles.overlay} ${isOpen ? styles.isOpen : ""}`} onClick={onClose} aria-hidden="true" />
 
       {/* Drawer */}
       <aside
@@ -88,42 +78,27 @@ export default function MobileNav({
         </div>
 
         <div className={styles.topNav}>
-          <button
-            className={styles.btnClose}
-            onClick={onClose}
-            aria-label="Close navigation"
-          >
+          <button className={styles.btnClose} onClick={onClose} aria-label="Close navigation">
             <i className="icon-close" />
           </button>
         </div>
 
         <div className={styles.navBody}>
           {/* Logo */}
-          <Link href="/" onClick={onClose} style={{ marginBottom: 24 }}>
-            <Image
-              src="/images/logo/logo.svg"
-              alt="Lumina"
-              width={130}
-              height={40}
-            />
+          <Link href="/" onClick={onClose} style={{ marginBottom: 24, transform: "translateX(-12px)" }}>
+            <Image src="/images/logo/logo.svg" alt="Lumina" width={130} height={40} />
           </Link>
 
           {/* Nav items */}
           <ul className={styles.menuList}>
             {navItems.map((item) => {
               const isExpanded = openItems.includes(item.label);
-              const isCurrent =
-                currentPath === item.href ||
-                item.children?.some((c) => c.href === currentPath);
+              const isCurrent = currentPath === item.href || item.children?.some((c) => c.href === currentPath);
 
               return (
                 <li key={item.label}>
                   <div className={styles.menuItem}>
-                    <Link
-                      href={item.href}
-                      onClick={onClose}
-                      className={isCurrent ? styles.active : ""}
-                    >
+                    <Link href={item.href} onClick={onClose} className={isCurrent ? styles.active : ""}>
                       {item.label}
                     </Link>
                     {item.children && (
@@ -136,9 +111,7 @@ export default function MobileNav({
                   </div>
 
                   {item.children && (
-                    <ul
-                      className={`${styles.subMenu} ${isExpanded ? styles.isOpen : ""}`}
-                    >
+                    <ul className={`${styles.subMenu} ${isExpanded ? styles.isOpen : ""}`}>
                       {item.children.map((child) => (
                         <li key={child.label}>
                           <Link href={child.href} onClick={onClose}>
@@ -154,12 +127,7 @@ export default function MobileNav({
           </ul>
 
           {/* CTA */}
-          <Link
-            href="/listings"
-            className="tf-btn btn-bg-1"
-            onClick={onClose}
-            style={{ marginBottom: 24 }}
-          >
+          <Link href="/listings" className="tf-btn btn-bg-1" onClick={onClose} style={{ marginBottom: 24 }}>
             <i className="icon icon-HouseLine" />
             <span>Find Property</span>
             <span className="bg-effect" />
@@ -189,28 +157,13 @@ export default function MobileNav({
 
           {/* Socials */}
           <div className={styles.socialWrap}>
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-            >
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <i className="icon-Facebook" />
             </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-            >
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <i className="icon-Instagram" />
             </a>
-            <a
-              href="https://x.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="X"
-            >
+            <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X">
               <i className="icon-X" />
             </a>
           </div>

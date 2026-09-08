@@ -9,6 +9,7 @@ import SplitText from "@/components/SplitText/SplitText";
 import styles from "./HeroSearch.module.scss";
 
 import ImageHero from "/images/section/hero-1.jpg";
+import clsx from "clsx";
 
 type SearchTab = "all" | "rent" | "sale";
 
@@ -29,6 +30,21 @@ const TYPES = ["All Types", "Apartment", "Villa", "Townhouse", "Commercial"];
 
 const BEDROOMS = ["Any Beds", "1 Bedroom", "2 Bedrooms", "3 Bedrooms", "4+ Bedrooms"];
 
+const AMENITIES = [
+  "Swimming Pool",
+  "Gym",
+  "24hr Security",
+  "Generator",
+  "Air Conditioning",
+  "Smart Home",
+  "Elevator / Lift",
+  "Concierge",
+  "CCTV",
+  "Parking Space",
+  "Water Treatment",
+  "Boys' Quarters",
+];
+
 export default function HeroSearch() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<SearchTab>("all");
@@ -37,6 +53,11 @@ export default function HeroSearch() {
   const [type, setType] = useState("");
   const [beds, setBeds] = useState("");
   const [advancedOpen, setAdvancedOpen] = useState(false);
+  const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
+
+  const toggleAmenity = (amenity: string) => {
+    setSelectedAmenities((prev) => (prev.includes(amenity) ? prev.filter((a) => a !== amenity) : [...prev, amenity]));
+  };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,12 +67,13 @@ export default function HeroSearch() {
     if (city && city !== "All Cities") params.set("city", city);
     if (type && type !== "All Types") params.set("type", type.toLowerCase());
     if (beds && beds !== "Any Beds") params.set("beds", beds.replace(/\D/g, ""));
+    if (selectedAmenities.length > 0) params.set("amenities", selectedAmenities.join(","));
     router.push(`/listings?${params.toString()}`);
   };
 
   return (
     <section className={styles.pageTitle}>
-      <div className="tf-container w-1770">
+      <div className={clsx("tf-container w-1770", styles.pageTitleInner)}>
         {/* Heading */}
         <div className={styles.content}>
           <SplitText effect="split-lines-rotation-x" as="h1" className={styles.title}>
@@ -64,24 +86,17 @@ export default function HeroSearch() {
               matches your lifestyle and budget.
             </div>
 
-            <Link href="/listings" className="tf-btn btn-bg-1 btn-px-32">
+            {/* <Link href="/listings" className="tf-btn btn-bg-1 btn-px-32">
               <span>View Properties</span>
               <span className="bg-effect" />
-            </Link>
+            </Link> */}
           </div>
         </div>
 
         {/* Hero image with floating search form */}
-        <div style={{ position: "relative" }}>
+        <div>
           <AnimateOnScroll direction="1" className={styles.heroImage}>
-            <Image
-              src={ImageHero}
-              alt="Luxury Lagos property"
-              width={1770}
-              height={680}
-              priority
-              style={{ objectFit: "cover", width: "100%", height: "auto" }}
-            />
+            <Image src={ImageHero} alt="Luxury Lagos property" width={1770} height={680} priority />
           </AnimateOnScroll>
 
           {/* Search form */}
@@ -102,7 +117,7 @@ export default function HeroSearch() {
             {/* Search box */}
             <form className={styles.searchBox} onSubmit={handleSearch}>
               <div className={styles.formGrid}>
-                <div className={styles.fieldWrap}>
+                {/* <div className={styles.fieldWrap}>
                   <label htmlFor="keyword">Keyword</label>
                   <input
                     id="keyword"
@@ -111,7 +126,7 @@ export default function HeroSearch() {
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
                   />
-                </div>
+                </div> */}
 
                 <div className={styles.fieldWrap}>
                   <label htmlFor="city">Location</label>
@@ -197,6 +212,24 @@ export default function HeroSearch() {
                       <option>6,000 SqFt</option>
                       <option>10,000 SqFt</option>
                     </select>
+                  </div>
+                </div>
+
+                {/* Amenities */}
+                <div className={styles.amenitiesSection}>
+                  <div className={styles.amenitiesLabel}>Amenities</div>
+                  <div className={styles.amenitiesGrid}>
+                    {AMENITIES.map((amenity) => (
+                      <label key={amenity} className={styles.checkboxItem}>
+                        <input
+                          type="checkbox"
+                          checked={selectedAmenities.includes(amenity)}
+                          onChange={() => toggleAmenity(amenity)}
+                        />
+                        <span className={styles.checkboxBox} />
+                        <span className={styles.checkboxText}>{amenity}</span>
+                      </label>
+                    ))}
                   </div>
                 </div>
               </div>

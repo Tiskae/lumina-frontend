@@ -3,8 +3,17 @@
 .section {
   padding: 100px 0;
 
-  @include res(lg) { padding: 80px 0; }
-  @include res(md) { padding: 60px 0; }
+  @include res(lg) {
+    padding: 80px 0;
+  }
+  @include res(md) {
+    padding: 60px 0;
+  }
+}
+
+.heading h2 {
+  font-size: 40px;
+  line-height: 1.2;
 }
 
 .grid {
@@ -13,13 +22,17 @@
   gap: 30px;
   margin-top: 48px;
 
-  @include res(lg) { grid-template-columns: repeat(2, 1fr); }
-  @include res(sm) { grid-template-columns: 1fr; }
+  @include res(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include res(sm) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .agentCard {
+  display: block;
   border: 1px solid var(--Line);
-  border-radius: 16px;
   overflow: hidden;
   @include transition3();
 

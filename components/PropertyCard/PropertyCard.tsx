@@ -1,6 +1,17 @@
-import Image from "next/image";
 import Link from "next/link";
+import PropertyImageCarousel from "@/components/PropertyImageCarousel/PropertyImageCarousel";
 import styles from "./PropertyCard.module.scss";
+import clsx from "clsx";
+
+export interface PropertyDetail {
+  label: string;
+  value: string;
+}
+
+export interface PropertyNearby {
+  place: string;
+  distance: string;
+}
 
 export interface Property {
   id: string;
@@ -23,6 +34,9 @@ export interface Property {
   featured?: boolean;
   description?: string;
   amenities?: string[];
+  details?: PropertyDetail[];
+  utilities?: string[];
+  nearby?: PropertyNearby[];
   agent?: string;
   yearBuilt?: number;
   latitude?: number;
@@ -32,6 +46,7 @@ export interface Property {
 interface PropertyCardProps {
   property: Property;
   variant?: "default" | "style1" | "list";
+  whiteBg?: boolean;
 }
 
 const STATUS_LABELS: Record<Property["status"], string> = {
@@ -40,123 +55,90 @@ const STATUS_LABELS: Record<Property["status"], string> = {
   new: "New",
 };
 
-export default function PropertyCard({
-  property,
-  variant = "default",
-}: PropertyCardProps) {
-  const { slug, title, price, status, beds, baths, sqft, image, tag } =
-    property;
+function getImages(property: Property): string[] {
+  const gallery = property.gallery?.filter(Boolean) ?? [];
+  return gallery.length > 0 ? gallery : [property.image];
+}
 
-  const variantClass =
-    variant === "style1"
-      ? styles.style1
-      : variant === "list"
-        ? styles.styleList
-        : styles.styleDefault;
+export default function PropertyCard({ property, variant = "default", whiteBg }: PropertyCardProps) {
+  const { slug, title, price, status, type, beds, baths, sqft, address } = property;
+  const images = getImages(property);
 
+  /* ── List variant ─────────────────────────────────────────────────────────── */
   if (variant === "list") {
     return (
-      <div className={`${styles.cardHouse} ${styles.styleList} hover-image`}>
-        <div className={styles.wrapImg}>
-          <Link href={`/properties/${slug}`} className={styles.imgStyle}>
-            <Image
-              src={image}
-              alt={title}
-              width={280}
-              height={220}
-              style={{ objectFit: "cover" }}
-            />
-          </Link>
+      <div className={clsx(styles.cardHouse, styles.styleList, whiteBg && styles.whiteBg)}>
+        {/* Carousel — fills the left image column */}
+        <div className={styles.imagesWrap}>
+          <PropertyImageCarousel images={images} href={`/properties/${slug}`} alt={title} id={`list-${slug}`} />
         </div>
 
-        <div className={styles.content}>
-          <div className="d-flex gap_8 mb_8">
-            <div className={styles.wrapTag}>
-              <span className={styles.tag}>{STATUS_LABELS[status]}</span>
+        {/* Content */}
+        <div className={styles.listContent}>
+          {/* Price + tags */}
+          <div className={styles.listPricingRow}>
+            <div className={styles.listPrice}>{price}</div>
+            <div className={styles.listTags}>
+              <span className={styles.listTag}>{STATUS_LABELS[status]}</span>
+              <span className={styles.listTag} style={{ textTransform: "capitalize" }}>
+                {type}
+              </span>
             </div>
-            {tag && (
-              <div className={styles.wrapTag}>
-                <span className={styles.tag}>{tag}</span>
-              </div>
-            )}
           </div>
 
-          <div className={styles.price}>{price}</div>
-          <h5 className={styles.title}>
-            <Link href={`/properties/${slug}`}>{title}</Link>
-          </h5>
+          {/* Title + address */}
+          <Link href={`/properties/${slug}`} className={styles.listTitle}>
+            {title}
+          </Link>
+          {address && <div className={styles.listPlace}>{address}</div>}
 
-          <ul className={styles.info}>
+          {/* Info row */}
+          <ul className={styles.listInfo}>
             <li>
               <i className="icon icon-Bed" />
-              <span>{beds} Beds</span>
+              {beds} Bed
             </li>
             <li>
               <i className="icon icon-Bathtub" />
-              <span>{baths} Baths</span>
+              {baths} Bath
             </li>
             <li>
-              <i className="icon icon-Crop" />
-              <span>{sqft.toLocaleString()} sqft</span>
+              <i className="icon icon-Ruler" />
+              {sqft.toLocaleString()} Sqft
             </li>
           </ul>
 
-          <div className={styles.wrapBtn}>
-            <Link href={`/properties/${slug}`} className="tf-btn btn-bg-1">
+          {/* Buttons */}
+          <div className={styles.listBtns}>
+            <Link href={`/properties/${slug}`} className="tf-btn rounded-8">
               <span>View Details</span>
               <span className="bg-effect" />
             </Link>
-            <button className="tf-btn btn-border">
-              <i className="icon icon-Heart" />
-              <span>Save</span>
+            {/* <button className="tf-btn btn-border rounded-8">
+              <span>Compare</span>
               <span className="bg-effect" />
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
     );
   }
 
+  /* ── Default / style1 variant ─────────────────────────────────────────────── */
+  const variantClass = variant === "style1" ? styles.style1 : styles.styleDefault;
+
   return (
-    <div
-      className={`${styles.cardHouse} ${variantClass} hover-image`}
-    >
-      <Link href={`/properties/${slug}`} className={styles.imgStyle}>
-        <Image
-          src={image}
-          alt={title}
-          width={400}
-          height={280}
-          style={{ objectFit: "cover", width: "100%", height: "100%" }}
-        />
-        <div className={styles.wrapTag}>
-          <span className={styles.tag}>{STATUS_LABELS[status]}</span>
-          {tag && <span className={styles.tag}>{tag}</span>}
-        </div>
-      </Link>
+    <div className={clsx(styles.cardHouse, variantClass, "hover-image", whiteBg && styles.whiteBg)}>
+      {/* Image carousel fills the 280px top grid slot */}
+      <div className={styles.imgStyle}>
+        <PropertyImageCarousel images={images} href={`/properties/${slug}`} alt={title} id={`grid-${slug}`} />
+      </div>
 
-      {variant === "default" && (
-        <div className={styles.wrapBtn}>
-          <Link
-            href={`/properties/${slug}`}
-            className={`tf-btn btn-bg-white ${styles.quickView}`}
-          >
-            <span>Quick View</span>
-            <span className="bg-effect" />
-          </Link>
-          <button className={`tf-btn btn-border ${styles.compare}`}>
-            <span>Compare</span>
-            <span className="bg-effect" />
-          </button>
-        </div>
-      )}
+      <div className={styles.title}>
+        <h5>{title}</h5>
+      </div>
 
-      <div className={variant === "style1" ? styles.content : ""}>
-        <div className={styles.price}>{price}</div>
-        <h5 className={styles.title}>
-          <Link href={`/properties/${slug}`}>{title}</Link>
-        </h5>
-
+      <div className={styles.content}>
         <ul className={styles.info}>
           <li>
             <i className="icon icon-Bed" />
@@ -169,6 +151,10 @@ export default function PropertyCard({
           <li>
             <i className="icon icon-Crop" />
             <span>{sqft.toLocaleString()} sqft</span>
+          </li>
+          <li>
+            <i className="icon icon-CurrencyCircleDollar" />
+            <span>{price}</span>
           </li>
         </ul>
       </div>

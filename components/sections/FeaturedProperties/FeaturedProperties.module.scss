@@ -1,21 +1,31 @@
 @use "../../../styles/mixins" as *;
 
 .section {
-  padding: 100px 0;
+  padding: 80px 0 100px;
 
-  @include res(lg) { padding: 80px 0; }
-  @include res(md) { padding: 60px 0; }
+  @include res(lg) {
+    padding: 80px 0;
+  }
+  @include res(md) {
+    padding: 60px 0;
+  }
 }
 
 .header {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
   gap: 24px;
-  margin-bottom: 48px;
+  margin-bottom: 20px;
   flex-wrap: wrap;
 
-  @include res(md) { margin-bottom: 32px; }
+  // @include res(md) {
+  // margin-bottom: 32px;
+  // }
+}
+
+.heading h2 {
+  font-size: 40px;
 }
 
 .grid {
@@ -23,8 +33,12 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 
-  @include res(lg) { grid-template-columns: repeat(2, 1fr); }
-  @include res(sm) { grid-template-columns: 1fr; }
+  @include res(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include res(sm) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .viewAll {

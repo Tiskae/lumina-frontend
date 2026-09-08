@@ -1,0 +1,565 @@
+@use "../../../styles/mixins" as *;
+
+// ─── Hero (gallery) section ───────────────────────────────────────────────────
+.heroSection {
+  background: var(--Bg-light);
+  padding-top: 120px;
+  padding-bottom: 0;
+}
+
+// ─── Breadcrumb ───────────────────────────────────────────────────────────────
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--Text-secondary);
+  margin-bottom: 24px;
+
+  a {
+    color: var(--Text-secondary);
+    transition: color 0.2s;
+    &:hover {
+      color: var(--Primary);
+    }
+  }
+
+  i {
+    font-size: 12px;
+    opacity: 0.5;
+  }
+
+  span {
+    color: var(--Primary);
+    font-weight: 600;
+  }
+}
+
+// ─── Detail body section ──────────────────────────────────────────────────────
+.bodySection {
+  padding: 60px 0 100px;
+}
+
+.bodyGrid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 60px;
+  align-items: start;
+
+  @include res(xl) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ─── Left column ─────────────────────────────────────────────────────────────
+.leftCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0; // gaps handled by .section margin
+}
+
+// ─── Title block ─────────────────────────────────────────────────────────────
+.titleBlock {
+  margin-bottom: 32px;
+}
+
+.tagRow {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.statusTag {
+  padding: 4px 14px;
+  border-radius: 99px;
+  background: var(--Primary);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+}
+
+.typeTag {
+  padding: 4px 14px;
+  border-radius: 99px;
+  background: var(--Bg-light);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--Text-secondary);
+  border: 1px solid var(--Line);
+}
+
+.propertyTitle {
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--Text-primary);
+  margin-bottom: 10px;
+
+  @include res(md) {
+    font-size: 28px;
+  }
+}
+
+.addressRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+
+  i {
+    font-size: 18px;
+    color: var(--Primary);
+    flex-shrink: 0;
+  }
+
+  span {
+    font-size: 15px;
+    color: var(--Text-secondary);
+  }
+}
+
+.price {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--Primary);
+}
+
+// ─── Specs bar ────────────────────────────────────────────────────────────────
+.specsBar {
+  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0;
+  border: 1px solid var(--Line);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+
+.specItem {
+  flex: 1;
+  min-width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 15px 16px;
+  text-align: center;
+  border-right: 1px solid var(--Line);
+
+  &:last-child {
+    border-right: none;
+  }
+
+  @include res(sm) {
+    min-width: 100px;
+    border-bottom: 1px solid var(--Line);
+    border-right: none;
+
+    &:nth-child(odd) {
+      border-right: 1px solid var(--Line);
+    }
+  }
+
+  i {
+    font-size: 26px;
+    color: var(--Primary);
+  }
+}
+
+.specValue {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--Text-primary);
+}
+
+.specLabel {
+  font-size: 12px;
+  color: var(--Text-secondary);
+}
+
+// ─── Generic section wrapper ──────────────────────────────────────────────────
+.section {
+  margin-bottom: 48px;
+}
+
+.sectionTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--Text-primary);
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--Primary);
+  display: inline-block;
+}
+
+// ─── Description ─────────────────────────────────────────────────────────────
+.descriptionBody {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--Text-secondary);
+  }
+}
+
+// ─── Additional Details table ─────────────────────────────────────────────────
+.detailsTable {
+  border: 1px solid var(--Line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.detailRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--Line);
+  font-size: 14px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.detailRowAlt {
+  background: var(--Bg-light);
+}
+
+.detailLabel {
+  color: var(--Text-secondary);
+  font-weight: 500;
+}
+
+.detailValue {
+  color: var(--Text-primary);
+  font-weight: 600;
+}
+
+// ─── Utilities grid ───────────────────────────────────────────────────────────
+.utilitiesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+
+  @include res(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.utilityItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--Text-primary);
+
+  i {
+    font-size: 18px;
+    color: var(--Primary);
+    flex-shrink: 0;
+  }
+}
+
+// ─── Amenities ────────────────────────────────────────────────────────────────
+.amenitiesGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.amenityChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--Line);
+  font-size: 13px;
+  color: var(--Text-primary);
+  background: var(--White);
+
+  i {
+    color: var(--Primary);
+    font-size: 16px;
+  }
+}
+
+// ─── Map ─────────────────────────────────────────────────────────────────────
+.mapWrap {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--Line);
+  display: flex;
+  flex-direction: column;
+}
+
+.mapFrame {
+  width: 100%;
+  height: 380px;
+  border: none;
+  display: block;
+
+  @include res(md) {
+    height: 260px;
+  }
+}
+
+.mapLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--Primary);
+  padding: 10px 16px;
+  border-top: 1px solid var(--Line);
+  background: var(--Bg-light);
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  i {
+    font-size: 14px;
+  }
+}
+
+// ─── Nearby ───────────────────────────────────────────────────────────────────
+.nearbyGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+
+  @include res(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.nearbyItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--Line);
+  border-radius: 10px;
+  background: var(--White);
+
+  i {
+    font-size: 20px;
+    color: var(--Primary);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+}
+
+.nearbyInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.nearbyPlace {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--Text-primary);
+}
+
+.nearbyDist {
+  font-size: 12px;
+  color: var(--Primary);
+  font-weight: 500;
+}
+
+// ─── Right column ─────────────────────────────────────────────────────────────
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  position: sticky;
+  top: 100px;
+
+  @include res(xl) {
+    position: static;
+  }
+}
+
+// ─── Agent card ───────────────────────────────────────────────────────────────
+.agentCard {
+  border: 1px solid var(--Line);
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.agentCardTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--Text-primary);
+  margin-bottom: 20px;
+}
+
+.agentInfo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.agentAvatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.agentName {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--Text-primary);
+}
+
+.agentRole {
+  font-size: 13px;
+  color: var(--Primary);
+  margin-top: 2px;
+}
+
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.formInput,
+.formTextarea {
+  padding: 11px 16px;
+  border: 1px solid var(--Line);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--Text-primary);
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+  background: var(--White);
+
+  &::placeholder {
+    color: var(--Text-secondary);
+    opacity: 0.65;
+  }
+
+  &:focus {
+    border-color: var(--Primary);
+  }
+}
+
+.formTextarea {
+  resize: vertical;
+}
+
+.agentCtaBtns {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+
+  i {
+    color: black;
+  }
+
+  &:hover i {
+    color: var(--White);
+  }
+}
+
+// ─── Summary card ─────────────────────────────────────────────────────────────
+.summaryCard {
+  border: 1px solid var(--Line);
+  border-radius: 16px;
+  padding: 28px;
+}
+
+.summaryTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--Text-primary);
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--Line);
+}
+
+.summaryList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--Line);
+    font-size: 14px;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.summaryKey {
+  color: var(--Text-secondary);
+}
+
+.summaryVal {
+  font-weight: 600;
+  color: var(--Text-primary);
+}
+
+// ─── Related Properties ───────────────────────────────────────────────────────
+.relatedSection {
+  padding: 80px 0 100px;
+  background: var(--Bg-light);
+}
+
+.relatedHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  gap: 16px;
+}
+
+.relatedTitle {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--Text-primary);
+
+  @include res(sm) {
+    font-size: 24px;
+  }
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+
+  @include res(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include res(sm) {
+    grid-template-columns: 1fr;
+  }
+}

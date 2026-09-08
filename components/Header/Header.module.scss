@@ -5,6 +5,7 @@
 .header {
   position: relative;
   z-index: 9999;
+  background-color: #fff !important;
 
   .headerInner {
     display: flex;
@@ -15,6 +16,8 @@
   }
 
   .siteLogo {
+    transform: translateX(-9px);
+
     @include res(xxxl, min) {
       min-width: 378px;
     }
@@ -48,8 +51,8 @@
       color: var(--Text-primary);
     }
 
-    .icon {
-    }
+    // .icon {
+    // }
 
     .hotLineText {
       .label {
@@ -92,9 +95,9 @@
   // Default style (initial header shown before scroll)
   &.styleDefault {
     @include res(xxl) {
-      :global(.tf-btn) {
-        display: none;
-      }
+      // :global(.tf-btn) {
+      // display: none;
+      // }
     }
     @include res(xl) {
       .hotLine {

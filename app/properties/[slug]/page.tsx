@@ -1,20 +1,19 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import PageLayout from "@/components/PageLayout/PageLayout";
+import PropertyGallery from "@/components/PropertyGallery/PropertyGallery";
+import FinancingCalculator from "@/components/FinancingCalculator/FinancingCalculator";
+import PropertyCard from "@/components/PropertyCard/PropertyCard";
 import propertiesData from "@/data/properties.json";
 import agentsData from "@/data/agents.json";
 import type { Property } from "@/components/PropertyCard/PropertyCard";
+import styles from "./PropertyDetail.module.scss";
 
 export async function generateStaticParams() {
   return propertiesData.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export async function generateMetadata({ params }: { params: { slug: string } }) {
   const property = propertiesData.find((p) => p.slug === params.slug);
   if (!property) return {};
   return {
@@ -23,315 +22,220 @@ export async function generateMetadata({
   };
 }
 
-export default function PropertyDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const property = propertiesData.find((p) => p.slug === params.slug) as
-    | Property
-    | undefined;
+export default function PropertyDetailPage({ params }: { params: { slug: string } }) {
+  const property = propertiesData.find((p) => p.slug === params.slug) as Property | undefined;
   if (!property) notFound();
 
-  const agent = agentsData.find((a) => a.id === property.agent as unknown as string);
+  const agent = agentsData.find((a) => a.id === (property.agent as unknown as string));
+  const images = (property.gallery?.length ? property.gallery : [property.image]) as string[];
+  const paragraphs = property.description?.split("\n\n") ?? [];
+
+  // Related: same type first, then same city, exclude self — pick 3
+  const related = (propertiesData as Property[])
+    .filter((p) => p.id !== property.id)
+    .sort((a, b) => {
+      const aScore = (a.type === property.type ? 2 : 0) + (a.city === property.city ? 1 : 0);
+      const bScore = (b.type === property.type ? 2 : 0) + (b.city === property.city ? 1 : 0);
+      return bScore - aScore;
+    })
+    .slice(0, 3);
 
   return (
-    <PageLayout currentPath={`/properties/${params.slug}`}>
-      {/* Gallery hero */}
-      <section style={{ background: "var(--Bg-light)", paddingTop: 80 }}>
+    <PageLayout currentPath={`/properties/${params.slug}`} isAbsolute>
+      {/* ── Gallery Hero ─────────────────────────────────────────────────── */}
+      <section className={styles.heroSection}>
         <div className="tf-container">
           {/* Breadcrumb */}
-          <nav
-            style={{
-              display: "flex",
-              gap: 8,
-              alignItems: "center",
-              fontSize: 14,
-              color: "var(--Text-secondary)",
-              marginBottom: 24,
-            }}
-          >
-            <Link href="/" style={{ color: "var(--Text-secondary)" }}>Home</Link>
-            <span>/</span>
-            <Link href="/listings" style={{ color: "var(--Text-secondary)" }}>Listings</Link>
-            <span>/</span>
-            <span style={{ color: "var(--Primary)", fontWeight: 600 }}>{property.title}</span>
+          <nav className={styles.breadcrumb}>
+            <Link href="/">Home</Link>
+            <i className="icon icon-CaretRight" />
+            <Link href="/listings">Listings</Link>
+            <i className="icon icon-CaretRight" />
+            <span>{property.title}</span>
           </nav>
 
-          {/* Main image */}
-          <div
-            style={{
-              position: "relative",
-              height: 520,
-              borderRadius: 16,
-              overflow: "hidden",
-              marginBottom: 12,
-            }}
-          >
-            <Image
-              src={property.image}
-              alt={property.title}
-              fill
-              style={{ objectFit: "cover" }}
-              priority
-            />
-          </div>
-
-          {/* Thumbnail strip */}
-          <div style={{ display: "flex", gap: 12, marginBottom: 48 }}>
-            {property.gallery?.slice(1).map((img, i) => (
-              <div
-                key={i}
-                style={{
-                  position: "relative",
-                  flex: 1,
-                  height: 140,
-                  borderRadius: 12,
-                  overflow: "hidden",
-                }}
-              >
-                <Image
-                  src={img}
-                  alt={`${property.title} ${i + 2}`}
-                  fill
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
-            ))}
-          </div>
+          <PropertyGallery images={images} title={property.title} />
         </div>
       </section>
 
-      {/* Detail body */}
-      <section style={{ padding: "60px 0 100px" }}>
+      {/* ── Detail Body ──────────────────────────────────────────────────── */}
+      <section className={styles.bodySection}>
         <div className="tf-container">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 360px", gap: 60 }}>
-            {/* Left column */}
-            <div>
-              {/* Title + price */}
-              <div style={{ marginBottom: 32 }}>
-                <div style={{ display: "flex", gap: 12, marginBottom: 12 }}>
-                  <span
-                    style={{
-                      padding: "4px 14px",
-                      borderRadius: 99,
-                      background: "var(--Bg-light)",
-                      fontSize: 12,
-                      fontWeight: 600,
-                      textTransform: "uppercase",
-                      color: "var(--Text-primary)",
-                    }}
-                  >
-                    {property.status === "for-sale" ? "For Sale" : "For Rent"}
-                  </span>
-                  <span
-                    style={{
-                      padding: "4px 14px",
-                      borderRadius: 99,
-                      background: "var(--Bg-light)",
-                      fontSize: 12,
-                      fontWeight: 600,
-                      textTransform: "uppercase",
-                      color: "var(--Text-secondary)",
-                    }}
-                  >
-                    {property.type}
-                  </span>
+          <div className={styles.bodyGrid}>
+            {/* ── Left Column ──────────────────────────────────────────────── */}
+            <div className={styles.leftCol}>
+              {/* Title block */}
+              <div className={styles.titleBlock}>
+                <div className={styles.tagRow}>
+                  <span className={styles.statusTag}>{property.status === "for-sale" ? "For Sale" : "For Rent"}</span>
+                  <span className={styles.typeTag}>{property.type}</span>
                 </div>
 
-                <h1
-                  style={{
-                    fontSize: 40,
-                    fontWeight: 700,
-                    lineHeight: "48px",
-                    color: "var(--Text-primary)",
-                    marginBottom: 8,
-                  }}
-                >
-                  {property.title}
-                </h1>
+                <h1 className={styles.propertyTitle}>{property.title}</h1>
 
-                <div style={{ display: "flex", gap: 8, alignItems: "center", marginBottom: 16 }}>
-                  <i className="icon icon-MapPin" style={{ fontSize: 20, color: "var(--Primary)" }} />
-                  <span style={{ fontSize: 15, color: "var(--Text-secondary)" }}>{property.address}</span>
+                <div className={styles.addressRow}>
+                  <i className="icon icon-MapPin" />
+                  <span>{property.address}</span>
                 </div>
 
-                <div
-                  style={{
-                    fontSize: 36,
-                    fontWeight: 700,
-                    color: "var(--Primary)",
-                  }}
-                >
-                  {property.price}
-                </div>
+                <div className={styles.price}>{property.price}</div>
               </div>
 
-              {/* Specs */}
-              <div
-                style={{
-                  display: "flex",
-                  gap: 32,
-                  padding: "24px",
-                  background: "var(--Bg-light)",
-                  borderRadius: 12,
-                  marginBottom: 32,
-                  flexWrap: "wrap",
-                }}
-              >
+              {/* Specs bar */}
+              <div className={styles.specsBar}>
                 {[
                   { icon: "icon-Bed", value: property.beds, label: "Bedrooms" },
                   { icon: "icon-Bathtub", value: property.baths, label: "Bathrooms" },
                   { icon: "icon-Crop", value: `${property.sqft.toLocaleString()} sqft`, label: "Area" },
-                  { icon: "icon-HashStraight", value: property.garages, label: "Garages" },
+                  {
+                    icon: "icon-Warehouse",
+                    value: `${property.garages ?? 0} ${property.garages && property?.garages > 1 ? "cars" : "car"}`,
+                    label: "Garages",
+                  },
+                  { icon: "icon-CalendarBlank", value: property.yearBuilt, label: "Year Built" },
+                  {
+                    icon: "icon-HouseLine",
+                    value: property.type.charAt(0).toUpperCase() + property.type.slice(1),
+                    label: "Property Type",
+                  },
                 ].map((spec) => (
-                  <div key={spec.label} style={{ textAlign: "center", flex: 1 }}>
-                    <i
-                      className={`icon ${spec.icon}`}
-                      style={{ fontSize: 28, color: "var(--Primary)", display: "block", marginBottom: 8 }}
-                    />
-                    <div style={{ fontSize: 20, fontWeight: 700, color: "var(--Text-primary)", marginBottom: 4 }}>
-                      {spec.value}
-                    </div>
-                    <div style={{ fontSize: 13, color: "var(--Text-secondary)" }}>{spec.label}</div>
+                  <div key={spec.label} className={styles.specItem}>
+                    <i className={`icon ${spec.icon}`} />
+                    <div className={styles.specValue}>{spec.value}</div>
+                    <div className={styles.specLabel}>{spec.label}</div>
                   </div>
                 ))}
               </div>
 
-              {/* Description */}
-              <div style={{ marginBottom: 40 }}>
-                <h3 style={{ fontSize: 22, fontWeight: 600, color: "var(--Text-primary)", marginBottom: 16 }}>
-                  About This Property
-                </h3>
-                <p style={{ fontSize: 16, lineHeight: "28px", color: "var(--Text-secondary)" }}>
-                  {property.description}
-                </p>
-              </div>
-
-              {/* Amenities */}
-              <div>
-                <h3 style={{ fontSize: 22, fontWeight: 600, color: "var(--Text-primary)", marginBottom: 16 }}>
-                  Amenities
-                </h3>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-                  {property.amenities?.map((amenity) => (
-                    <span
-                      key={amenity}
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 8,
-                        padding: "8px 16px",
-                        borderRadius: 8,
-                        border: "1px solid var(--Line)",
-                        fontSize: 14,
-                        color: "var(--Text-primary)",
-                      }}
-                    >
-                      <i className="icon icon-CheckCircle" style={{ color: "var(--Primary)", fontSize: 18 }} />
-                      {amenity}
-                    </span>
+              {/* ── Description ──────────────────────────────────────────── */}
+              <div className={styles.section}>
+                <h3 className={styles.sectionTitle}>About This Property</h3>
+                <div className={styles.descriptionBody}>
+                  {paragraphs.map((para, i) => (
+                    <p key={i}>{para}</p>
                   ))}
                 </div>
               </div>
+
+              {/* ── Additional Details ────────────────────────────────────── */}
+              {property.details && property.details.length > 0 && (
+                <div className={styles.section}>
+                  <h3 className={styles.sectionTitle}>Additional Details</h3>
+                  <div className={styles.detailsTable}>
+                    {property.details.map((d, i) => (
+                      <div key={d.label} className={`${styles.detailRow} ${i % 2 === 0 ? styles.detailRowAlt : ""}`}>
+                        <span className={styles.detailLabel}>{d.label}</span>
+                        <span className={styles.detailValue}>{d.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* ── Property Utilities ────────────────────────────────────── */}
+              {property.utilities && property.utilities.length > 0 && (
+                <div className={styles.section}>
+                  <h3 className={styles.sectionTitle}>Property Utilities</h3>
+                  <div className={styles.utilitiesGrid}>
+                    {property.utilities.map((util) => (
+                      <div key={util} className={styles.utilityItem}>
+                        <i className="icon icon-CheckCircle" />
+                        <span>{util}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* ── Amenities ────────────────────────────────────────────── */}
+              {property.amenities && property.amenities.length > 0 && (
+                <div className={styles.section}>
+                  <h3 className={styles.sectionTitle}>Amenities</h3>
+                  <div className={styles.amenitiesGrid}>
+                    {property.amenities.map((a) => (
+                      <span key={a} className={styles.amenityChip}>
+                        <i className="icon icon-CheckCircle" />
+                        {a}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* ── Property on Map ───────────────────────────────────────── */}
+              {property.latitude && property.longitude && (
+                <div className={styles.section}>
+                  <h3 className={styles.sectionTitle}>Property on Map</h3>
+                  <div className={styles.mapWrap}>
+                    <iframe
+                      src={`https://www.openstreetmap.org/export/embed.html?bbox=${property.longitude - 0.01},${property.latitude - 0.008},${property.longitude + 0.01},${property.latitude + 0.008}&layer=mapnik&marker=${property.latitude},${property.longitude}`}
+                      title={`Map of ${property.title}`}
+                      className={styles.mapFrame}
+                      loading="lazy"
+                    />
+                    <a
+                      href={`https://www.openstreetmap.org/?mlat=${property.latitude}&mlon=${property.longitude}#map=16/${property.latitude}/${property.longitude}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.mapLink}
+                    >
+                      <i className="icon icon-ArrowSquareOut" />
+                      View larger map
+                    </a>
+                  </div>
+                </div>
+              )}
+
+              {/* ── Financing Calculator ──────────────────────────────────── */}
+              <div className={styles.section}>
+                <h3 className={styles.sectionTitle}>Financing Calculator</h3>
+                <FinancingCalculator defaultPrice={property.priceRaw ?? 0} />
+              </div>
+
+              {/* ── What's Nearby ─────────────────────────────────────────── */}
+              {property.nearby && property.nearby.length > 0 && (
+                <div className={styles.section}>
+                  <h3 className={styles.sectionTitle}>What&rsquo;s Nearby</h3>
+                  <div className={styles.nearbyGrid}>
+                    {property.nearby.map((n) => (
+                      <div key={n.place} className={styles.nearbyItem}>
+                        <i className="icon icon-MapPin" />
+                        <div className={styles.nearbyInfo}>
+                          <span className={styles.nearbyPlace}>{n.place}</span>
+                          <span className={styles.nearbyDist}>{n.distance}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
-            {/* Right sidebar */}
-            <div>
+            {/* ── Right Sidebar ─────────────────────────────────────────────── */}
+            <div className={styles.rightCol}>
               {/* Agent card */}
               {agent && (
-                <div
-                  style={{
-                    border: "1px solid var(--Line)",
-                    borderRadius: 16,
-                    padding: 28,
-                    position: "sticky",
-                    top: 100,
-                  }}
-                >
-                  <h4
-                    style={{
-                      fontSize: 18,
-                      fontWeight: 600,
-                      color: "var(--Text-primary)",
-                      marginBottom: 20,
-                    }}
-                  >
-                    Contact Agent
-                  </h4>
+                <div className={styles.agentCard}>
+                  <h4 className={styles.agentCardTitle}>Contact Agent</h4>
 
-                  <div style={{ display: "flex", gap: 16, alignItems: "center", marginBottom: 20 }}>
-                    <div
-                      style={{
-                        width: 56,
-                        height: 56,
-                        borderRadius: "50%",
-                        overflow: "hidden",
-                        flexShrink: 0,
-                        position: "relative",
-                      }}
-                    >
-                      <Image
-                        src={agent.image}
-                        alt={agent.name}
-                        fill
-                        style={{ objectFit: "cover" }}
-                      />
-                    </div>
+                  <div className={styles.agentInfo}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={agent.image} alt={agent.name} className={styles.agentAvatar} />
                     <div>
-                      <div style={{ fontWeight: 600, fontSize: 16, color: "var(--Text-primary)" }}>
-                        {agent.name}
-                      </div>
-                      <div style={{ fontSize: 13, color: "var(--Primary)" }}>{agent.role}</div>
+                      <div className={styles.agentName}>{agent.name}</div>
+                      <div className={styles.agentRole}>{agent.role}</div>
                     </div>
                   </div>
 
                   {/* Contact form */}
-                  <form style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                    <input
-                      type="text"
-                      placeholder="Your full name"
-                      style={{
-                        padding: "11px 16px",
-                        border: "1px solid var(--Line)",
-                        borderRadius: 8,
-                        fontSize: 14,
-                        outline: "none",
-                      }}
-                    />
-                    <input
-                      type="email"
-                      placeholder="Email address"
-                      style={{
-                        padding: "11px 16px",
-                        border: "1px solid var(--Line)",
-                        borderRadius: 8,
-                        fontSize: 14,
-                        outline: "none",
-                      }}
-                    />
-                    <input
-                      type="tel"
-                      placeholder="Phone number"
-                      style={{
-                        padding: "11px 16px",
-                        border: "1px solid var(--Line)",
-                        borderRadius: 8,
-                        fontSize: 14,
-                        outline: "none",
-                      }}
-                    />
+                  <form className={styles.contactForm}>
+                    <input type="text" placeholder="Your full name" className={styles.formInput} />
+                    <input type="email" placeholder="Email address" className={styles.formInput} />
+                    <input type="tel" placeholder="Phone number" className={styles.formInput} />
                     <textarea
                       rows={4}
                       placeholder="I am interested in this property..."
-                      style={{
-                        padding: "11px 16px",
-                        border: "1px solid var(--Line)",
-                        borderRadius: 8,
-                        fontSize: 14,
-                        outline: "none",
-                        resize: "vertical",
-                      }}
+                      className={styles.formTextarea}
                     />
                     <button type="submit" className="tf-btn btn-bg-1 w-full">
                       <span>Send Enquiry</span>
@@ -339,21 +243,13 @@ export default function PropertyDetailPage({
                     </button>
                   </form>
 
-                  <div style={{ marginTop: 16, display: "flex", gap: 12 }}>
-                    <a
-                      href={`tel:${agent.phone}`}
-                      className="tf-btn btn-border"
-                      style={{ flex: 1 }}
-                    >
+                  <div className={styles.agentCtaBtns}>
+                    <a href={`tel:${agent.phone}`} className="tf-btn btn-border" style={{ flex: 1 }}>
                       <i className="icon icon-PhoneCall" />
                       <span>Call</span>
                       <span className="bg-effect" />
                     </a>
-                    <a
-                      href={`mailto:${agent.email}`}
-                      className="tf-btn btn-border"
-                      style={{ flex: 1 }}
-                    >
+                    <a href={`mailto:${agent.email}`} className="tf-btn btn-border" style={{ flex: 1 }}>
                       <i className="icon icon-Email" />
                       <span>Email</span>
                       <span className="bg-effect" />
@@ -361,10 +257,77 @@ export default function PropertyDetailPage({
                   </div>
                 </div>
               )}
+
+              {/* Quick summary card */}
+              <div className={styles.summaryCard}>
+                <h4 className={styles.summaryTitle}>Property Summary</h4>
+                <ul className={styles.summaryList}>
+                  <li>
+                    <span className={styles.summaryKey}>Listed</span>
+                    <span className={styles.summaryVal}>
+                      {property.status === "for-sale" ? "For Sale" : "For Rent"}
+                    </span>
+                  </li>
+                  <li>
+                    <span className={styles.summaryKey}>Type</span>
+                    <span className={styles.summaryVal} style={{ textTransform: "capitalize" }}>
+                      {property.type}
+                    </span>
+                  </li>
+                  <li>
+                    <span className={styles.summaryKey}>City</span>
+                    <span className={styles.summaryVal}>
+                      {property.city}, {property.state}
+                    </span>
+                  </li>
+                  <li>
+                    <span className={styles.summaryKey}>Bedrooms</span>
+                    <span className={styles.summaryVal}>{property.beds}</span>
+                  </li>
+                  <li>
+                    <span className={styles.summaryKey}>Bathrooms</span>
+                    <span className={styles.summaryVal}>{property.baths}</span>
+                  </li>
+                  <li>
+                    <span className={styles.summaryKey}>Garages</span>
+                    <span className={styles.summaryVal}>{property.garages ?? 0}</span>
+                  </li>
+                  <li>
+                    <span className={styles.summaryKey}>Area</span>
+                    <span className={styles.summaryVal}>{property.sqft.toLocaleString()} sqft</span>
+                  </li>
+                  {property.yearBuilt && (
+                    <li>
+                      <span className={styles.summaryKey}>Year Built</span>
+                      <span className={styles.summaryVal}>{property.yearBuilt}</span>
+                    </li>
+                  )}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* ── Related Properties ───────────────────────────────────────────── */}
+      {related.length > 0 && (
+        <section className={styles.relatedSection}>
+          <div className="tf-container">
+            <div className={styles.relatedHeader}>
+              <h2 className={styles.relatedTitle}>Related Properties</h2>
+              <Link href="/listings" className="tf-btn btn-border">
+                <span>View All</span>
+                <span className="bg-effect" />
+              </Link>
+            </div>
+            <div className={styles.relatedGrid}>
+              {related.map((p) => (
+                <PropertyCard key={p.id} property={p} variant="default" whiteBg={true} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </PageLayout>
   );
 }

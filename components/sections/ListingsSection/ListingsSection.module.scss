@@ -1,0 +1,337 @@
+@use "../../../styles/mixins" as *;
+
+// ─── Section ──────────────────────────────────────────────────────────────────
+.section {
+  padding: 60px 0 100px;
+  position: relative;
+
+  @include res(md) {
+    padding: 40px 0 60px;
+  }
+}
+
+// ─── Two-col layout ───────────────────────────────────────────────────────────
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 40px;
+  align-items: start;
+
+  @include res(xxl) {
+    grid-template-columns: 320px 1fr;
+    gap: 30px;
+  }
+  @include res(xl) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ─── Sidebar col ─────────────────────────────────────────────────────────────
+.sidebarCol {
+  @include res(xl) {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: min(380px, 90vw);
+    height: 100vh;
+    z-index: 900;
+    overflow-y: auto;
+    background: var(--White);
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.12);
+    transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Override sticky positioning inside drawer
+    > * {
+      position: relative;
+      top: auto;
+      border-radius: 0;
+      border: none;
+    }
+  }
+
+  &.sidebarOpen {
+    @include res(xl) {
+      left: 0;
+    }
+  }
+}
+
+// ─── Mobile overlay ───────────────────────────────────────────────────────────
+.overlay {
+  display: none;
+
+  @include res(xl) {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 899;
+  }
+}
+
+// ─── Main col ─────────────────────────────────────────────────────────────────
+.mainCol {
+  min-width: 0;
+}
+
+// ─── Meta filter bar ──────────────────────────────────────────────────────────
+.metaFilter {
+  margin-bottom: 32px;
+}
+
+.topFilter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.filterLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.filterRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+// Mobile filter button (hidden on xl+)
+.btnFilter {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: var(--Text-primary);
+  color: var(--White);
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  @include transition3();
+
+  &:hover {
+    background: var(--Primary);
+  }
+
+  @include res(xl) {
+    display: flex;
+  }
+}
+
+.resultCount {
+  font-size: 15px;
+  color: var(--Text-secondary);
+
+  span {
+    font-weight: 700;
+    color: var(--Text-primary);
+    font-size: 18px;
+  }
+}
+
+// Sort
+.sortWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  span {
+    font-size: 14px;
+    color: var(--Text-secondary);
+    white-space: nowrap;
+  }
+
+  select {
+    padding: 9px 14px;
+    border: 1px solid var(--Line);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--Text-primary);
+    background: var(--White);
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    @include transition3();
+
+    &:focus {
+      border-color: var(--Text-primary);
+    }
+  }
+}
+
+// View toggle
+.viewWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  span {
+    font-size: 14px;
+    color: var(--Text-secondary);
+    white-space: nowrap;
+  }
+}
+
+.viewToggle {
+  display: flex;
+  gap: 8px;
+
+  button {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--Line);
+    background: var(--White);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--Text-secondary);
+    @include transition3();
+
+    &:hover,
+    &.viewActive {
+      background: var(--Text-primary);
+      border-color: var(--Text-primary);
+      color: var(--White);
+    }
+  }
+}
+
+// ─── Active filter chips ──────────────────────────────────────────────────────
+.activeFilters {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filterChip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 99px;
+  border: 1px solid var(--Line);
+  background: var(--Bg-light);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--Text-primary);
+  cursor: pointer;
+  @include transition3();
+
+  &:hover {
+    border-color: var(--Primary);
+    background: rgba(254, 86, 49, 0.06);
+    color: var(--Primary);
+  }
+
+  i {
+    font-size: 12px;
+  }
+}
+
+.clearAll {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--Primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px 0;
+  @include transition3();
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+// ─── Property grid ────────────────────────────────────────────────────────────
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+
+  @include res(lg) {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  &.listView {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+// ─── Empty state ──────────────────────────────────────────────────────────────
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 80px 20px;
+  text-align: center;
+
+  i {
+    font-size: 48px;
+    color: var(--Line);
+  }
+
+  p {
+    font-size: 16px;
+    color: var(--Text-secondary);
+  }
+}
+
+// ─── Pagination ───────────────────────────────────────────────────────────────
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 56px;
+
+  button {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    border: 1px solid var(--Line);
+    background: var(--White);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--Text-primary);
+    cursor: pointer;
+    @include transition3();
+
+    &:hover,
+    &.pageActive {
+      background: var(--Primary);
+      border-color: var(--Primary);
+      color: var(--White);
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    &:first-child,
+    &:last-child {
+      font-size: 20px;
+    }
+  }
+}

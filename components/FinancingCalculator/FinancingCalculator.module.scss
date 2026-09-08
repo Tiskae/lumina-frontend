@@ -1,0 +1,202 @@
+@use "../../styles/mixins" as *;
+
+.calc {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+
+  @include res(lg) {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+// ─── Input fields ─────────────────────────────────────────────────────────────
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--Text-primary);
+}
+
+.input {
+  padding: 11px 16px;
+  border: 1px solid var(--Line);
+  border-radius: 8px;
+  font-size: 15px;
+  color: var(--Text-primary);
+  outline: none;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    border-color: var(--Primary);
+  }
+}
+
+// ─── Slider ───────────────────────────────────────────────────────────────────
+.sliderWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--Line);
+  outline: none;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--Primary);
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px var(--Primary);
+    transition: transform 0.15s ease;
+
+    &:hover {
+      transform: scale(1.15);
+    }
+  }
+
+  &::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--Primary);
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px var(--Primary);
+  }
+}
+
+.sliderLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--Text-secondary);
+}
+
+// ─── Term buttons ─────────────────────────────────────────────────────────────
+.termBtns {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.termBtn {
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--Line);
+  background: var(--White);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--Text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: var(--Primary);
+    color: var(--Primary);
+  }
+}
+
+.termActive {
+  background: var(--Primary);
+  border-color: var(--Primary);
+  color: #fff;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+// ─── Results panel ────────────────────────────────────────────────────────────
+.results {
+  background: var(--Bg-light);
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.monthly {
+  text-align: center;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--Line);
+}
+
+.monthlyLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--Text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.monthlyValue {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--Primary);
+  line-height: 1;
+}
+
+.breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--Text-secondary);
+
+  span:last-child {
+    font-weight: 600;
+    color: var(--Text-primary);
+  }
+}
+
+.bRowTotal {
+  padding-top: 12px;
+  border-top: 1px solid var(--Line);
+  font-size: 15px;
+  color: var(--Text-primary);
+  font-weight: 600;
+
+  span:last-child {
+    color: var(--Primary);
+    font-size: 16px;
+  }
+}
+
+.disclaimer {
+  font-size: 11px;
+  color: var(--Text-secondary);
+  line-height: 1.6;
+  opacity: 0.7;
+}
