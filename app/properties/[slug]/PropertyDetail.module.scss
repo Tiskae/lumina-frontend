@@ -4,7 +4,88 @@
 .heroSection {
   background: var(--Bg-light);
   padding-top: 120px;
-  padding-bottom: 25px;
+  padding-bottom: 40px;
+}
+
+// ─── Hero split grid ─────────────────────────────────────────────────────────
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 40px;
+  align-items: start;
+
+  @include res(lg) {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+.heroGallery {
+  min-width: 0; // prevent grid blowout
+}
+
+// ─── Hero info panel ─────────────────────────────────────────────────────────
+.heroInfo {
+  display: flex;
+  flex-direction: column;
+  padding-top: 8px;
+
+  @include res(lg) {
+    order: -1; // title/price above gallery on mobile
+    padding-top: 0;
+  }
+}
+
+.heroTitle {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--Text-primary);
+  margin-top: 14px;
+  margin-bottom: 12px;
+
+  @include res(md) {
+    font-size: 24px;
+  }
+}
+
+.heroPriceDivider {
+  height: 1px;
+  background: var(--Line);
+  margin: 20px 0;
+}
+
+.heroPrice {
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--Primary);
+
+  @include res(md) {
+    font-size: 24px;
+  }
+}
+
+.heroQuickStats {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--Line);
+  flex-wrap: wrap;
+}
+
+.heroStat {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--Text-secondary);
+
+  i {
+    font-size: 18px;
+    color: var(--Primary);
+  }
 }
 
 // ─── Breadcrumb ───────────────────────────────────────────────────────────────
@@ -37,7 +118,7 @@
 
 // ─── Detail body section ──────────────────────────────────────────────────────
 .bodySection {
-  padding: 40px 0 100px;
+  padding: 48px 0 100px;
 }
 
 .bodyGrid {

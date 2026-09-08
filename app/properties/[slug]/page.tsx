@@ -55,7 +55,45 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
             <span>{property.title}</span>
           </nav>
 
-          <PropertyGallery images={images} title={property.title} />
+          <div className={styles.heroGrid}>
+            {/* Gallery */}
+            <div className={styles.heroGallery}>
+              <PropertyGallery images={images} title={property.title} />
+            </div>
+
+            {/* Key info panel */}
+            <div className={styles.heroInfo}>
+              <div className={styles.tagRow}>
+                <span className={styles.statusTag}>{property.status === "for-sale" ? "For Sale" : "For Rent"}</span>
+                <span className={styles.typeTag}>{property.type}</span>
+              </div>
+
+              <h1 className={styles.heroTitle}>{property.title}</h1>
+
+              <div className={styles.addressRow}>
+                <i className="icon icon-MapPin" />
+                <span>{property.address}</span>
+              </div>
+
+              <div className={styles.heroPriceDivider} />
+              <div className={styles.heroPrice}>{property.price}</div>
+
+              <div className={styles.heroQuickStats}>
+                <div className={styles.heroStat}>
+                  <i className="icon icon-Bed" />
+                  <span>{property.beds} Beds</span>
+                </div>
+                <div className={styles.heroStat}>
+                  <i className="icon icon-Bathtub" />
+                  <span>{property.baths} Baths</span>
+                </div>
+                <div className={styles.heroStat}>
+                  <i className="icon icon-Crop" />
+                  <span>{property.sqft.toLocaleString()} sqft</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -65,23 +103,6 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
           <div className={styles.bodyGrid}>
             {/* ── Left Column ──────────────────────────────────────────────── */}
             <div className={styles.leftCol}>
-              {/* Title block */}
-              <div className={styles.titleBlock}>
-                <div className={styles.tagRow}>
-                  <span className={styles.statusTag}>{property.status === "for-sale" ? "For Sale" : "For Rent"}</span>
-                  <span className={styles.typeTag}>{property.type}</span>
-                </div>
-
-                <h1 className={styles.propertyTitle}>{property.title}</h1>
-
-                <div className={styles.addressRow}>
-                  <i className="icon icon-MapPin" />
-                  <span>{property.address}</span>
-                </div>
-
-                <div className={styles.price}>{property.price}</div>
-              </div>
-
               {/* Specs bar */}
               <div className={styles.specsBar}>
                 {[
