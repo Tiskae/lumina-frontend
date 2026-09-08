@@ -5,6 +5,11 @@
   background: linear-gradient(252.62deg, #dcedf5 0%, #f9f1e5 100.83%);
   padding: 180px 0 100px;
 
+  &.hasBg {
+    padding: 240px 0 160px;
+    background-size: cover;
+  }
+
   .contentWrap {
     text-align: center;
     // background-color: var(--Bg-light);
@@ -30,6 +35,29 @@
     }
     @include res(sm) {
       font-size: 28px;
+      line-height: 36px;
+    }
+  }
+
+  &.hasBg .title {
+    color: white;
+    text-shadow: 1px 1px 5px var(--Primary);
+  }
+
+  &.smallerHeading .title {
+    font-size: 42px;
+    line-height: 64px;
+
+    @include res(lg) {
+      font-size: 36px;
+      line-height: 52px;
+    }
+    @include res(md) {
+      font-size: 28px;
+      line-height: 42px;
+    }
+    @include res(sm) {
+      font-size: 24px;
       line-height: 36px;
     }
   }

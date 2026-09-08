@@ -54,8 +54,10 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      font-size: 14px;
+      font-size: 16px;
       color: var(--Text-secondary);
+      justify-content: center;
+      // background-color: yellowgreen;
 
       i {
         font-size: 20px;
@@ -135,7 +137,8 @@
 // This only applies to the grid card (styleDefault/style1), NOT to styleList
 .cardHouse:not(.styleList) {
   .title {
-    background-color: #611200;
+    // background-color: #611200;
+    background-color: var(--Primary);
     position: absolute;
     top: 280px;
     left: 50%;

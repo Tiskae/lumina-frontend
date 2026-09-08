@@ -15,33 +15,33 @@ const navItems: NavItem[] = [
   {
     label: "Home",
     href: "/",
-    children: [
-      { label: "Homepage 1", href: "/" },
-      { label: "Homepage 2", href: "/home-2" },
-    ],
+    // children: [
+    //   { label: "Homepage 1", href: "/" },
+    //   { label: "Homepage 2", href: "/home-2" },
+    // ],
   },
   {
-    label: "Listings",
-    href: "/listings",
-    children: [
-      { label: "Filter Sidebar", href: "/listings/sidebar" },
-      { label: "Grid Full Width", href: "/listings" },
-      { label: "Half Map Grid", href: "/listings/map" },
-      { label: "Top Filter", href: "/listings/top-filter" },
-      { label: "Top Map", href: "/listings/top-map" },
-    ],
+    label: "Properties",
+    href: "/properties",
+    // children: [
+    //   { label: "Filter Sidebar", href: "/listings/sidebar" },
+    //   { label: "Grid Full Width", href: "/listings" },
+    //   { label: "Half Map Grid", href: "/listings/map" },
+    //   { label: "Top Filter", href: "/listings/top-filter" },
+    //   { label: "Top Map", href: "/listings/top-map" },
+    // ],
   },
-  {
-    label: "Property Details",
-    href: "/properties/lumina-heights-ikoyi",
-  },
+  // {
+  //   label: "Property Details",
+  //   href: "/properties/lumina-heights-ikoyi",
+  // },
   {
     label: "Latest News",
     href: "/blog",
-    children: [
-      { label: "Blog", href: "/blog" },
-      { label: "Blog Post", href: "/blog/luxury-real-estate-lagos" },
-    ],
+    // children: [
+    //   { label: "Blog", href: "/blog" },
+    //   { label: "Blog Post", href: "/blog/luxury-real-estate-lagos" },
+    // ],
   },
   {
     label: "Contact",
@@ -93,7 +93,10 @@ export default function MobileNav({ isOpen, onClose, currentPath = "/" }: Mobile
           <ul className={styles.menuList}>
             {navItems.map((item) => {
               const isExpanded = openItems.includes(item.label);
-              const isCurrent = currentPath === item.href || item.children?.some((c) => c.href === currentPath);
+              const isCurrent =
+                currentPath === item.href ||
+                item.children?.some((c) => c.href === currentPath) ||
+                (item.href !== "/" && currentPath.startsWith(item.href));
 
               return (
                 <li key={item.label}>
@@ -127,7 +130,7 @@ export default function MobileNav({ isOpen, onClose, currentPath = "/" }: Mobile
           </ul>
 
           {/* CTA */}
-          <Link href="/listings" className="tf-btn btn-bg-1" onClick={onClose} style={{ marginBottom: 24 }}>
+          <Link href="/properties" className="tf-btn btn-bg-1" onClick={onClose} style={{ marginBottom: 24 }}>
             <i className="icon icon-HouseLine" />
             <span>Find Property</span>
             <span className="bg-effect" />
@@ -140,7 +143,7 @@ export default function MobileNav({ isOpen, onClose, currentPath = "/" }: Mobile
               <div>
                 <div className="text-caption-1 text-secondary">Hotline</div>
                 <div className="text-button text-cl-primary">
-                  <a href="tel:+2348001234567">+234 800 123 4567</a>
+                  <a href="tel:09120448767">0912 044 8767</a>
                 </div>
               </div>
             </div>

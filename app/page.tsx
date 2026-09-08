@@ -5,6 +5,7 @@ import FeaturedProperties from "@/components/sections/FeaturedProperties/Feature
 import CategorySection from "@/components/sections/CategorySection/CategorySection";
 import AgentsSection from "@/components/sections/AgentsSection/AgentsSection";
 import BlogSection from "@/components/sections/BlogSection/BlogSection";
+import GallerySection from "@/components/sections/GallerySection/GallerySection";
 import propertiesData from "@/data/properties.json";
 import type { Property } from "@/components/PropertyCard/PropertyCard";
 
@@ -19,6 +20,7 @@ export default function HomePage() {
       <CategorySection />
       <AgentsSection />
       <BlogSection />
+      <GallerySection />
     </PageLayout>
   );
 }

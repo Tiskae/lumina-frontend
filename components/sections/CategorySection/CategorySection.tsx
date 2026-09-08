@@ -4,11 +4,11 @@ import AnimateOnScroll from "@/components/AnimateOnScroll/AnimateOnScroll";
 import styles from "./CategorySection.module.scss";
 
 const categories = [
-  { name: "Apartments", count: 124, icon: "icon-Apartments", href: "/listings?type=apartment" },
-  { name: "Villas", count: 48, icon: "icon-Villa", href: "/listings?type=villa" },
-  { name: "Townhouses", count: 36, icon: "icon-Townhouse", href: "/listings?type=townhouse" },
-  { name: "Commercial", count: 21, icon: "icon-Commercial", href: "/listings?type=commercial" },
-  { name: "Warehouses", count: 12, icon: "icon-Warehouse", href: "/listings?type=warehouse" },
+  { name: "Apartments", count: 4, icon: "icon-Apartments", href: "/properties?type=apartment" },
+  { name: "Villas & Estates", count: 5, icon: "icon-Villa", href: "/properties?type=villa" },
+  { name: "Townhouses", count: 1, icon: "icon-Townhouse", href: "/properties?type=townhouse" },
+  { name: "For Sale", count: 8, icon: "icon-Heart", href: "/properties?status=for-sale" },
+  { name: "For Rent", count: 2, icon: "icon-House", href: "/properties?status=for-rent" },
 ];
 
 export default function CategorySection() {
@@ -30,7 +30,7 @@ export default function CategorySection() {
                   <i className={`icon ${cat.icon}`} />
                 </div>
                 <div className={styles.catName}>{cat.name}</div>
-                <div className={styles.catCount}>{cat.count} listings</div>
+                <div className={styles.catCount}>{cat.count} properties</div>
               </Link>
             </AnimateOnScroll>
           ))}

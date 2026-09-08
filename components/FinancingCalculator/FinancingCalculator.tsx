@@ -5,16 +5,58 @@ import styles from "./FinancingCalculator.module.scss";
 
 interface Props {
   defaultPrice?: number;
+  currencyCode?: string;
 }
 
-function formatNaira(n: number) {
-  return `₦${Math.round(n).toLocaleString("en-NG")}`;
+interface CurrencyConfig {
+  code: string;
+  locale: string;
+  defaultRate: number;
+  priceStep: number;
+  disclaimer: string;
 }
 
-export default function FinancingCalculator({ defaultPrice = 0 }: Props) {
+const CURRENCY_CONFIG: Record<string, CurrencyConfig> = {
+  NGN: {
+    code: "NGN",
+    locale: "en-NG",
+    defaultRate: 18,
+    priceStep: 1_000_000,
+    disclaimer:
+      "* Estimates are indicative only. Actual mortgage terms depend on lender policies, creditworthiness, and prevailing CBN rates.",
+  },
+  ZAR: {
+    code: "ZAR",
+    locale: "en-ZA",
+    defaultRate: 11.5,
+    priceStep: 100_000,
+    disclaimer:
+      "* Estimates are indicative only. Actual bond terms depend on lender policies, creditworthiness, and prevailing SARB rates.",
+  },
+  USD: {
+    code: "USD",
+    locale: "en-US",
+    defaultRate: 7,
+    priceStep: 10_000,
+    disclaimer:
+      "* Estimates are indicative only. Actual mortgage terms depend on lender policies, creditworthiness, and prevailing market rates.",
+  },
+};
+
+function formatCurrency(n: number, config: CurrencyConfig) {
+  return new Intl.NumberFormat(config.locale, {
+    style: "currency",
+    currency: config.code,
+    maximumFractionDigits: 0,
+  }).format(Math.round(n));
+}
+
+export default function FinancingCalculator({ defaultPrice = 0, currencyCode = "NGN" }: Props) {
+  const config = CURRENCY_CONFIG[currencyCode] ?? CURRENCY_CONFIG.NGN;
+
   const [price, setPrice] = useState(defaultPrice);
   const [downPct, setDownPct] = useState(20);
-  const [rate, setRate] = useState(18);
+  const [rate, setRate] = useState(config.defaultRate);
   const [years, setYears] = useState(15);
 
   const { monthly, totalPayment, totalInterest, loanAmount } = useMemo(() => {
@@ -31,18 +73,20 @@ export default function FinancingCalculator({ defaultPrice = 0 }: Props) {
     return { monthly, totalPayment, totalInterest, loanAmount: loan };
   }, [price, downPct, rate, years]);
 
+  const fmt = (n: number) => formatCurrency(n, config);
+
   return (
     <div className={styles.calc}>
       <div className={styles.fields}>
         {/* Property Price */}
         <div className={styles.field}>
-          <label className={styles.label}>Property Price (₦)</label>
+          <label className={styles.label}>Property Price ({config.code})</label>
           <input
             type="number"
             className={styles.input}
             value={price}
             min={0}
-            step={1000000}
+            step={config.priceStep}
             onChange={(e) => setPrice(Number(e.target.value))}
           />
         </div>
@@ -62,7 +106,7 @@ export default function FinancingCalculator({ defaultPrice = 0 }: Props) {
             />
             <div className={styles.sliderLabels}>
               <span>5%</span>
-              <span>{formatNaira((downPct / 100) * price)}</span>
+              <span>{fmt((downPct / 100) * price)}</span>
               <span>60%</span>
             </div>
           </div>
@@ -111,31 +155,29 @@ export default function FinancingCalculator({ defaultPrice = 0 }: Props) {
       <div className={styles.results}>
         <div className={styles.monthly}>
           <div className={styles.monthlyLabel}>Monthly Payment</div>
-          <div className={styles.monthlyValue}>{monthly > 0 ? formatNaira(monthly) : "—"}</div>
+          <div className={styles.monthlyValue}>{monthly > 0 ? fmt(monthly) : "—"}</div>
         </div>
 
         <div className={styles.breakdown}>
           <div className={styles.bRow}>
             <span>Loan Amount</span>
-            <span>{formatNaira(loanAmount)}</span>
+            <span>{fmt(loanAmount)}</span>
           </div>
           <div className={styles.bRow}>
             <span>Down Payment ({downPct}%)</span>
-            <span>{formatNaira((downPct / 100) * price)}</span>
+            <span>{fmt((downPct / 100) * price)}</span>
           </div>
           <div className={styles.bRow}>
             <span>Total Interest Paid</span>
-            <span>{totalInterest > 0 ? formatNaira(totalInterest) : "—"}</span>
+            <span>{totalInterest > 0 ? fmt(totalInterest) : "—"}</span>
           </div>
           <div className={`${styles.bRow} ${styles.bRowTotal}`}>
             <span>Total Cost</span>
-            <span>{totalPayment > 0 ? formatNaira(totalPayment) : "—"}</span>
+            <span>{totalPayment > 0 ? fmt(totalPayment) : "—"}</span>
           </div>
         </div>
 
-        <p className={styles.disclaimer}>
-          * Estimates are indicative only. Actual mortgage terms depend on lender policies, creditworthiness, and prevailing CBN rates.
-        </p>
+        <p className={styles.disclaimer}>{config.disclaimer}</p>
       </div>
     </div>
   );

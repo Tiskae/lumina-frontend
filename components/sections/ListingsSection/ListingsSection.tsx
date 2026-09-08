@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import FilterSidebar, { type FilterState, MAX_PRICE } from "@/components/FilterSidebar/FilterSidebar";
 import PropertyCard from "@/components/PropertyCard/PropertyCard";
 import type { Property } from "@/components/PropertyCard/PropertyCard";
@@ -23,7 +24,17 @@ const DEFAULT_FILTERS: FilterState = {
 };
 
 export default function ListingsSection({ properties }: Props) {
-  const [filters, setFilters] = useState<FilterState>(DEFAULT_FILTERS);
+  const searchParams = useSearchParams();
+
+  const [filters, setFilters] = useState<FilterState>(() => {
+    const type = searchParams.get("type") as Property["type"] | null;
+    const status = searchParams.get("status") as FilterState["status"] | null;
+    return {
+      ...DEFAULT_FILTERS,
+      types: type ? [type] : [],
+      status: status === "for-sale" || status === "for-rent" ? status : "all",
+    };
+  });
   const [view, setView] = useState<"grid" | "list">("grid");
   const [sort, setSort] = useState("default");
   const [page, setPage] = useState(1);

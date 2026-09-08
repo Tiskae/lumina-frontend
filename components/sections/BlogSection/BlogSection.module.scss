@@ -26,6 +26,17 @@
   line-height: 1.2;
 }
 
+.header a {
+  i {
+    color: #000;
+    @include transition3();
+  }
+
+  &:hover i {
+    color: #fff;
+  }
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

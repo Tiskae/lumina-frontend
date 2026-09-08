@@ -80,8 +80,8 @@ export default function SearchResults() {
             </h3>
             <p style={{ fontSize: 15, color: "var(--Text-secondary)" }}>
               Try adjusting your search filters or{" "}
-              <a href="/listings" style={{ color: "var(--Primary)" }}>
-                browse all listings
+              <a href="/properties" style={{ color: "var(--Primary)" }}>
+                browse all properties
               </a>
               .
             </p>

@@ -4,6 +4,7 @@ import PageLayout from "@/components/PageLayout/PageLayout";
 import PropertyGallery from "@/components/PropertyGallery/PropertyGallery";
 import FinancingCalculator from "@/components/FinancingCalculator/FinancingCalculator";
 import PropertyCard from "@/components/PropertyCard/PropertyCard";
+import AgentContactForm from "@/components/AgentContactForm/AgentContactForm";
 import propertiesData from "@/data/properties.json";
 import agentsData from "@/data/agents.json";
 import type { Property } from "@/components/PropertyCard/PropertyCard";
@@ -49,12 +50,41 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
           <nav className={styles.breadcrumb}>
             <Link href="/">Home</Link>
             <i className="icon icon-CaretRight" />
-            <Link href="/listings">Listings</Link>
+            <Link href="/properties">Properties</Link>
             <i className="icon icon-CaretRight" />
             <span>{property.title}</span>
           </nav>
 
-          <PropertyGallery images={images} title={property.title} />
+          {/* Full-width property info */}
+          <div className={styles.propInfoBar}>
+            <div className={styles.propInfoLeft}>
+              <h1 className={styles.heroTitle}>{property.title}</h1>
+              <div className={styles.addressRow}>
+                <i className="icon icon-MapPin" />
+                <span>{property.address}</span>
+              </div>
+            </div>
+            <div className={styles.propInfoRight}>
+              <div className={styles.heroPrice}>{property.price}</div>
+              <div className={styles.heroQuickStats}>
+                <div className={styles.heroStat}>
+                  <i className="icon icon-Bed" />
+                  <span>{property.beds} Beds</span>
+                </div>
+                <div className={styles.heroStat}>
+                  <i className="icon icon-Bathtub" />
+                  <span>{property.baths} Baths</span>
+                </div>
+                <div className={styles.heroStat}>
+                  <i className="icon icon-Crop" />
+                  <span>{property.sqft.toLocaleString()} sqft</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Gallery: big main left + thumb column right */}
+          <PropertyGallery images={images} title={property.title} layout="sidebar" />
         </div>
       </section>
 
@@ -64,23 +94,6 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
           <div className={styles.bodyGrid}>
             {/* ── Left Column ──────────────────────────────────────────────── */}
             <div className={styles.leftCol}>
-              {/* Title block */}
-              <div className={styles.titleBlock}>
-                <div className={styles.tagRow}>
-                  <span className={styles.statusTag}>{property.status === "for-sale" ? "For Sale" : "For Rent"}</span>
-                  <span className={styles.typeTag}>{property.type}</span>
-                </div>
-
-                <h1 className={styles.propertyTitle}>{property.title}</h1>
-
-                <div className={styles.addressRow}>
-                  <i className="icon icon-MapPin" />
-                  <span>{property.address}</span>
-                </div>
-
-                <div className={styles.price}>{property.price}</div>
-              </div>
-
               {/* Specs bar */}
               <div className={styles.specsBar}>
                 {[
@@ -189,7 +202,7 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
               {/* ── Financing Calculator ──────────────────────────────────── */}
               <div className={styles.section}>
                 <h3 className={styles.sectionTitle}>Financing Calculator</h3>
-                <FinancingCalculator defaultPrice={property.priceRaw ?? 0} />
+                <FinancingCalculator defaultPrice={property.priceRaw ?? 0} currencyCode={property.currencyCode ?? "NGN"} />
               </div>
 
               {/* ── What's Nearby ─────────────────────────────────────────── */}
@@ -228,20 +241,7 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
                   </div>
 
                   {/* Contact form */}
-                  <form className={styles.contactForm}>
-                    <input type="text" placeholder="Your full name" className={styles.formInput} />
-                    <input type="email" placeholder="Email address" className={styles.formInput} />
-                    <input type="tel" placeholder="Phone number" className={styles.formInput} />
-                    <textarea
-                      rows={4}
-                      placeholder="I am interested in this property..."
-                      className={styles.formTextarea}
-                    />
-                    <button type="submit" className="tf-btn btn-bg-1 w-full">
-                      <span>Send Enquiry</span>
-                      <span className="bg-effect" />
-                    </button>
-                  </form>
+                  <AgentContactForm agentName={agent.name} />
 
                   <div className={styles.agentCtaBtns}>
                     <a href={`tel:${agent.phone}`} className="tf-btn btn-border" style={{ flex: 1 }}>
@@ -315,7 +315,7 @@ export default function PropertyDetailPage({ params }: { params: { slug: string 
           <div className="tf-container">
             <div className={styles.relatedHeader}>
               <h2 className={styles.relatedTitle}>Related Properties</h2>
-              <Link href="/listings" className="tf-btn btn-border">
+              <Link href="/properties" className="tf-btn btn-border">
                 <span>View All</span>
                 <span className="bg-effect" />
               </Link>

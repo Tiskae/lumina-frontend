@@ -41,6 +41,7 @@ export interface Property {
   yearBuilt?: number;
   latitude?: number;
   longitude?: number;
+  currencyCode?: string;
 }
 
 interface PropertyCardProps {

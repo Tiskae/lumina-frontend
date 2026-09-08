@@ -22,7 +22,7 @@ export default function FeaturedProperties({ properties }: FeaturedPropertiesPro
             title={<>Handpicked for the Discerning Buyer</>}
           />
           <div className={styles.viewAll}>
-            <Link href="/listings" className="tf-btn btn-border btn-px-28">
+            <Link href="/properties" className="tf-btn btn-border btn-px-28">
               <span>View All Properties</span>
               <i className="icon icon-ArowRight" />
               <span className="bg-effect" />

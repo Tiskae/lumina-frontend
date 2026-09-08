@@ -4,7 +4,88 @@
 .heroSection {
   background: var(--Bg-light);
   padding-top: 120px;
-  padding-bottom: 0;
+  padding-bottom: 48px;
+}
+
+// ─── Full-width property info bar ────────────────────────────────────────────
+.propInfoBar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 0px 0 18px;
+  border-bottom: 1px solid var(--Line);
+  margin-bottom: 24px;
+
+  @include res(md) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+.propInfoLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+.propInfoRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  flex-shrink: 0;
+
+  @include res(md) {
+    align-items: flex-start;
+  }
+}
+
+.heroTitle {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--Text-primary);
+  margin-top: 12px;
+  margin-bottom: 10px;
+
+  @include res(md) {
+    font-size: 24px;
+  }
+}
+
+.heroPrice {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--Primary);
+  white-space: nowrap;
+
+  @include res(md) {
+    font-size: 22px;
+  }
+}
+
+.heroQuickStats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.heroStat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--Text-secondary);
+  white-space: nowrap;
+
+  i {
+    font-size: 16px;
+    color: var(--Primary);
+  }
 }
 
 // ─── Breadcrumb ───────────────────────────────────────────────────────────────
@@ -14,7 +95,7 @@
   gap: 6px;
   font-size: 13px;
   color: var(--Text-secondary);
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 
   a {
     color: var(--Text-secondary);
@@ -37,7 +118,7 @@
 
 // ─── Detail body section ──────────────────────────────────────────────────────
 .bodySection {
-  padding: 60px 0 100px;
+  padding: 48px 0 60px;
 }
 
 .bodyGrid {
@@ -386,7 +467,7 @@
   flex-direction: column;
   gap: 28px;
   position: sticky;
-  top: 100px;
+  top: 20px;
 
   @include res(xl) {
     position: static;
@@ -396,7 +477,7 @@
 // ─── Agent card ───────────────────────────────────────────────────────────────
 .agentCard {
   border: 1px solid var(--Line);
-  border-radius: 16px;
+  border-radius: 12px;
   padding: 28px;
 }
 
@@ -484,7 +565,7 @@
 // ─── Summary card ─────────────────────────────────────────────────────────────
 .summaryCard {
   border: 1px solid var(--Line);
-  border-radius: 16px;
+  border-radius: 12px;
   padding: 28px;
 }
 
@@ -528,7 +609,7 @@
 
 // ─── Related Properties ───────────────────────────────────────────────────────
 .relatedSection {
-  padding: 80px 0 100px;
+  padding: 40px 0 80px;
   background: var(--Bg-light);
 }
 
