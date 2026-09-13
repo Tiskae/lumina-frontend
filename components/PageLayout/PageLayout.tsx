@@ -34,7 +34,7 @@ export default function PageLayout({
 
       <ScrollToTop />
 
-      {showNewsletter && <NewsletterPopup />}
+      {/* {showNewsletter && <NewsletterPopup />} */}
     </>
   );
 }

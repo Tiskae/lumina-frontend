@@ -6,7 +6,8 @@
   position: relative;
   background-color: #f9f7f6;
   display: grid;
-  grid-template-rows: 280px 1fr;
+  grid-template-rows: 250px 1fr;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.13);
 
   &.whiteBg {
     background-color: #fff !important;
@@ -57,7 +58,6 @@
       font-size: 16px;
       color: var(--Text-secondary);
       justify-content: center;
-      // background-color: yellowgreen;
 
       i {
         font-size: 20px;
@@ -137,10 +137,9 @@
 // This only applies to the grid card (styleDefault/style1), NOT to styleList
 .cardHouse:not(.styleList) {
   .title {
-    // background-color: #611200;
     background-color: var(--Primary);
     position: absolute;
-    top: 280px;
+    top: 250px;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 70%;
@@ -182,7 +181,7 @@
 
   // ── Image carousel column ─────────────────────────────────────────────────────
   .imagesWrap {
-    flex: 0 0 400px;
+    flex: 0 0 680px;
     align-self: stretch;
     min-height: 280px;
     // carousel child uses height: 100% — needs a defined height context
@@ -294,7 +293,7 @@
   // ── Responsive ───────────────────────────────────────────────────────────────
   @include res(xxl) {
     .imagesWrap {
-      flex: 0 0 260px;
+      flex: 0 0 440px;
     }
     .listContent {
       padding: 24px 22px;
@@ -303,7 +302,7 @@
 
   @include res(lg) {
     .imagesWrap {
-      flex: 0 0 220px;
+      flex: 0 0 374px;
       min-height: 240px;
     }
     .listPrice {

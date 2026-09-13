@@ -147,7 +147,7 @@
   @include transition-cubic-1();
 
   &.active-animate {
-    clip-path: inset(0 0 0 0);
+    clip-path: inset(-20px);
     opacity: 1;
     transform: translateX(0);
   }
@@ -164,7 +164,7 @@
   @include transition-cubic-1();
 
   &.active-animate {
-    clip-path: inset(0 0 0 0);
+    clip-path: inset(-20px);
     opacity: 1;
     transform: translateX(0);
   }
@@ -181,7 +181,7 @@
   @include transition-cubic-1();
 
   &.active-animate {
-    clip-path: inset(0 0 0 0);
+    clip-path: inset(-20px);
     opacity: 1;
     transform: translateX(0);
   }
@@ -198,7 +198,7 @@
   @include transition-cubic-1();
 
   &.active-animate {
-    clip-path: inset(0 0 0 0);
+    clip-path: inset(-20px);
     opacity: 1;
     transform: translateX(0);
   }
