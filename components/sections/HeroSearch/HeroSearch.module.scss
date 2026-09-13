@@ -18,7 +18,7 @@
   }
 
   @include res(sm) {
-    padding: 70px 0 20px;
+    padding: 70px 0 10px;
   }
 
   .pageTitleInner {
@@ -35,7 +35,6 @@
     height: calc(100vh - 110px);
     position: relative;
     overflow: hidden;
-    // background-color: yellow;
     display: grid;
     align-content: space-between;
 
@@ -44,7 +43,9 @@
     }
 
     @include res(sm) {
-      padding: 50px 20px 20px;
+      margin: 20px 10px;
+      padding: 40px 15px 20px;
+      width: calc(100vw - 20px);
     }
   }
 
@@ -55,7 +56,6 @@
       font-size: 66px;
       line-height: 80px;
       font-weight: 700;
-      // color: var(--Text-primary);
       color: #fff;
       margin-bottom: 20px;
 
@@ -79,7 +79,6 @@
       font-size: 18px;
       line-height: 28px;
       max-width: 80%;
-      // color: var(--Text-secondary);
       color: #fff;
       flex: 1;
 
@@ -87,6 +86,11 @@
         font-size: 15px;
         line-height: 24px;
         max-width: none;
+      }
+
+      @media screen and (max-height: 900px) {
+        background-color: yellow;
+        display: none;
       }
     }
 
@@ -150,6 +154,7 @@
   align-items: center;
   gap: 0;
   background: var(--White);
+  backdrop-filter: blur(3px);
 
   justify-self: center;
   border-radius: 12px 12px 0 0;
@@ -158,6 +163,7 @@
 
   @include res(sm) {
     width: 100%;
+    background: rgba(255, 255, 255, 0.85);
   }
 }
 
@@ -174,7 +180,11 @@
 
   &.active {
     color: var(--Text-primary);
-    background: var(--Bg-light);
+    background: rgba(251, 239, 214, 0.8);
+
+    @include res(sm) {
+      background: rgba(255, 255, 255, 0.85);
+    }
   }
 
   &:hover {
@@ -184,6 +194,7 @@
 
 .searchBox {
   background: var(--White);
+  backdrop-filter: blur(5px);
   border-radius: 12px;
   padding: 28px;
   box-shadow: 0px 10px 25px 0px #485f771a;
@@ -191,6 +202,7 @@
   @include res(sm) {
     padding: 20px 16px;
     border-radius: 0 0 12px 12px;
+    background: rgba(255, 255, 255, 0.85);
   }
 }
 
@@ -229,6 +241,7 @@
     font-size: 15px;
     color: var(--Text-primary);
     background: var(--White);
+
     outline: none;
     @include transition3();
 
@@ -238,6 +251,10 @@
 
     &::placeholder {
       color: var(--Text-muted);
+    }
+
+    @include res(sm) {
+      background: rgba(255, 255, 255, 0.85) !important;
     }
   }
 }

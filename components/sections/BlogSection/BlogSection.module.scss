@@ -19,11 +19,27 @@
   gap: 24px;
   margin-bottom: 48px;
   flex-wrap: wrap;
+
+  @include res(sm) {
+    gap: 0;
+    display: grid;
+    justify-content: unset;
+  }
 }
 
 .heading h2 {
   font-size: 40px;
   line-height: 1.2;
+
+  @include res(sm) {
+    font-size: 28px;
+  }
+}
+
+.viewAll {
+  @include res(sm) {
+    justify-self: flex-end;
+  }
 }
 
 .header a {

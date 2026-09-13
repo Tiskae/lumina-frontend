@@ -17,6 +17,10 @@
 
 .heading h2 {
   font-size: 40px;
+
+  @include res(sm) {
+    font-size: 28px;
+  }
 }
 
 .grid {
@@ -36,7 +40,6 @@
 .catCard {
   display: block;
   background: var(--White);
-  // border-radius: 12px;
   padding: 32px 24px;
   text-align: center;
   @include transition3();

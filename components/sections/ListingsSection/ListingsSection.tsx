@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import FilterSidebar, { type FilterState, MAX_PRICE } from "@/components/FilterSidebar/FilterSidebar";
 import PropertyCard from "@/components/PropertyCard/PropertyCard";
@@ -24,6 +24,7 @@ const DEFAULT_FILTERS: FilterState = {
 };
 
 export default function ListingsSection({ properties }: Props) {
+  const sectionRef = useRef<HTMLElement>(null);
   const searchParams = useSearchParams();
 
   const [filters, setFilters] = useState<FilterState>(() => {
@@ -43,6 +44,10 @@ export default function ListingsSection({ properties }: Props) {
   const [sort, setSort] = useState("default");
   const [page, setPage] = useState(1);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const scrollToSection = () => {
+    sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   const cities = useMemo(
     () => Array.from(new Set(properties.map((p) => p.city))).sort(),
@@ -109,7 +114,7 @@ export default function ListingsSection({ properties }: Props) {
   }
 
   return (
-    <section className={styles.section}>
+    <section ref={sectionRef} className={styles.section}>
       <div className="tf-container">
         <div className={styles.row}>
 
@@ -236,7 +241,7 @@ export default function ListingsSection({ properties }: Props) {
             {totalPages > 1 && (
               <div className={styles.pagination}>
                 <button
-                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  onClick={() => { setPage((p) => Math.max(1, p - 1)); scrollToSection(); }}
                   disabled={page === 1}
                   aria-label="Previous page"
                 >
@@ -246,13 +251,13 @@ export default function ListingsSection({ properties }: Props) {
                   <button
                     key={p}
                     className={p === page ? styles.pageActive : ""}
-                    onClick={() => setPage(p)}
+                    onClick={() => { setPage(p); scrollToSection(); }}
                   >
                     {p}
                   </button>
                 ))}
                 <button
-                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  onClick={() => { setPage((p) => Math.min(totalPages, p + 1)); scrollToSection(); }}
                   disabled={page === totalPages}
                   aria-label="Next page"
                 >

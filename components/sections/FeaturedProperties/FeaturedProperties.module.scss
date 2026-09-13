@@ -19,13 +19,18 @@
   margin-bottom: 20px;
   flex-wrap: wrap;
 
-  // @include res(md) {
-  // margin-bottom: 32px;
-  // }
+  @include res(sm) {
+    gap: 0;
+    margin-bottom: 30px;
+  }
 }
 
 .heading h2 {
   font-size: 40px;
+
+  @include res(sm) {
+    font-size: 28px;
+  }
 }
 
 .grid {
@@ -43,4 +48,10 @@
 
 .viewAll {
   flex-shrink: 0;
+
+  @include res(sm) {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
 }
