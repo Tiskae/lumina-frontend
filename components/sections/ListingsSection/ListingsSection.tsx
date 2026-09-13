@@ -29,10 +29,14 @@ export default function ListingsSection({ properties }: Props) {
   const [filters, setFilters] = useState<FilterState>(() => {
     const type = searchParams.get("type") as Property["type"] | null;
     const status = searchParams.get("status") as FilterState["status"] | null;
+    const city = searchParams.get("city");
+    const beds = searchParams.get("beds");
     return {
       ...DEFAULT_FILTERS,
       types: type ? [type] : [],
       status: status === "for-sale" || status === "for-rent" ? status : "all",
+      city: city || "all",
+      beds: beds || "any",
     };
   });
   const [view, setView] = useState<"grid" | "list">("grid");
@@ -70,7 +74,7 @@ export default function ListingsSection({ properties }: Props) {
     });
   }, [filtered, sort]);
 
-  const perPage = view === "list" ? 4 : 6;
+  const perPage = view === "list" ? 5 : 6;
   const totalPages = Math.ceil(sorted.length / perPage);
   const paged = sorted.slice((page - 1) * perPage, page * perPage);
 

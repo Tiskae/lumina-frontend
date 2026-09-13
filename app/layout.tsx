@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Syne } from "next/font/google";
 import "@/styles/globals.scss";
+import PageTransition from "@/components/PageTransition/PageTransition";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -26,7 +27,9 @@ export default function RootLayout({
         <link rel="icon" href="/images/favicon.svg" />
       </head>
       <body>
-        <div id="wrapper">{children}</div>
+        <div id="wrapper">
+          <PageTransition>{children}</PageTransition>
+        </div>
       </body>
     </html>
   );

@@ -6,27 +6,28 @@ import { useState, useEffect } from "react";
 import styles from "./Footer.module.scss";
 
 const quickLinks = [
-  { label: "About Lumina", href: "/about" },
-  { label: "Our Properties", href: "/properties" },
-  { label: "Find an Agent", href: "/contact" },
-  { label: "Latest News", href: "/blog" },
+  { label: "Home", href: "/" },
+  { label: "All Properties", href: "/properties" },
+  { label: "Our Agents", href: "/agents" },
+  { label: "Blog & News", href: "/blog" },
   { label: "Contact Us", href: "/contact" },
 ];
 
 const propertyLinks = [
-  { label: "Luxury Apartments", href: "/properties?type=apartment" },
-  { label: "Villas & Duplexes", href: "/properties?type=villa" },
+  { label: "Apartments", href: "/properties?type=apartment" },
+  { label: "Villas & Estates", href: "/properties?type=villa" },
   { label: "Townhouses", href: "/properties?type=townhouse" },
-  { label: "Commercial", href: "/properties?type=commercial" },
-  { label: "New Developments", href: "/properties?status=new" },
+  { label: "For Sale", href: "/properties?status=for-sale" },
+  { label: "For Rent", href: "/properties?status=for-rent" },
 ];
 
 const locationLinks = [
-  { label: "Lagos Island", href: "/properties?city=lagos-island" },
-  { label: "Ikoyi", href: "/properties?city=ikoyi" },
-  { label: "Lekki", href: "/properties?city=lekki" },
-  { label: "Victoria Island", href: "/properties?city=vi" },
-  { label: "Abuja", href: "/properties?city=abuja" },
+  { label: "Ikoyi, Lagos", href: "/properties?city=Ikoyi" },
+  { label: "Lekki, Lagos", href: "/properties?city=Lekki" },
+  { label: "Victoria Island", href: "/properties?city=Victoria Island" },
+  { label: "Maitama, Abuja", href: "/properties?city=Maitama" },
+  { label: "Camps Bay, Cape Town", href: "/properties?city=Camps Bay" },
+  { label: "East Legon, Accra", href: "/properties?city=East Legon" },
 ];
 
 interface ColBlockProps {
@@ -151,11 +152,14 @@ export default function Footer() {
         <div className={styles.footerBottom}>
           <p className={styles.copyright}>&copy; {new Date().getFullYear()} Lumina Real Estate. All rights reserved.</p>
           <div style={{ display: "flex", gap: 24 }}>
-            <Link href="/privacy" style={{ color: "var(--Text-muted)", fontSize: 14 }}>
-              Privacy Policy
+            <Link href="/blog" style={{ color: "var(--Text-muted)", fontSize: 14 }}>
+              Blog & News
             </Link>
-            <Link href="/terms" style={{ color: "var(--Text-muted)", fontSize: 14 }}>
-              Terms of Use
+            <Link href="/agents" style={{ color: "var(--Text-muted)", fontSize: 14 }}>
+              Our Agents
+            </Link>
+            <Link href="/contact" style={{ color: "var(--Text-muted)", fontSize: 14 }}>
+              Contact
             </Link>
           </div>
         </div>

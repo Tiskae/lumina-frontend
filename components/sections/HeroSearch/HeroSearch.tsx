@@ -15,18 +15,19 @@ type SearchTab = "all" | "rent" | "sale";
 
 const CITIES = [
   "All Cities",
-  "Lagos Island",
+  "Asokoro",
+  "Banana Island",
+  "Camps Bay",
+  "East Legon",
+  "Guzape",
   "Ikoyi",
   "Lekki",
-  "Victoria Island",
-  "Banana Island",
-  "Oniru",
-  "Abuja",
   "Maitama",
-  "Asokoro",
+  "Oniru",
+  "Victoria Island",
 ];
 
-const TYPES = ["All Types", "Apartment", "Villa", "Townhouse", "Commercial"];
+const TYPES = ["All Types", "Apartment", "Villa", "Townhouse"];
 
 const BEDROOMS = ["Any Beds", "1 Bedroom", "2 Bedrooms", "3 Bedrooms", "4+ Bedrooms"];
 
@@ -62,7 +63,8 @@ export default function HeroSearch() {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const params = new URLSearchParams();
-    if (activeTab !== "all") params.set("status", activeTab);
+    if (activeTab === "rent") params.set("status", "for-rent");
+    else if (activeTab === "sale") params.set("status", "for-sale");
     if (keyword) params.set("q", keyword);
     if (city && city !== "All Cities") params.set("city", city);
     if (type && type !== "All Types") params.set("type", type.toLowerCase());
@@ -163,10 +165,10 @@ export default function HeroSearch() {
               </div>
 
               <div className={styles.searchActions}>
-                <button type="button" className={styles.advancedToggle} onClick={() => setAdvancedOpen((v) => !v)}>
+                {/* <button type="button" className={styles.advancedToggle} onClick={() => setAdvancedOpen((v) => !v)}>
                   <i className="icon icon-filter" />
                   {advancedOpen ? "Simple Search" : "Advanced Search"}
-                </button>
+                </button> */}
 
                 <button type="submit" className="tf-btn btn-bg-1 btn-px-28">
                   <i className="icon icon-search" />

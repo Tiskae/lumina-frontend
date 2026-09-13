@@ -55,14 +55,17 @@
     // }
 
     .hotLineText {
+      display: grid;
+      gap: 8px;
+
       .label {
         font-size: 14px;
-        line-height: 22px;
+        line-height: 1;
         color: var(--Text-secondary);
       }
       .number {
         font-size: 16px;
-        line-height: 26px;
+        line-height: 1;
         font-weight: 600;
         color: var(--Text-primary);
 
@@ -147,7 +150,7 @@
   .navigation {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 30px;
     list-style: none;
     padding: 0;
     margin: 0;

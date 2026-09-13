@@ -2,8 +2,12 @@
 
 .statsSection {
   padding: 60px 0;
-  border-top: 1px solid var(--Line);
+  border-top: 1px solid rgb(240, 240, 240);
   border-bottom: 1px solid var(--Line);
+  background-image:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.8)), url("/images/section/stats-bg.jpg");
+  background-position: center;
+  background-size: cover;
 }
 
 .grid {
