@@ -18,7 +18,7 @@
   }
 
   @include res(sm) {
-    padding: 70px 0 10px;
+    padding: 50px 0 10px;
   }
 
   .pageTitleInner {
@@ -46,6 +46,7 @@
       margin: 20px 10px;
       padding: 40px 15px 20px;
       width: calc(100vw - 20px);
+      height: calc(100vh - 90px);
     }
   }
 
@@ -88,7 +89,7 @@
         max-width: none;
       }
 
-      @media screen and (max-height: 900px) {
+      @media screen and (max-width: 450px) and (max-height: 900px) {
         background-color: yellow;
         display: none;
       }

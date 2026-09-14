@@ -185,7 +185,7 @@ function HeaderRight({ onMenuOpen }: { onMenuOpen?: () => void }) {
         </div>
       </div>
 
-      <Link href="/properties" className="tf-btn">
+      <Link href="/properties" className={clsx("tf-btn", styles.findPropertyBtn)} style={{ marginRight: 24 }}>
         <i className="icon icon-HouseLine" />
         <span>Find Property</span>
         <span className="bg-effect" />

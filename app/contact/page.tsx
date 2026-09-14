@@ -1,6 +1,7 @@
 import PageLayout from "@/components/PageLayout/PageLayout";
 import PageBanner from "@/components/sections/PageBanner/PageBanner";
 import ContactForm from "@/components/ContactForm/ContactForm";
+import AnimateOnScroll from "@/components/AnimateOnScroll/AnimateOnScroll";
 import agentsData from "@/data/agents.json";
 import styles from "./Contact.module.scss";
 
@@ -45,6 +46,7 @@ export default function ContactPage() {
         <div className="tf-container">
           <div className={styles.grid}>
             {/* Left — office info */}
+            <AnimateOnScroll direction="1">
             <div>
               <h2 className={styles.heading}>Let&apos;s Find Your Perfect Property</h2>
               <p className={styles.subtext}>
@@ -73,13 +75,16 @@ export default function ContactPage() {
                 ))}
               </div>
             </div>
+            </AnimateOnScroll>
 
             {/* Right — contact form */}
+            <AnimateOnScroll direction="4">
             <div className={styles.formCard}>
               <h3 className={styles.formTitle}>Send Us a Message</h3>
               <p className={styles.formNote}>We typically respond within one business day.</p>
               <ContactForm />
             </div>
+            </AnimateOnScroll>
           </div>
         </div>
       </section>
@@ -97,14 +102,17 @@ export default function ContactPage() {
       {/* ── Team ─────────────────────────────────────────────────────────── */}
       <section className={styles.teamSection}>
         <div className="tf-container">
+          <AnimateOnScroll direction="1">
           <div className={styles.teamHeader}>
             <h2 className={styles.teamTitle}>Speak Directly with a Consultant</h2>
             <p className={styles.teamSub}>Our team is available Monday through Friday to answer any question.</p>
           </div>
+          </AnimateOnScroll>
 
           <div className={styles.teamGrid}>
-            {agentsData.map((agent) => (
-              <div key={agent.id} id={agent.id} className={styles.agentCard}>
+            {agentsData.map((agent, i) => (
+              <AnimateOnScroll key={agent.id} direction="2" delay={i * 0.1}>
+              <div id={agent.id} className={styles.agentCard}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={agent.image} alt={agent.name} className={styles.agentAvatar} />
                 <div className={styles.agentName}>{agent.name}</div>
@@ -128,6 +136,7 @@ export default function ContactPage() {
                   </a>
                 </div>
               </div>
+              </AnimateOnScroll>
             ))}
           </div>
         </div>

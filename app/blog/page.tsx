@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import PageLayout from "@/components/PageLayout/PageLayout";
 import PageBanner from "@/components/sections/PageBanner/PageBanner";
+import AnimateOnScroll from "@/components/AnimateOnScroll/AnimateOnScroll";
 import blogData from "@/data/blog.json";
 import styles from "./Blog.module.scss";
 
@@ -34,6 +35,7 @@ export default function BlogPage() {
         <div className="tf-container">
           {/* Featured post */}
           {featured && (
+            <AnimateOnScroll direction="1">
             <article className={styles.featured}>
               <Link href={`/blog/${featured.slug}`} className={styles.featuredImg}>
                 <Image src={featured.image} alt={featured.title} fill style={{ objectFit: "cover" }} priority />
@@ -54,16 +56,20 @@ export default function BlogPage() {
                 </div>
               </div>
             </article>
+            </AnimateOnScroll>
           )}
 
           {/* All other posts */}
+          <AnimateOnScroll direction="1">
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionHeading}>More Articles</h2>
           </div>
+          </AnimateOnScroll>
 
           <div className={styles.grid}>
-            {rest.map((post) => (
-              <article key={post.id} className={styles.card}>
+            {rest.map((post, i) => (
+              <AnimateOnScroll key={post.id} direction="2" delay={i * 0.1}>
+              <article className={styles.card}>
                 <Link href={`/blog/${post.slug}`} className={styles.cardImgWrap}>
                   <Image src={post.image} alt={post.title} fill style={{ objectFit: "cover" }} />
                 </Link>
@@ -87,6 +93,7 @@ export default function BlogPage() {
                   </div>
                 </div>
               </article>
+              </AnimateOnScroll>
             ))}
           </div>
         </div>

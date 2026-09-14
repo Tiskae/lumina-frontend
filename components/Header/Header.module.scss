@@ -27,11 +27,27 @@
     }
   }
 
+  .findPropertyBtn {
+    @include res(sm) {
+      margin-right: 0 !important;
+      padding: 10px 20px;
+      line-height: 20px;
+
+      i {
+        font-size: 20px;
+      }
+    }
+  }
+
   .headerRight {
     display: flex;
     align-items: center;
     gap: 28px;
     padding: 20px 0;
+
+    @include res(sm) {
+      padding: 10px 0;
+    }
   }
 
   .hotLine {

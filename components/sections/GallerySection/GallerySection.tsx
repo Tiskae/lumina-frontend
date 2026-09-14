@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import SectionHeading from "@/components/SectionHeading/SectionHeading";
+import AnimateOnScroll from "@/components/AnimateOnScroll/AnimateOnScroll";
 import styles from "./GallerySection.module.scss";
 
 //
@@ -107,14 +108,17 @@ export default function GallerySection() {
   return (
     <section className={styles.section}>
       <div className="tf-container">
-        <SectionHeading
-          subtitle="Our Portfolio"
-          title="A Glimpse of Lumina"
-          align="center"
-          className={styles.heading}
-        />
+        <AnimateOnScroll direction="1">
+          <SectionHeading
+            subtitle="Our Portfolio"
+            title="A Glimpse of Lumina"
+            align="center"
+            className={styles.heading}
+          />
+        </AnimateOnScroll>
       </div>
 
+      <AnimateOnScroll direction="2" slow>
       <div className={styles.gridWrap}>
         <div className={styles.grid}>
           {items.map((item) => (
@@ -135,6 +139,7 @@ export default function GallerySection() {
           ))}
         </div>
       </div>
+      </AnimateOnScroll>
     </section>
   );
 }

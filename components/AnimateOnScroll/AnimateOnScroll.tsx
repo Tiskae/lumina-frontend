@@ -57,7 +57,7 @@ export default function AnimateOnScroll({
         }
       },
       // rootMargin fires the callback 80px before the element reaches the bottom of the viewport
-      { threshold: 0, rootMargin: "0px 0px 80px 0px" },
+      { threshold: 0, rootMargin: "0px 0px -140px 0px" },
     );
 
     observer.observe(el);

@@ -15,12 +15,14 @@ export default function CategorySection() {
   return (
     <section className={styles.section}>
       <div className="tf-container">
-        <SectionHeading
-          className={styles.heading}
-          subtitle="Browse by Type"
-          title="Find the Property That Fits Your Life"
-          align="center"
-        />
+        <AnimateOnScroll direction="1">
+          <SectionHeading
+            className={styles.heading}
+            subtitle="Browse by Type"
+            title="Find the Property That Fits Your Life"
+            align="center"
+          />
+        </AnimateOnScroll>
 
         <div className={styles.grid}>
           {categories.map((cat, i) => (

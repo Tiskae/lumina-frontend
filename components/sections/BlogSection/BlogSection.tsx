@@ -20,6 +20,7 @@ export default function BlogSection() {
   return (
     <section className={styles.section}>
       <div className="tf-container">
+        <AnimateOnScroll direction="1">
         <div className={styles.header}>
           <SectionHeading
             className={styles.heading}
@@ -37,6 +38,7 @@ export default function BlogSection() {
             <span className="bg-effect" />
           </Link>
         </div>
+        </AnimateOnScroll>
 
         <div className={styles.grid}>
           {posts.map((post, i) => (

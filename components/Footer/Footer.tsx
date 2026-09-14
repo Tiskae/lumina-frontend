@@ -148,19 +148,27 @@ export default function Footer() {
           />
         </div>
 
+        {/* Disclaimer */}
+        <p className={styles.disclaimer}>
+          Lumina is a fictional brand created for demonstration purposes. All property listings, agents, prices, and
+          content on this site are AI-generated and do not represent real properties or individuals.
+        </p>
+
         {/* Footer bottom bar */}
         <div className={styles.footerBottom}>
           <p className={styles.copyright}>&copy; {new Date().getFullYear()} Lumina Real Estate. All rights reserved.</p>
-          <div style={{ display: "flex", gap: 24 }}>
-            <Link href="/blog" style={{ color: "var(--Text-muted)", fontSize: 14 }}>
-              Blog & News
-            </Link>
-            <Link href="/agents" style={{ color: "var(--Text-muted)", fontSize: 14 }}>
-              Our Agents
-            </Link>
-            <Link href="/contact" style={{ color: "var(--Text-muted)", fontSize: 14 }}>
-              Contact
-            </Link>
+          <div style={{ display: "flex", gap: 24, alignItems: "center", flexWrap: "wrap" }}>
+            <span className={styles.credit}>
+              Carefully handcrafted by{" "}
+              <a
+                href="https://tiskae.netlify.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.creditLink}
+              >
+                Tiskae Studio
+              </a>
+            </span>
           </div>
         </div>
       </div>
