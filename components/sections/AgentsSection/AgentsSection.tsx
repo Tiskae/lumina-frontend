@@ -9,17 +9,19 @@ export default function AgentsSection() {
   return (
     <section className={styles.section}>
       <div className="tf-container">
-        <SectionHeading
-          className={styles.heading}
-          subtitle="Our Agents"
-          title={
-            <>
-              Meet the People Behind <br />
-              Every Perfect Match
-            </>
-          }
-          align="center"
-        />
+        <AnimateOnScroll direction="1">
+          <SectionHeading
+            className={styles.heading}
+            subtitle="Our Agents"
+            title={
+              <>
+                Meet the People Behind <br />
+                Every Perfect Match
+              </>
+            }
+            align="center"
+          />
+        </AnimateOnScroll>
 
         <div className={styles.grid}>
           {agentsData.map((agent, i) => (

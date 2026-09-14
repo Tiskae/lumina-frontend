@@ -5,9 +5,17 @@
   background: linear-gradient(252.62deg, #dcedf5 0%, #f9f1e5 100.83%);
   padding: 180px 0 100px;
 
+  @include res(sm) {
+    padding-top: 150px;
+  }
+
   &.hasBg {
     padding: 240px 0 160px;
     background-size: cover;
+
+    @include res(sm) {
+      padding-top: 210px;
+    }
   }
 
   .contentWrap {
@@ -15,8 +23,8 @@
     // background-color: var(--Bg-light);
   }
 
-  &.style2 {
-  }
+  // &.style2 {
+  // }
 
   .title {
     font-size: 56px;
@@ -40,8 +48,11 @@
   }
 
   &.hasBg .title {
-    color: white;
-    text-shadow: 1px 1px 5px var(--Primary);
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--Primary);
+    backdrop-filter: blur(3px);
+    max-width: 1000px;
+    margin: auto;
   }
 
   &.smallerHeading .title {

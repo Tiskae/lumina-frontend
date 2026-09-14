@@ -5,6 +5,10 @@
   background: var(--Bg-light);
   padding-top: 120px;
   padding-bottom: 48px;
+
+  @include res(sm) {
+    padding-top: 90px;
+  }
 }
 
 // ─── Full-width property info bar ────────────────────────────────────────────

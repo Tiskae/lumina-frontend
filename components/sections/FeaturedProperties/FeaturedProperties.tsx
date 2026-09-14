@@ -15,6 +15,7 @@ export default function FeaturedProperties({ properties }: FeaturedPropertiesPro
   return (
     <section className={styles.section}>
       <div className="tf-container">
+        <AnimateOnScroll direction="1">
         <div className={styles.header}>
           <SectionHeading
             className={styles.heading}
@@ -29,6 +30,7 @@ export default function FeaturedProperties({ properties }: FeaturedPropertiesPro
             </Link>
           </div>
         </div>
+        </AnimateOnScroll>
 
         <div className={styles.grid}>
           {featured.map((property, i) => (

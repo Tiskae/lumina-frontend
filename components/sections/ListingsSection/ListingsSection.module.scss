@@ -178,6 +178,10 @@
     color: var(--Text-secondary);
     white-space: nowrap;
   }
+
+  @include res(sm) {
+    display: none;
+  }
 }
 
 .viewToggle {

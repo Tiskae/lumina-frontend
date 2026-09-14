@@ -14,7 +14,7 @@ export interface FilterState {
   priceMax: number;
 }
 
-export const MAX_PRICE = 3_000_000_000;
+export const MAX_PRICE = 5_000_000_000;
 const STEP = 10_000_000;
 
 function formatPrice(value: number) {

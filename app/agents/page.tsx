@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import PageLayout from "@/components/PageLayout/PageLayout";
 import PageBanner from "@/components/sections/PageBanner/PageBanner";
+import AnimateOnScroll from "@/components/AnimateOnScroll/AnimateOnScroll";
 import agentsData from "@/data/agents.json";
 
 export const metadata = {
@@ -31,9 +32,9 @@ export default function AgentsPage() {
               gap: 30,
             }}
           >
-            {agentsData.map((agent) => (
+            {agentsData.map((agent, i) => (
+              <AnimateOnScroll key={agent.id} direction="2" delay={i * 0.12}>
               <div
-                key={agent.id}
                 style={{
                   border: "1px solid var(--Line)",
                   borderRadius: 16,
@@ -167,10 +168,12 @@ export default function AgentsPage() {
                   </div>
                 </div>
               </div>
+              </AnimateOnScroll>
             ))}
           </div>
 
           {/* CTA */}
+          <AnimateOnScroll direction="1">
           <div
             style={{
               marginTop: 80,
@@ -207,6 +210,7 @@ export default function AgentsPage() {
               <span className="bg-effect" />
             </Link>
           </div>
+          </AnimateOnScroll>
         </div>
       </section>
     </PageLayout>

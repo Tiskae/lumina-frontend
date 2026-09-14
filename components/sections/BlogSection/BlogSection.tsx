@@ -4,6 +4,7 @@ import SectionHeading from "@/components/SectionHeading/SectionHeading";
 import AnimateOnScroll from "@/components/AnimateOnScroll/AnimateOnScroll";
 import styles from "./BlogSection.module.scss";
 import blogData from "@/data/blog.json";
+import clsx from "clsx";
 
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-GB", {
@@ -19,6 +20,7 @@ export default function BlogSection() {
   return (
     <section className={styles.section}>
       <div className="tf-container">
+        <AnimateOnScroll direction="1">
         <div className={styles.header}>
           <SectionHeading
             className={styles.heading}
@@ -30,12 +32,13 @@ export default function BlogSection() {
               </>
             }
           />
-          <Link href="/blog" className="tf-btn btn-border btn-px-28">
+          <Link href="/blog" className={clsx("tf-btn btn-border btn-px-28", styles.viewAll)}>
             <span>View All Posts</span>
             <i className="icon icon-ArowRight" />
             <span className="bg-effect" />
           </Link>
         </div>
+        </AnimateOnScroll>
 
         <div className={styles.grid}>
           {posts.map((post, i) => (
