@@ -26,8 +26,8 @@ export default function PropertyImageCarousel({ images, href, alt, id }: Props) 
   return (
     <div
       className={styles.wrap}
-      onMouseEnter={() => swiperRef.current?.autoplay?.pause()}
-      onMouseLeave={() => swiperRef.current?.autoplay?.resume()}
+      onMouseEnter={() => swiperRef.current?.autoplay?.start()}
+      onMouseLeave={() => swiperRef.current?.autoplay?.stop()}
     >
       <Swiper
         modules={[Autoplay, Navigation]}
@@ -40,7 +40,7 @@ export default function PropertyImageCarousel({ images, href, alt, id }: Props) 
             ? { prevEl: `.${prevClass}`, nextEl: `.${nextClass}` }
             : false
         }
-        onSwiper={(swiper) => { swiperRef.current = swiper; }}
+        onSwiper={(swiper) => { swiperRef.current = swiper; swiper.autoplay?.stop(); }}
         className={styles.swiper}
         touchStartPreventDefault={false}
       >

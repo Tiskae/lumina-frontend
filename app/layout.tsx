@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Syne } from "next/font/google";
 import "@/styles/globals.scss";
 import PageTransition from "@/components/PageTransition/PageTransition";
+import SmoothScroll from "@/components/SmoothScroll/SmoothScroll";
+import SplashScreen from "@/components/SplashScreen/SplashScreen";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -27,6 +29,8 @@ export default function RootLayout({
         <link rel="icon" href="/images/favicon.svg" />
       </head>
       <body>
+        <SplashScreen />
+        <SmoothScroll />
         <div id="wrapper">
           <PageTransition>{children}</PageTransition>
         </div>
