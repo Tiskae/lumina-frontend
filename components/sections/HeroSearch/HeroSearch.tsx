@@ -8,7 +8,7 @@ import AnimateOnScroll from "@/components/AnimateOnScroll/AnimateOnScroll";
 import SplitText from "@/components/SplitText/SplitText";
 import styles from "./HeroSearch.module.scss";
 
-import ImageHero from "/images/section/hero-1.jpg";
+import ImageHero from "/public/images/section/hero-1.jpg";
 import clsx from "clsx";
 
 type SearchTab = "all" | "rent" | "sale";
